@@ -152,11 +152,7 @@ hr,
 main,
 table,
 iframe {
-<<<<<<< HEAD
-  margin-bottom: 1.58884rem;
-=======
   margin-bottom: 1.62495rem;
->>>>>>> master
 }
 /* Bei h2 passt @vertical nicht. */
 h2 {
@@ -196,11 +192,7 @@ main {
   width: 96.6652%;
 }
 header {
-<<<<<<< HEAD
-  margin-top: 3.17768rem;
-=======
   margin-top: 3.2499rem;
->>>>>>> master
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */
 @media print {
