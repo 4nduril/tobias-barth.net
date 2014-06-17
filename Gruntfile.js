@@ -280,6 +280,10 @@ module.exports = function (grunt) {
 			copyPages: {
 				files: ['pages/**/*'],
 				tasks: ['copy:pages']
+			},
+			regexRepl: {
+				files: ['pages/**/*'],
+				tasks: ['regex-replace:dev']
 			}
 		}
 	});
