@@ -29,7 +29,17 @@ module.exports = function (grunt) {
 			}
 		},
 		copy: {
-			dev: {
+			pages: {
+				files: [
+					{
+						expand: true,
+						cwd: 'pages/',
+						src: ['**/*.html', '**/*.php', '.htaccess', '**/*.xml', '**/*.txt'],
+						dest: 'dev/'
+					}
+				]
+			},
+			lib: {
 				files: [
 					{
 						expand: true,
@@ -45,13 +55,11 @@ module.exports = function (grunt) {
 						rename: function(dest, src) {
 							return dest + 'focusfix.js';
 						}
-					},
-					{
-						expand: true,
-						cwd: 'pages/',
-						src: ['**/*.html', '**/*.php', '.htaccess', '**/*.xml', '**/*.txt'],
-						dest: 'dev/'
-					},
+					}
+				]
+			},
+			img: {
+				files: [
 					{
 						expand: true,
 						cwd: 'images/',
@@ -268,6 +276,10 @@ module.exports = function (grunt) {
 			catJs: {
 				files: ['js/*.js'],
 				tasks: ['concat:dev']
+			},
+			copyPages: {
+				files: ['pages/**/*'],
+				tasks: ['copy:pages']
 			}
 		}
 	});
@@ -282,7 +294,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['less:dev', 'copy:dev', 'concat:dev', 'jshint', /*'concat:modernizr',*/ 'regex-replace:dev', 'imagemin:dev']);
+	grunt.registerTask('copydev', ['copy:lib', 'copy:pages', 'copy:img']);
+	grunt.registerTask('default', ['less:dev', 'copydev', 'concat:dev', 'jshint', /*'concat:modernizr',*/ 'regex-replace:dev', 'imagemin:dev']);
 	grunt.registerTask('dist', ['less:dist', 'uglify:dist', 'copy:dist', 'regex-replace:dist', 'imagemin:dist']);
 /*	grunt.registerTask('dist', ['less:dist', 'modernizr:dist', 'uglify:dist', 'copy:dist', 'regex-replace:dist', 'imagemin:dist']);*/
 };
