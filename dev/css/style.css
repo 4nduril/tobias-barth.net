@@ -129,11 +129,11 @@ blockquote {
 body {
   width: 100%;
   margin: 0 auto;
-  font-size: 1em;
-  line-height: 1.4444em;
+  font-size: 1.125rem;
+  line-height: 1.62495rem;
   font-family: sans-serif;
-  background-color: #212121;
-  color: #ffffff;
+  background-color: #ccccff;
+  color: #222222;
 }
 p,
 ul,
@@ -152,11 +152,47 @@ hr,
 main,
 table,
 iframe {
-  margin-bottom: 1.4444em;
+  margin-bottom: 1.62495rem;
 }
 /* Bei h2 passt @vertical nicht. */
 h2 {
   margin-bottom: 1em;
+}
+a.skiplink {
+  position: absolute;
+  top: -4em;
+  display: block;
+  padding: .5em;
+  background-color: #ffffff;
+  text-shadow: none;
+  text-decoration: none;
+  color: #444444;
+  border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+a.skiplink:focus {
+  top: 0;
+  outline: none;
+}
+.site-head h1,
+.site-head p {
+  float: left;
+  margin-left: 1.6666%;
+  margin-right: 1.6666%;
+  width: 96.6652%;
+}
+main {
+  float: left;
+  margin-left: 1.6666%;
+  margin-right: 1.6666%;
+  width: 96.6652%;
+}
+header {
+  margin-top: 3.2499rem;
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */
 @media print {
