@@ -6,8 +6,8 @@
 
 // Farben
 
-@bgcolor: #212121;
-@color: white;
+@bgcolor: #ccf;
+@color: #222;
 @textbgcolor: #fff;
 @textcolor: #444;
 @maincolor: #04819e; 
@@ -17,9 +17,11 @@
 
 // Größen
 
-@fontsize: 1em;
+@fontsizevalue: 1.1;
+@fontsize: (@fontsizevalue * 1rem);
 @lineheight: 1.4444;
-@vertical: @fontsize * @lineheight;
+@vertical: (@fontsize * @lineheight);
+@verticalem: (@fontsizevalue * 1em * @lineheight);
 @pagewidth: 100%;
 @inhaltpadding:1em;
 
@@ -49,11 +51,39 @@ h2 {
 	margin-bottom:1em;
 }
 
+a.skiplink {
+	position:absolute;
+	top:-4em;
+	display:block;
+	padding:.5em;
+	background-color:@textbgcolor;
+	text-shadow:none;
+	text-decoration:none;
+	color:@textcolor;
+	.border-radius(0 0 3px 3px);
+	.box-shadow();
+	&:focus {
+		top:0;
+		outline:none;
+	}
+}
 // === Global Ende === \\
 
 // === Site-specific styles === \\
 
+.site-head {
+	h1, p {
+		.col();
+	}
+}
 
+main {
+	.col();
+}
+
+header {
+	margin-top:(2 * @vertical);
+}
 
 // === Styles Ende === \\
 
