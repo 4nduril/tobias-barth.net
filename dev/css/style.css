@@ -129,8 +129,8 @@ blockquote {
 body {
   width: 100%;
   margin: 0 auto;
-  font-size: 1.1rem;
-  line-height: 1.58884rem;
+  font-size: 1.125rem;
+  line-height: 1.62495rem;
   font-family: sans-serif;
   background-color: #ccccff;
   color: #222222;
@@ -152,7 +152,11 @@ hr,
 main,
 table,
 iframe {
+<<<<<<< HEAD
   margin-bottom: 1.58884rem;
+=======
+  margin-bottom: 1.62495rem;
+>>>>>>> master
 }
 /* Bei h2 passt @vertical nicht. */
 h2 {
@@ -192,7 +196,11 @@ main {
   width: 96.6652%;
 }
 header {
+<<<<<<< HEAD
   margin-top: 3.17768rem;
+=======
+  margin-top: 3.2499rem;
+>>>>>>> master
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */
 @media print {
