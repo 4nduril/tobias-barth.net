@@ -132,8 +132,21 @@ body {
   font-size: 1.125rem;
   line-height: 1.62495rem;
   font-family: sans-serif;
-  background-color: #ccccff;
+  background-color: #ffffff;
   color: #222222;
+}
+body a {
+  color: #aa7a39;
+  text-decoration: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+body a:hover,
+body a:focus {
+  color: #ffffff;
+  background-color: #aa7a39;
 }
 p,
 ul,
@@ -151,7 +164,8 @@ address,
 hr,
 main,
 table,
-iframe {
+iframe,
+header {
   margin-bottom: 1.62495rem;
 }
 /* Bei h2 passt @vertical nicht. */
@@ -166,7 +180,7 @@ a.skiplink {
   background-color: #ffffff;
   text-shadow: none;
   text-decoration: none;
-  color: #444444;
+  color: #222222;
   border-radius: 0 0 3px 3px;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
@@ -178,20 +192,34 @@ a.skiplink:focus {
   top: 0;
   outline: none;
 }
-.site-head h1,
-.site-head p {
+.in-site-head,
+.in-site-footer {
   float: left;
   margin-left: 1.6666%;
   margin-right: 1.6666%;
   width: 96.6652%;
 }
-main {
-  float: left;
-  margin-left: 1.6666%;
-  margin-right: 1.6666%;
-  width: 96.6652%;
+.site-head,
+.site-footer {
+  /* For IE 6/7 (trigger hasLayout) */
+  zoom: 1;
 }
-header {
+.site-head:before,
+.site-footer:before,
+.site-head:after,
+.site-footer:after {
+  content: "";
+  display: table;
+}
+.site-head:after,
+.site-footer:after {
+  clear: both;
+}
+.site-head {
+  background-color: #2a4f6e;
+  color: #f8d098;
+}
+.site-head h1 {
   margin-top: 3.2499rem;
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */

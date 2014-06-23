@@ -6,14 +6,20 @@
 
 // Farben
 
-@bgcolor: #ccf;
+@bgcolor: #fff;
 @color: #222;
-@textbgcolor: #fff;
-@textcolor: #444;
-@maincolor: #04819e; 
-@linkcolor: #a61300;
-@linkhovercolor: #e2001a;
-@bordercolor: #ccc;
+@maincolordark2: #07243B;
+@maincolordark1: #133552;
+@maincolor: #2A4F6E; 
+@maincolorlight1: #496C8A;
+@maincolorlight2: #6686A0;
+@secondarycolordark2: #5C3705;
+@secondarycolordark1: #7F5316;
+@secondarycolor: #AA7A39; 
+@secondarycolorlight1: #D5A86A;
+@secondarycolorlight2: #F8D098;
+@linkcolor:@secondarycolor;
+@bordercolor: ;
 
 // Größen
 
@@ -39,9 +45,10 @@ body {
 	.font();
 	background-color:@bgcolor;
 	color:@color;
+	.std-link();
 }
 
-p,ul,ol,dl,aside,section,article,h1,h3,h4,h5,h6,address,hr,main,table,iframe {
+p,ul,ol,dl,aside,section,article,h1,h3,h4,h5,h6,address,hr,main,table,iframe,header {
 	margin-bottom:@vertical;
 }
 
@@ -56,10 +63,10 @@ a.skiplink {
 	top:-4em;
 	display:block;
 	padding:.5em;
-	background-color:@textbgcolor;
+	background-color:@bgcolor;
 	text-shadow:none;
 	text-decoration:none;
-	color:@textcolor;
+	color:@color;
 	.border-radius(0 0 3px 3px);
 	.box-shadow();
 	&:focus {
@@ -67,22 +74,36 @@ a.skiplink {
 		outline:none;
 	}
 }
+
+.std-link() {
+	a {
+		color:@linkcolor;
+		text-decoration:none;
+		.transition();
+		&:hover, &:focus {
+			color:@bgcolor;
+			background-color:@linkcolor;
+		}
+	}
+}
 // === Global Ende === \\
 
 // === Site-specific styles === \\
 
-.site-head {
-	h1, p {
-		.col();
-	}
-}
-
-main {
+.in-site-head, .in-site-footer {
 	.col();
 }
 
-header {
-	margin-top:(2 * @vertical);
+.site-head, .site-footer {
+	.cf();
+}
+
+.site-head {
+	background-color:@maincolor;
+	color:@secondarycolorlight2;
+	h1 {
+		margin-top:(2 * @vertical);
+	}
 }
 
 // === Styles Ende === \\
