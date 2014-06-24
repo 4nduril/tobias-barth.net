@@ -136,7 +136,7 @@ body {
   color: #222222;
 }
 body a {
-  color: #aa7a39;
+  color: #074574;
   text-decoration: none;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -146,7 +146,7 @@ body a {
 body a:hover,
 body a:focus {
   color: #ffffff;
-  background-color: #aa7a39;
+  background-color: #074574;
 }
 p,
 ul,
@@ -216,8 +216,8 @@ a.skiplink:focus {
   clear: both;
 }
 .site-head {
-  background-color: #2a4f6e;
-  color: #f8d098;
+  background-color: #0b65aa;
+  color: #eeeeee;
 }
 .site-head h1 {
   margin-top: 3.2499rem;

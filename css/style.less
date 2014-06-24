@@ -7,18 +7,25 @@
 // Farben
 
 @bgcolor: #fff;
-@color: #222;
-@maincolordark2: #07243B;
-@maincolordark1: #133552;
-@maincolor: #2A4F6E; 
-@maincolorlight1: #496C8A;
-@maincolorlight2: #6686A0;
+@color: @darktextcolor;
+@darktextcolor:#222;
+@lighttextcolor:#eee;
+@maincolordark2: #02243E;
+@maincolordark1: #074574;
+@maincolor: #0B65AA; 
+@maincolorlight1: #3E84BA;
+@maincolorlight2: #84B6DC;
+//@maincolordark2: #07243B;
+//@maincolordark1: #133552;
+//@maincolor: #2A4F6E; 
+//@maincolorlight1: #496C8A;
+//@maincolorlight2: #6686A0;
 @secondarycolordark2: #5C3705;
 @secondarycolordark1: #7F5316;
 @secondarycolor: #AA7A39; 
 @secondarycolorlight1: #D5A86A;
 @secondarycolorlight2: #F8D098;
-@linkcolor:@secondarycolor;
+@linkcolor:@maincolordark1;
 @bordercolor: ;
 
 // Größen
@@ -100,7 +107,7 @@ a.skiplink {
 
 .site-head {
 	background-color:@maincolor;
-	color:@secondarycolorlight2;
+	color:@lighttextcolor;
 	h1 {
 		margin-top:(2 * @vertical);
 	}
