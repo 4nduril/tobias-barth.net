@@ -218,6 +218,9 @@ a.skiplink:focus {
 .site-head {
   background-color: #0b65aa;
   color: #eeeeee;
+  font-size: 1.2375rem;
+  line-height: 1.31309091;
+  font-family: Helvetica, Arial, 'Liberation Sans', sans-serif;
 }
 h1.in-site-head,
 .tagline.in-site-head {
