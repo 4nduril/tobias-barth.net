@@ -219,8 +219,23 @@ a.skiplink:focus {
   background-color: #0b65aa;
   color: #eeeeee;
 }
-.site-head h1 {
-  margin-top: 3.2499rem;
+h1.in-site-head,
+.tagline.in-site-head {
+  font-family: 'Terminal Dosis Light', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  text-align: right;
+  text-shadow: 0 1px 2px rgba(34, 34, 34, 0.9);
+}
+h1.in-site-head {
+  margin-top: 1.62495rem;
+  font-size: 2.8125rem;
+  line-height: 1.15552;
+  margin-bottom: 0;
+}
+.tagline.in-site-head {
+  font-size: 1.62495rem;
+  line-height: 1;
+  letter-spacing: .015em;
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */
 @media print {
