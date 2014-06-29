@@ -192,6 +192,13 @@ a.skiplink:focus {
   top: 0;
   outline: none;
 }
+img {
+  max-width: 100%;
+}
+abbr,
+acronym {
+  cursor: help;
+}
 .in-site-head,
 .in-site-footer {
   float: left;
