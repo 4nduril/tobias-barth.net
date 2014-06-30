@@ -253,10 +253,12 @@ h1.in-site-head {
 p.in-site-footer {
   margin-bottom: 0;
 }
-h3.in-site-footer {
+h3.in-site-footer,
+h4.in-site-footer {
   margin-top: 1.62495rem;
 }
-h3.in-site-footer:first-child {
+h3.in-site-footer:first-child,
+h4.in-site-footer:first-child {
   margin-top: 0;
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */
