@@ -247,6 +247,9 @@ h1.in-site-head {
   line-height: 1;
   letter-spacing: .015em;
 }
+.site-footer {
+  padding-bottom: 1.62495rem;
+}
 .in-site-footer {
   text-align: center;
 }
