@@ -43,6 +43,30 @@
 @fontfamily: Helvetica, Arial, 'Liberation Sans', sans-serif;
 @logofont:'Terminal Dosis Light', Helvetica, Arial, sans-serif;
 
+// Media Queries
+
+@m:'screen';
+@w1:45em;
+@w2:65em;
+@w3:;
+@w4:;
+@w5:;
+@w6:;
+@w7:;
+
+@m1:~"@{m} and (min-width:@{w1})";
+@m2:~"@{m} and (min-width:@{w2})";
+@m1-5:~"@{m} and (min-width:@{w1}) and (max-width:@{w5})";
+@m2-5:~"@{m} and (min-width:@{w2}) and (max-width:@{w5})";
+@m3-5:~"@{m} and (min-width:@{w3}) and (max-width:@{w5})";
+
+@m3:~"@{m} and (min-width:@{w3})";
+@s3:~"@{m} and (max-width:@{w3})";
+@m4:~"@{m} and (min-width:@{w4})";
+@m5:~"@{m} and (min-width:@{w5})";
+@m6:~"@{m} and (min-width:@{w6})";
+@m7:~"@{m} and (min-width:@{w7})";
+
 // === Variablen Ende === \\
 
 // === Global === \\
@@ -140,6 +164,33 @@ abbr,acronym {
 		letter-spacing:.015em;
 	}
 }
+
+.teaser {
+	&.portrait {
+		text-align:center;
+	}
+	@media @m1 {
+		.col(6);
+		text-align:right;
+		&.portrait {
+			float:right;
+			img {
+				vertical-align:bottom;
+			}
+		}
+	}
+	@media @m2 {
+		text-align:left;
+		font-size:@h3;
+		line-height:@h3line;
+		&.portrait {
+			max-width:(18 * @vertical);
+			.col(5,1);
+			float:right;
+		}
+	}
+}
+
 
 .site-footer {
 	padding-bottom:@vertical;

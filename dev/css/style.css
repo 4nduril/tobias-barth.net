@@ -247,6 +247,39 @@ h1.in-site-head {
   line-height: 1;
   letter-spacing: .015em;
 }
+.teaser.portrait {
+  text-align: center;
+}
+@media screen and (min-width:45em) {
+  .teaser {
+    float: left;
+    margin-left: 1.6666%;
+    margin-right: 1.6666%;
+    width: 46.666%;
+    text-align: right;
+  }
+  .teaser.portrait {
+    float: right;
+  }
+  .teaser.portrait img {
+    vertical-align: bottom;
+  }
+}
+@media screen and (min-width:65em) {
+  .teaser {
+    text-align: left;
+    font-size: 1.35rem;
+    line-height: 1.20366667;
+  }
+  .teaser.portrait {
+    max-width: 29.2491rem;
+    float: left;
+    margin-left: 9.9998%;
+    margin-right: 1.6666%;
+    width: 38.3328%;
+    float: right;
+  }
+}
 .site-footer {
   padding-bottom: 1.62495rem;
 }
