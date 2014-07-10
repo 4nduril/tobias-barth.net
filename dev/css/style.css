@@ -201,33 +201,24 @@ acronym {
 }
 .in-site-head,
 .in-site-footer {
-  float: left;
-  margin-left: 1.6666%;
-  margin-right: 1.6666%;
-  width: 96.6652%;
+  padding: 0 1.6666%;
 }
-.site-head,
-.site-footer {
-  /* For IE 6/7 (trigger hasLayout) */
-  zoom: 1;
-}
-.site-head:before,
-.site-footer:before,
-.site-head:after,
-.site-footer:after {
-  content: "";
-  display: table;
-}
-.site-head:after,
-.site-footer:after {
-  clear: both;
-}
+/*.site-head, .site-footer {
+	.cf();
+}*/
 .site-head {
   background-color: #0b65aa;
   color: #eeeeee;
   font-size: 1.2375rem;
   line-height: 1.31309091;
   font-family: Helvetica, Arial, 'Liberation Sans', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+@media screen and (min-width:65em) {
+  .site-head {
+    justify-content: space-between;
+  }
 }
 h1.in-site-head,
 .tagline.in-site-head {
@@ -235,6 +226,12 @@ h1.in-site-head,
   font-style: normal;
   text-align: right;
   text-shadow: 0 1px 2px rgba(34, 34, 34, 0.9);
+  padding: 0 1.6666%;
+  -webkit-box-flex: 1 100%;
+  -moz-box-flex: 1 100%;
+  -webkit-flex: 1 100%;
+  -ms-flex: 1;
+  flex: 1 100%;
 }
 h1.in-site-head {
   margin-top: 1.62495rem;
@@ -252,14 +249,17 @@ h1.in-site-head {
 }
 @media screen and (min-width:45em) {
   .teaser {
-    float: left;
-    margin-left: 1.6666%;
-    margin-right: 1.6666%;
-    width: 46.666%;
+    padding: 0 1.6666%;
+    -webkit-box-flex: 1 0px;
+    -moz-box-flex: 1 0px;
+    -webkit-flex: 1 0px;
+    -ms-flex: 1;
+    flex: 1 0px;
     text-align: right;
+    order: 1;
   }
   .teaser.portrait {
-    float: right;
+    order: 2;
   }
   .teaser.portrait img {
     vertical-align: bottom;
@@ -270,14 +270,20 @@ h1.in-site-head {
     text-align: left;
     font-size: 1.35rem;
     line-height: 1.20366667;
+    padding: 0 1.6666%;
+    -webkit-box-flex: 0 50%;
+    -moz-box-flex: 0 50%;
+    -webkit-flex: 0 50%;
+    -ms-flex: 0;
+    flex: 0 50%;
   }
   .teaser.portrait {
-    max-width: 29.2491rem;
-    float: left;
-    margin-left: 9.9998%;
-    margin-right: 1.6666%;
-    width: 38.3328%;
-    float: right;
+    padding: 0 1.6666%;
+    -webkit-box-flex: 0 41.66666667%;
+    -moz-box-flex: 0 41.66666667%;
+    -webkit-flex: 0 41.66666667%;
+    -ms-flex: 0;
+    flex: 0 41.66666667%;
   }
 }
 .site-footer {

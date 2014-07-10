@@ -21,6 +21,25 @@
 	width:(@spaltenzahl * @colWidth) + ((2 * @spaltenzahl - 2) * @gutWidth);
 }
 
+.flex-cont(@pad: 0;@wrap: wrap) {
+	margin-left:(-(@pad) * @gutWidth);
+	display:-webkit-box;
+	display:-moz-box;
+	display:-ms-flexbox;
+	display:-webkit-flex;
+	display:flex;
+	flex-wrap:@wrap;
+}
+
+.flex(@rel: 1; @width: 0px; @padding: @gutWidth) {
+	padding: 0 @padding;
+	-webkit-box-flex:@rel @width;
+	-moz-box-flex:@rel @width;
+	-webkit-flex:@rel @width;
+	-ms-flex:@rel;
+	flex:@rel @width;
+}
+
 .no-col() {
 	float:none;
 	margin:0;
