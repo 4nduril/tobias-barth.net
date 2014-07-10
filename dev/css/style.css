@@ -246,6 +246,7 @@ h1.in-site-head {
 }
 .teaser.portrait {
   text-align: center;
+  width: 100%;
 }
 @media screen and (min-width:45em) {
   .teaser {
