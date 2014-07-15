@@ -315,6 +315,10 @@ h3.in-site-footer:first-child,
 h4.in-site-footer:first-child {
   margin-top: 0;
 }
+.in-site-footer .sm {
+  font-size: 3.2499rem;
+  display: inline-block;
+}
 @media screen and (min-width:45em) {
   .in-site-footer {
     padding: 0 3.3332%;
