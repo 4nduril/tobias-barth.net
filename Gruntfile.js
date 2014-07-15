@@ -55,6 +55,18 @@ module.exports = function (grunt) {
 						rename: function(dest, src) {
 							return dest + 'focusfix.js';
 						}
+					},
+					{
+						expand: true,
+						src: ['bower/font-awesome/less/*.less'],
+						dest: 'css/',
+						flatten: true
+					},
+					{
+						expand: true,
+						cwd: 'bower/font-awesome/fonts/',
+						src: ['*.eot', '*.woff', '*.ttf', '*.svg', '*.otf'],
+						dest: 'dev/fonts'
 					}
 				]
 			},
@@ -299,7 +311,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('copydev', ['copy:lib', 'copy:pages', 'copy:img']);
-	grunt.registerTask('default', ['less:dev', 'copydev', 'concat:dev', 'jshint', /*'concat:modernizr',*/ 'regex-replace:dev', 'imagemin:dev']);
+	grunt.registerTask('default', ['copydev', 'less:dev', 'concat:dev', 'jshint', /*'concat:modernizr',*/ 'regex-replace:dev', 'imagemin:dev']);
 	grunt.registerTask('dist', ['less:dist', 'uglify:dist', 'copy:dist', 'regex-replace:dist', 'imagemin:dist']);
 /*	grunt.registerTask('dist', ['less:dist', 'modernizr:dist', 'uglify:dist', 'copy:dist', 'regex-replace:dist', 'imagemin:dist']);*/
 };
