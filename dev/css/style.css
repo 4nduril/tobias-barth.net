@@ -285,10 +285,21 @@ h1.in-site-head {
     -webkit-flex: 0 41.66666667%;
     -ms-flex: 0;
     flex: 0 41.66666667%;
+    text-align: right;
   }
 }
 .site-footer {
   padding-bottom: 1.62495rem;
+}
+@media screen and (min-width:45em) {
+  .site-footer {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 0;
+    -moz-column-gap: 0;
+    column-gap: 0;
+  }
 }
 .in-site-footer {
   text-align: center;
@@ -303,6 +314,22 @@ h4.in-site-footer {
 h3.in-site-footer:first-child,
 h4.in-site-footer:first-child {
   margin-top: 0;
+}
+@media screen and (min-width:45em) {
+  .in-site-footer {
+    padding: 0 3.3332%;
+    text-align: left;
+  }
+  h4.in-site-footer,
+  h4.in-site-footer + p {
+    display: inline;
+  }
+  h4.in-site-footer {
+    padding-right: 0;
+  }
+  h4.in-site-footer + p {
+    padding-left: 0;
+  }
 }
 /* Print-Stylesheet übernommmen aus http://html5boilerplate.com */
 @media print {

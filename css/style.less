@@ -194,6 +194,7 @@ abbr,acronym {
 		.flex(0;50%);
 		&.portrait {
 			.flex(0;(5/12*100%));
+			text-align:right;
 		}
 	}
 }
@@ -201,6 +202,10 @@ abbr,acronym {
 
 .site-footer {
 	padding-bottom:@vertical;
+	@media @m1 {
+		.column-count();
+		.column-gap(0);
+	}
 }
 
 .in-site-footer {
@@ -212,6 +217,19 @@ abbr,acronym {
 		margin-top:@vertical;
 		&:first-child {
 			margin-top:0;
+		}
+	}
+	@media @m1 {
+		padding:0 (2*@gutWidth);
+		text-align:left;
+		h4&, h4& + p {
+			display:inline;
+		}
+		h4& {
+			padding-right:0;
+		}
+		h4& + p {
+			padding-left:0;
 		}
 	}
 }
