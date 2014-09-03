@@ -1,3 +1,4 @@
+/* jshint strict:false */
 /**
  * "Yet Another Multicolumn Layout" - YAML CSS Framework
  *

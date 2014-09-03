@@ -29,24 +29,14 @@ module.exports = function (grunt) {
 			}
 		},
 		copy: {
-			pages: {
-				files: [
-					{
-						expand: true,
-						cwd: 'pages/',
-						src: ['**/*.html', '**/*.php', '.htaccess', '**/*.xml', '**/*.txt'],
-						dest: 'dev/'
+			focusfix: {
+				options: {
+					process: function(content, srcpath) {
+						var jshintNotice = "/* jshint strict:false */";
+						return jshintNotice + "\n" + content;
 					}
-				]
-			},
-			lib: {
+				},
 				files: [
-					{
-						expand: true,
-						src: ['bower/jquery/jquery.js'],
-						dest: 'dev/js/',
-						flatten: true
-					},
 					{
 						expand: true,
 						src: ['bower/yaml-focusfix.js/index.js'],
@@ -55,11 +45,21 @@ module.exports = function (grunt) {
 						rename: function(dest, src) {
 							return dest + 'focusfix.js';
 						}
+					}
+				],
+			},
+		preDev: {
+				files: [
+					{
+						expand: true,
+						cwd: 'pages/',
+						src: ['**/*.html', '**/*.php', '.htaccess', '**/*.xml', '**/*.txt'],
+						dest: 'dev/'
 					},
 					{
 						expand: true,
-						src: ['bower/font-awesome/less/*.less'],
-						dest: 'css/',
+						src: ['bower/jquery/jquery.js'],
+						dest: 'dev/js/',
 						flatten: true
 					},
 					{
@@ -67,11 +67,7 @@ module.exports = function (grunt) {
 						cwd: 'bower/font-awesome/fonts/',
 						src: ['*.eot', '*.woff', '*.ttf', '*.svg', '*.otf'],
 						dest: 'dev/fonts'
-					}
-				]
-			},
-			img: {
-				files: [
+					},
 					{
 						expand: true,
 						cwd: 'images/',
@@ -80,7 +76,7 @@ module.exports = function (grunt) {
 					}
 				]
 			},
-			dist: {
+			preDist: {
 				files: [
 					{
 						expand: true,
@@ -99,6 +95,12 @@ module.exports = function (grunt) {
 						cwd: 'images/',
 						src: ['*.{jpg,JPG,jpeg}', '*.{gif,GIF}', '*.{png,PNG}', '*.{SVG,svg}'],
 						dest: 'dist/images/'
+					},
+					{
+						expand: true,
+						cwd: 'bower/font-awesome/fonts/',
+						src: ['*.eot', '*.woff', '*.ttf', '*.svg', '*.otf'],
+						dest: 'dev/fonts'
 					}
 				]
 			},
@@ -194,17 +196,21 @@ module.exports = function (grunt) {
 			}
 		},
 		jshint: {
-			files: ['dev/js/' + name + '.js'],
+			options: {
+				jshintrc: true,
+			},
+			files: ['js/*.js']
 		},
 		less: {
 			dev: {
 				options: {
+					paths: ['bower/font-awesome/less']
 				},
 				files: {'dev/css/style.css': 'css/style.less'}
 			},
 			dist: {
 				options: {
-					yuicompress: true
+					cleancss: true
 				},
 				files: {'dist/css/style.min.css': 'css/style.less'}
 			}
@@ -227,7 +233,7 @@ module.exports = function (grunt) {
 		},
 		"regex-replace": {
 			dev: {
-				src: ['dev/**/*.html', 'dist/**/*.php'],
+				src: ['dev/**/*.html', 'dev/**/*.php'],
 				actions: [
 					{
 						name: "Inject project's main JS filename",
@@ -287,7 +293,7 @@ module.exports = function (grunt) {
 			},
 			catJs: {
 				files: ['js/*.js'],
-				tasks: ['concat:dev']
+				tasks: ['concat:dev', 'jshint']
 			},
 			copyPages: {
 				files: ['pages/**/*'],
@@ -310,8 +316,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('copydev', ['copy:lib', 'copy:pages', 'copy:img']);
-	grunt.registerTask('default', ['copydev', 'less:dev', 'concat:dev', 'jshint', /*'concat:modernizr',*/ 'regex-replace:dev', 'imagemin:dev']);
+	grunt.registerTask('copy:dev', ['copy:focusfix', 'copy:preDev']);
+	grunt.registerTask('copy:dist', ['copy:focusfix', 'copy:preDist']);
+	grunt.registerTask('default', ['less:dev', 'copy:dev', 'concat:dev', 'jshint', /*'concat:modernizr',*/ 'regex-replace:dev', 'imagemin:dev']);
 	grunt.registerTask('dist', ['less:dist', 'uglify:dist', 'copy:dist', 'regex-replace:dist', 'imagemin:dist']);
 /*	grunt.registerTask('dist', ['less:dist', 'modernizr:dist', 'uglify:dist', 'copy:dist', 'regex-replace:dist', 'imagemin:dist']);*/
 };
