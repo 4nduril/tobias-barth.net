@@ -1,8 +1,5 @@
 # ToDo Website-Relaunch
 
-## Essentiell vor Publish
-
-- CSS mit static Layout für IE<8
 
 ## Site
 
