@@ -2,39 +2,66 @@
 <html lang="de">
 <head>
 	<meta charset="utf-8" />
-	<title>Titel</title>
+	<title>tobias-barth.net | Modernes Webdesign aus Köln</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="css/style.min.css" />
-
-<!--	<link rel="shortcut icon" href="images/favicon.ico" />-->
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="css/old-ie.min.css" />
+	<![endif]-->
 
 	<!--[if lt IE 9]>
 		<script src="js/old-ie.min.js"></script>
 	<![endif]-->
+	<script type="text/javascript">
+	  WebFontConfig = {
+		google: { families: [ 'Dosis:300:latin' ] }
+	  };
+	  (function() {
+		var wf = document.createElement('script');
+		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = 'true';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	  })(); </script>
 
 </head>
 <body>
 	<header class="site-head">
-			<h1>Überschrift</h1>
-			<p>Tagline</p>
-	</header>
-	<nav class="skip-links">
-		<a title="Navigation überspringen" class="skiplink" href="#content">Um direkt zum Hauptinhalt zu gelangen, drücken Sie Enter.</a>
-	</nav>
-	<nav class="main-navi">
+			<h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Modernes Webdesign aus Köln</p>
+		</header>
+		<main class="teaser">
+			<p class="portrait"><img src="images/Portrait.png" alt="Portrait Tobias Barth" /></p>
+			<p>Hallo, mein Name ist Tobias&nbsp;Barth. Ich bin freier Webdesigner und Frontend-Entwickler. Ich plane und programmiere komplexe Websites und Themes für <abbr title="Content-Management-Systeme">CMS</abbr> mit dem Fokus auf <em>barrierefreiem Zugang</em> und gerätunabhängiger Bedienbarkeit (<em>responsive Design</em>). Ich berate Sie rund um diese Themen, pflege Ihre Inhalte oder verstärke projektbezogen Ihr Team. Ich lebe in Köln und arbeite für Sie, wo Sie mich brauchen.</p>
+		</main>
+<!--	<nav class="skip-links">
+		<a title="Navigation überspringen" class="skiplink ym-skip" href="#content">Um direkt zum Hauptinhalt zu gelangen, drücken Sie Enter.</a>
+	</nav>-->
+<!--	<nav class="main-navi">
 		<ul>
 			<li class="main-navi-item"><a href="">Nav1</a></li>
 			<li><a href="">Nav2</a></li>
 		</ul>
-	</nav>
-	<main id="content">
-	</main>
+	</nav>-->
 	<footer class="site-footer">
-		
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net">contact@tobias-barth.net</a></p>
+		<p class="in-site-footer">Telefon: <a href="tel:+492215706935">+49 221 570 69 35</a></p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><a class="sm" href="https://alpha.app.net/4nduril" title="app.net"><span class="fa fa-adn"> </span></a> <a class="sm" href="https://twitter.com/4nduril" title="Twitter"><span class="fa fa-twitter"> </span></a> <a class="sm" href="https://github.com/4nduril" title="Github"><span class="fa fa-github-square"> </span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		Tobias&nbsp;Barth<br />
+		Vincenzstr.&nbsp;25<br />
+		51065&nbsp;Köln</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
 	</footer>
 
-	<script src="js/webproject-template.min.js"></script>
+	<script src="js/tobias-barth-net.min.js"></script>
 	<!--[if lt IE 9]>
 		<script src="js/old-ie2-superweirdbehaviour.min.js"></script>
 	<![endif]-->
