@@ -1,0 +1,33 @@
+/* Fixed Layout for the ancien regime */
+
+@fontsizevalue: 1.125;
+@fontsize: (@fontsizevalue * 1rem);
+@lineheight: 1.4444;
+@vertical: (@fontsize * @lineheight);
+
+.site-head > h1, .site-head > .tagline, main p, .site-footer {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.site-head {
+	&> h1 {
+	margin-top:0rem;
+	padding-top:@vertical;
+	}
+	&> h1, &> .tagline {
+		text-align:left;
+	}
+}
+
+main {
+	padding-top:@vertical;
+	padding-bottom:@vertical;
+}
+
+.portrait {
+	margin-bottom:@vertical;
+	img {
+		max-width:350px;
+	}
+}

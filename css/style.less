@@ -41,7 +41,7 @@
 // Schrift
 
 @fontfamily: Helvetica, Arial, 'Liberation Sans', sans-serif;
-@logofont:'Terminal Dosis Light', Helvetica, Arial, sans-serif;
+@logofont:'Dosis', Helvetica, Arial, sans-serif;
 
 // Media Queries
 
@@ -131,56 +131,70 @@ abbr,acronym {
 
 // === Site-specific styles === \\
 
-.in-site-head, .in-site-footer {
-	padding: 0 @gutWidth;
-}
-
-/*.site-head, .site-footer {
-	.cf();
-}*/
 
 .site-head {
 	background-color:@maincolor;
 	color:@lighttextcolor;
-	.font(@h4,@h4line);
 	display:flex;
 	flex-wrap:wrap;
-	@media @m2 {
-		justify-content:space-between;
-	}
-}
-
-.in-site-head {
-	h1&, .tagline& {
+	h1, .tagline {
 		font-family:@logofont;
 		font-style:normal;
 		text-align:right;
 		text-shadow:0 1px 2px fadeout(@color, 10%);
 		.flex(1;100%);
+		/* Webfont FOUT */
+		opacity:0;
 	}
-	h1& {
+	h1 {
 		margin-top:@vertical;
 		font-size:@mega;
 		line-height:@megaline;
 		margin-bottom:0;
 	}
-	.tagline& {
+	.tagline {
 		font-size:@h2;
 		line-height:@h2line;
 		letter-spacing:.015em;
 	}
 }
 
+		/* Webfont FOUT */
+.wf-dosis-n3-active .site-head {
+	h1, .tagline {
+		opacity:1;
+	}
+}
+
+main {
+	margin-top: (-1 * @vertical);
+	display:flex;
+	flex-wrap:wrap;
+	@media @m2 {
+		justify-content:space-between;
+	}
+	p {
+		padding:0 @gutWidth;
+		@media @m1 {
+			.flex();
+		}
+	}
+}
+
 .teaser {
-	&.portrait {
+	background-color:@maincolor;
+	color:@lighttextcolor;
+	.font(@h4,@h4line);
+	.portrait {
 		text-align:center;
 		width:100%;
 	}
 	@media @m1 {
-		.flex();
-		text-align:right;
-		order:1;
-		&.portrait {
+		p {
+			text-align:right;
+			order:1;
+		}
+		.portrait {
 			order:2;
 			img {
 				vertical-align:bottom;
@@ -188,11 +202,13 @@ abbr,acronym {
 		}
 	}
 	@media @m2 {
-		text-align:left;
-		font-size:@h3;
-		line-height:@h3line;
-		.flex(0;50%);
-		&.portrait {
+		p {
+			text-align:left;
+			font-size:@h3;
+			line-height:@h3line;
+			.flex(0;50%);
+		}
+		.portrait {
 			.flex(0;(5/12*100%));
 			text-align:right;
 		}
@@ -237,6 +253,7 @@ abbr,acronym {
 		}
 	}
 }
+
 
 // === Styles Ende === \\
 

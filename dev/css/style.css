@@ -199,30 +199,15 @@ abbr,
 acronym {
   cursor: help;
 }
-.in-site-head,
-.in-site-footer {
-  padding: 0 1.6666%;
-}
-/*.site-head, .site-footer {
-	.cf();
-}*/
 .site-head {
   background-color: #0b65aa;
   color: #eeeeee;
-  font-size: 1.2375rem;
-  line-height: 1.31309091;
-  font-family: Helvetica, Arial, 'Liberation Sans', sans-serif;
   display: flex;
   flex-wrap: wrap;
 }
-@media screen and (min-width:65em) {
-  .site-head {
-    justify-content: space-between;
-  }
-}
-h1.in-site-head,
-.tagline.in-site-head {
-  font-family: 'Terminal Dosis Light', Helvetica, Arial, sans-serif;
+.site-head h1,
+.site-head .tagline {
+  font-family: 'Dosis', Helvetica, Arial, sans-serif;
   font-style: normal;
   text-align: right;
   text-shadow: 0 1px 2px rgba(34, 34, 34, 0.9);
@@ -232,42 +217,73 @@ h1.in-site-head,
   -webkit-flex: 1 100%;
   -ms-flex: 1;
   flex: 1 100%;
+  /* Webfont FOUT */
+  opacity: 0;
 }
-h1.in-site-head {
+.site-head h1 {
   margin-top: 1.62495rem;
   font-size: 2.8125rem;
   line-height: 1.15552;
   margin-bottom: 0;
 }
-.tagline.in-site-head {
+.site-head .tagline {
   font-size: 1.62495rem;
   line-height: 1;
   letter-spacing: .015em;
 }
-.teaser.portrait {
-  text-align: center;
-  width: 100%;
+/* Webfont FOUT */
+.wf-dosis-n3-active .site-head h1,
+.wf-dosis-n3-active .site-head .tagline {
+  opacity: 1;
+}
+main {
+  margin-top: -1.62495rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+@media screen and (min-width:65em) {
+  main {
+    justify-content: space-between;
+  }
+}
+main p {
+  padding: 0 1.6666%;
 }
 @media screen and (min-width:45em) {
-  .teaser {
+  main p {
     padding: 0 1.6666%;
     -webkit-box-flex: 1 0px;
     -moz-box-flex: 1 0px;
     -webkit-flex: 1 0px;
     -ms-flex: 1;
     flex: 1 0px;
+  }
+}
+.teaser {
+  background-color: #0b65aa;
+  color: #eeeeee;
+  font-size: 1.2375rem;
+  line-height: 1.31309091;
+  font-family: Helvetica, Arial, 'Liberation Sans', sans-serif;
+}
+.teaser .portrait {
+  text-align: center;
+  width: 100%;
+}
+@media screen and (min-width:45em) {
+  .teaser p {
     text-align: right;
     order: 1;
   }
-  .teaser.portrait {
+  .teaser .portrait {
     order: 2;
   }
-  .teaser.portrait img {
+  .teaser .portrait img {
     vertical-align: bottom;
   }
 }
 @media screen and (min-width:65em) {
-  .teaser {
+  .teaser p {
     text-align: left;
     font-size: 1.35rem;
     line-height: 1.20366667;
@@ -278,7 +294,7 @@ h1.in-site-head {
     -ms-flex: 0;
     flex: 0 50%;
   }
-  .teaser.portrait {
+  .teaser .portrait {
     padding: 0 1.6666%;
     -webkit-box-flex: 0 41.66666667%;
     -moz-box-flex: 0 41.66666667%;
