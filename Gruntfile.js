@@ -292,7 +292,11 @@ module.exports = function (grunt) {
 					{
 						src: 'css/style.less',
 						dest: 'dist/css/style.min.css'
-					},
+					}
+				]
+			},
+			"ie-dist": {
+				files: [
 					{
 						src: 'css/old-ie.less',
 						dest: 'dist/css/old-ie.min.css'
@@ -433,6 +437,7 @@ module.exports = function (grunt) {
 	]);
 	grunt.registerTask('dist', [
 		'less:dist',
+		'less:ie-dist',
 		'uglify:dist',
 		'copy:dist',
 		'regex-replace:dist',
