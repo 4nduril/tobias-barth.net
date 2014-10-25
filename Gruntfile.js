@@ -269,10 +269,10 @@ module.exports = function (grunt) {
 			files: ['js/*.js']
 		},
 		less: {
+			options: {
+				paths: ['bower/font-awesome/less']
+			},
 			dev: {
-				options: {
-					paths: ['bower/font-awesome/less']
-				},
 				files: [
 					{
 						src: 'css/style.less',
