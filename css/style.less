@@ -137,12 +137,21 @@ abbr,acronym {
 	color:@lighttextcolor;
 	display:flex;
 	flex-wrap:wrap;
+	justify-content:flex-end;
+	a {
+		.flex(0;1;auto;@gutWidth);
+		color:inherit;
+		&:hover, &:focus {
+			color:inherit;
+			background-color:transparent;
+		}
+	}
 	h1, .tagline {
 		font-family:@logofont;
 		font-style:normal;
 		text-align:right;
 		text-shadow:0 1px 2px fadeout(@color, 10%);
-		.flex(1;100%);
+		/*.flex(1;1;100%;@gutWidth);*/
 		/* Webfont FOUT */
 		opacity:0;
 	}
@@ -176,7 +185,7 @@ main {
 	p {
 		padding:0 @gutWidth;
 		@media @m1 {
-			.flex();
+			.flex(1;0;50%;@gutWidth);
 		}
 	}
 }
@@ -206,15 +215,66 @@ main {
 			text-align:left;
 			font-size:@h3;
 			line-height:@h3line;
-			.flex(0;50%);
+			.flex(0;1;50%;@gutWidth);
 		}
 		.portrait {
-			.flex(0;(5/12*100%));
+			.flex(0;1;(5/12*100%);@gutWidth);
 			text-align:right;
 		}
 	}
 }
 
+.main-navi {
+	.flex(1;1;100%;0);
+	font-weight:bold;
+	/* Set color for other pages than landing */
+	background-color:@maincolor;
+	ul {
+		.flex-cont(0;no-wrap);
+		justify-content:space-around;
+	}
+	li {
+		.flex(1);
+		margin:(@gutWidth);
+		text-align:center;
+	}
+	a {
+		color:@lighttextcolor;
+		display:inline-block;
+		padding:0.5em .2em;
+		width:100%;
+		height:100%;
+		&:focus, &:active {
+			outline:none;
+		}
+	}
+	.fa {
+		font-size: (1.5 * @fontsize);
+		line-height:(@lineheight / 1.5);
+		display:block;
+		@media @m1 {
+			display:inline;
+		}
+	}
+	.teaser & {
+		order:3;
+		@media @m2 {
+			.flex(0;1;50%;0);
+		}
+	}
+}
+
+main {
+	/* adjust margin for navi on other than landing page */
+	&:not(.teaser) {
+		.main-navi {
+			margin-bottom:@vertical;
+			ul {
+				margin-bottom:0;
+			}
+		}
+	}
+}
 
 .site-footer {
 	padding-bottom:@vertical;
