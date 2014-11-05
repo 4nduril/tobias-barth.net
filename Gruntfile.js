@@ -164,7 +164,7 @@ module.exports = function (grunt) {
 							'*.svg',
 							'*.otf'
 						],
-						dest: 'dev/fonts'
+						dest: 'dist/fonts'
 					}
 				]
 			},
