@@ -28,7 +28,6 @@ module.exports = function (grunt) {
 					{
 						src: [
 							'bower/html5shiv/dist/html5shiv.js'
-/*							'bower/respond/respond.min.js'*/
 						],
 						dest: 'dev/js/old-ie.js'
 					},
@@ -69,7 +68,7 @@ module.exports = function (grunt) {
 						dest: 'js/',
 						flatten: true,
 						rename: function(dest, src) {
-							return dest + 'focusfix.js';
+							return dest + 'focusfix';
 						}
 					}
 				],
@@ -92,12 +91,12 @@ module.exports = function (grunt) {
 			},
 			preDev: {
 				files: [
-					{
+				/*	{
 						expand: true,
 						src: ['bower/jquery/jquery.js'],
 						dest: 'dev/js/',
 						flatten: true
-					},
+					},*/
 					{
 						expand: true,
 						cwd: 'bower/font-awesome/fonts/',
@@ -114,23 +113,24 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: 'images/',
 						src: [
-							'*.{jpg,JPG,jpeg}',
-							'*.{gif,GIF}',
-							'*.{png,PNG}',
-							'*.{SVG,svg}'
+							'**/*.{jpg,JPG,jpeg}',
+							'**/*.{gif,GIF}',
+							'**/*.{png,PNG}',
+							'**/*.{SVG,svg}'
 						],
-						dest: 'dev/images/'
+						dest: 'dev/images/',
+						flatten: true
 					}
 				]
 			},
-			preDist: {
+			dist: {
 				files: [
-					{
+					/*{
 						expand: true,
 						src: ['bower/jquery/jquery.min.js'],
 						dest: 'dist/js/',
 						flatten: true
-					},
+					},*/
 					{
 						expand: true,
 						cwd: 'pages/',
@@ -145,17 +145,6 @@ module.exports = function (grunt) {
 					},
 					{
 						expand: true,
-						cwd: 'images/',
-						src: [
-							'*.{jpg,JPG,jpeg}',
-							'*.{gif,GIF}',
-							'*.{png,PNG}',
-							'*.{SVG,svg}'
-						],
-						dest: 'dist/images/'
-					},
-					{
-						expand: true,
 						cwd: 'bower/font-awesome/fonts/',
 						src: [
 							'*.eot',
@@ -167,26 +156,7 @@ module.exports = function (grunt) {
 						dest: 'dist/fonts'
 					}
 				]
-			},
-			joomla: {
-				files: [
-					{
-						expand: true,
-						src: ['dist/js/*.min.js'],
-						dest: 'template/js/',
-						flatten: true
-					},
-					{
-						expand: true,
-						src: [
-							'dist/css/*.min.css',
-							'dist/css/fonts/*'
-						],
-						dest: 'template/css/',
-						flatten: true
-					}
-				]
-			},
+			}
 		},
 		imagemin: {
 			dist: {
@@ -354,12 +324,7 @@ module.exports = function (grunt) {
 						name: 'Minify CSS',
 						search: /(?:\.min)*(\.css)/g,
 						replace: '.min$1'
-					}/*,
-					{
-						name: 'Dist-Base-Address',
-						search: /(\$BASE = "http:\/\/)[^"]+/,
-						replace: '$1expedition-colonia.de/'
-					}*/
+					}
 				]
 			}
 		},
@@ -376,7 +341,6 @@ module.exports = function (grunt) {
 					{
 						src: [
 							'bower/html5shiv/dist/html5shiv.js'
-/*							'bower/respond/respond.min.js'*/
 						],
 						dest: 'dist/js/old-ie.min.js'
 					},
@@ -418,13 +382,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('copy:dev', [
-		'copy:focusfix',
 		'copy:pages',
 		'copy:preDev'
-	]);
-	grunt.registerTask('copy:dist', [
-		'copy:focusfix',
-		'copy:preDist'
 	]);
 	grunt.registerTask('default', [
 		'less:dev',
@@ -433,7 +392,6 @@ module.exports = function (grunt) {
 		'jshint',
 		/*'concat:modernizr',*/
 		'regex-replace:dev',
-		'imagemin:dev'
 	]);
 	grunt.registerTask('dist', [
 		'less:dist',
@@ -443,12 +401,4 @@ module.exports = function (grunt) {
 		'regex-replace:dist',
 		'imagemin:dist'
 	]);
-/*	grunt.registerTask('dist', [
-		'less:dist',
-		'modernizr:dist',
-		'uglify:dist',
-		'copy:dist',
-		'regex-replace:dist',
-		'imagemin:dist'
-	]);*/
 };
