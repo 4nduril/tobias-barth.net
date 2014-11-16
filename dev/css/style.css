@@ -202,7 +202,13 @@ acronym {
 .site-head {
   background-color: #0b65aa;
   color: #eeeeee;
+  margin-left: 0%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .site-head h1,
@@ -217,6 +223,8 @@ acronym {
   -webkit-flex: 1 100%;
   -ms-flex: 1;
   flex: 1 100%;
+  /* For -webkit- Syntax? */
+  width: 100%;
   /* Webfont FOUT */
   opacity: 0;
 }
@@ -238,11 +246,20 @@ acronym {
 }
 main {
   margin-top: -1.62495rem;
+  margin-left: 0%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 @media screen and (min-width:65em) {
   main {
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
     justify-content: space-between;
   }
 }
@@ -273,9 +290,17 @@ main p {
 @media screen and (min-width:45em) {
   .teaser p {
     text-align: right;
+    -webkit-ordinal-group: 1;
+    -moz-ordinal-group: 1;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
     order: 1;
   }
   .teaser .portrait {
+    -webkit-ordinal-group: 2;
+    -moz-ordinal-group: 2;
+    -webkit-order: 2;
+    -ms-flex-order: 2;
     order: 2;
   }
   .teaser .portrait img {
