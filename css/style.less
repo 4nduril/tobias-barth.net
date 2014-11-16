@@ -135,9 +135,8 @@ abbr,acronym {
 .site-head {
 	background-color:@maincolor;
 	color:@lighttextcolor;
-	display:flex;
-	flex-wrap:wrap;
-	justify-content:flex-end;
+	.flex-cont();
+	.justify(flex-end);
 	a {
 		.flex(0;1;auto;@gutWidth);
 		color:inherit;
@@ -152,6 +151,8 @@ abbr,acronym {
 		text-align:right;
 		text-shadow:0 1px 2px fadeout(@color, 10%);
 		/*.flex(1;1;100%;@gutWidth);*/
+		/* For -webkit- Syntax? */
+		width:100%;
 		/* Webfont FOUT */
 		opacity:0;
 	}
@@ -177,10 +178,9 @@ abbr,acronym {
 
 main {
 	margin-top: (-1 * @vertical);
-	display:flex;
-	flex-wrap:wrap;
+	.flex-cont();
 	@media @m2 {
-		justify-content:space-between;
+		.justify(space-between);
 	}
 	p {
 		padding:0 @gutWidth;
@@ -201,10 +201,10 @@ main {
 	@media @m1 {
 		p {
 			text-align:right;
-			order:1;
+			.order(1);
 		}
 		.portrait {
-			order:2;
+			.order(2);
 			img {
 				vertical-align:bottom;
 			}
