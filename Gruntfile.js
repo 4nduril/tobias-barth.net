@@ -16,6 +16,7 @@ module.exports = function (grunt) {
 		')' + 
 		'(?:\\.min)*(\\.js)(?!o)';
 	var minJsRegEx = new RegExp(minJsRegExString, 'g');
+	var devDest = '/srv/http/tobias-barth.net';
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -351,6 +352,19 @@ module.exports = function (grunt) {
 				]
 			}
 		},
+		rsync: {
+			options: {
+				recursive: true,
+				args: ['--verbose','--links','--times']
+			},
+			dev: {
+				options: {
+					src: 'dev/',
+					dest: devDest,
+					delete: true
+				}
+			}
+		},
 		watch: {
 			compileCss: {
 				files: ['css/*.less'],
@@ -367,6 +381,10 @@ module.exports = function (grunt) {
 			regexRepl: {
 				files: ['pages/**/*'],
 				tasks: ['regex-replace:dev']
+			},
+			copyDev: {
+				files: ['dev/**/*'],
+				tasks: ['rsync:dev']
 			}
 		}
 	});
@@ -380,6 +398,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-regex-replace');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-rsync');
 
 	grunt.registerTask('copy:dev', [
 		'copy:pages',
