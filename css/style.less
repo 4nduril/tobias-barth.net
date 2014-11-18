@@ -32,6 +32,9 @@
 
 @fontsizevalue: 1.125;
 @fontsize: (@fontsizevalue * 1rem);
+@multiplier: 1.1111;
+@m-fontsizevalue: (@fontsizevalue * @multiplier);
+@m-fontsize: (@m-fontsizevalue * 1rem);
 @lineheight: 1.4444;
 @vertical: (@fontsize * @lineheight);
 @verticalem: (@fontsizevalue * 1em * @lineheight);
@@ -40,7 +43,7 @@
 
 // Schrift
 
-@fontfamily: Helvetica, Arial, 'Liberation Sans', sans-serif;
+@fontfamily: 'Liberation Sans', Helvetica, Arial, sans-serif;
 @logofont:'Dosis', Helvetica, Arial, sans-serif;
 
 // Media Queries
@@ -48,7 +51,7 @@
 @m:'screen';
 @w1:45em;
 @w2:65em;
-@w3:;
+@w3:105em;
 @w4:;
 @w5:;
 @w6:;
@@ -75,6 +78,9 @@ body {
 	width:@pagewidth;
 	margin:0 auto;
 	.font();
+	@media @m2 {
+		.font(@m-fontsize);
+	}
 	background-color:@bgcolor;
 	color:@color;
 	.std-link();
@@ -116,6 +122,15 @@ a.skiplink {
 			color:@bgcolor;
 			background-color:@linkcolor;
 		}
+	}
+}
+
+.no-effect {
+	color:@color;
+	.transition-full(none);
+	&:hover, &:focus {
+		color:inherit;
+		background-color:inherit;
 	}
 }
 
@@ -182,10 +197,73 @@ main {
 	@media @m2 {
 		.justify(space-between);
 	}
-	p {
+}
+
+article h2, .sect-col {
+	padding:0 @gutWidth;
+}
+
+article {
+	.flex(1;0;100%);
+	@media @m3 {
+		.flex(0;0;75rem);
+		margin-left:auto;
+		margin-right:auto;
+	}
+}
+
+.sect-col {
+	& p:first-child::first-letter {
+		.font(@h2,@h2line);
+		font-weight:bold;
+	}
+	@media @m1 {
+		padding: 0;
+		margin-bottom:@vertical;
+		.column-count();
+		.column-gap(0);
+		/* You have to set the multiplicator of @gutWidth in padding according
+		 * to the column-count */
+		& > * {
+			padding:0 (2 * @gutWidth);
+			/* columns produce unpredictable margins after the last element,
+			 * so we cut it and do the margin on the container */
+			&:last-child {
+				margin-bottom:0;
+			}
+		}
+	}
+	@media @m2 {
+		.column-count(3);
+		& > * {
+			padding:0 (3 * @gutWidth);
+		}
+	}
+}
+
+.short-content {
+	@media @m1 {
+		.column-count(1);
+		width:75%;
+		margin:0 auto;
 		padding:0 @gutWidth;
-		@media @m1 {
-			.flex(1;0;50%;@gutWidth);
+		.sect-col& > * {
+			padding:0; 
+		}
+	}
+	@media @m2 {
+		width:50%;
+	}
+}
+
+.text-illustrate {
+	display:block;
+	margin:0 auto @vertical;
+	padding:0 @gutWidth;
+	@media @m1 {
+		max-width:50%;
+		.short-content & {
+			max-width:100%;
 		}
 	}
 }
@@ -197,30 +275,34 @@ main {
 	.portrait {
 		text-align:center;
 		width:100%;
+		.order(1);
 	}
-	@media @m1 {
-		p {
+	p {
+		padding:0 @gutWidth;
+		@media @m1 {
+			.flex(1;0;50%;@gutWidth);
 			text-align:right;
 			.order(1);
-		}
-		.portrait {
-			.order(2);
-			img {
-				vertical-align:bottom;
+			&.portrait {
+				.order(2);
+				img {
+					vertical-align:bottom;
+				}
 			}
 		}
-	}
-	@media @m2 {
-		p {
+		@media @m2 {
 			text-align:left;
 			font-size:@h3;
 			line-height:@h3line;
 			.flex(0;1;50%;@gutWidth);
+			&.portrait {
+				.flex(0;1;(5/12*100%);@gutWidth);
+				text-align:right;
+			}
 		}
-		.portrait {
-			.flex(0;1;(5/12*100%);@gutWidth);
-			text-align:right;
-		}
+	}
+	nav {
+		.order(3);
 	}
 }
 
@@ -242,7 +324,7 @@ main {
 		color:@lighttextcolor;
 		display:inline-block;
 		padding:0.5em .2em;
-		width:100%;
+		width:auto;
 		height:100%;
 		&:focus, &:active {
 			outline:none;
@@ -264,8 +346,8 @@ main {
 	}
 }
 
+/* adjust margin for navi on other than landing page */
 main {
-	/* adjust margin for navi on other than landing page */
 	&:not(.teaser) {
 		.main-navi {
 			margin-bottom:@vertical;
@@ -298,6 +380,7 @@ main {
 	.sm {
 		font-size:(2*@vertical);
 		display:inline-block;
+		&:extend(.no-effect all);
 	}
 	@media @m1 {
 		padding:0 (2*@gutWidth);
@@ -311,6 +394,18 @@ main {
 		h4& + p {
 			padding-left:0;
 		}
+	}
+}
+
+/* Firefox-Bug: image-scaling in flex-containers */
+
+.ff-flexbox-correction {
+	max-width:(100vw - (2*@gutWidth));
+	@media @m1 {
+		max-width:(50vw - (2 * @gutWidth));
+	}
+	& & {
+		max-width:100%;
 	}
 }
 

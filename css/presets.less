@@ -23,13 +23,35 @@
 
 .flex-cont(@pad: 0;@wrap: wrap) {
 	margin-left:(-(@pad) * @gutWidth);
+	display:-ms-flexbox;
 	display:-webkit-box;
 	display:-moz-box;
-	display:-ms-flexbox;
 	display:-webkit-flex;
+	display:-ms-flex;
 	display:flex;
 	-webkit-flex-wrap:@wrap;
+	-ms-flex-wrap: @wrap;
 	flex-wrap:@wrap;
+}
+
+.justify(@value) when (@value = flex-end) {
+	-ms-flex-pack:end;
+}
+
+.justify(@value) when (@value = flex-start) {
+	-ms-flex-pack:start;
+}
+
+.justify(@value) when (@value = center) {
+	-ms-flex-pack:center;
+}
+
+.justify(@value) when (@value = space-between) {
+	-ms-flex-pack:justify;
+}
+
+.justify(@value) when (@value = space-around) {
+	-ms-flex-pack:distribute;
 }
 
 .justify(@value) {
@@ -156,7 +178,7 @@
 
 .font(
    @size:@fontsize,
-   @lineheight:@vertical,
+   @lineheight:@lineheight,
    @stack:@fontfamily) {
 	font-size:@size;
 	line-height:@lineheight;

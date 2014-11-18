@@ -84,7 +84,8 @@ module.exports = function (grunt) {
 							'**/*.php',
 							'.htaccess',
 							'**/*.xml',
-							'**/*.txt'
+							'**/*.txt',
+							'**/*.config'
 						],
 						dest: 'dev/'
 					}

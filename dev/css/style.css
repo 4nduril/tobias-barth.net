@@ -130,10 +130,17 @@ body {
   width: 100%;
   margin: 0 auto;
   font-size: 1.125rem;
-  line-height: 1.62495rem;
-  font-family: Helvetica, Arial, 'Liberation Sans', sans-serif;
+  line-height: 1.4444;
+  font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
   background-color: #ffffff;
   color: #222222;
+}
+@media screen and (min-width:65em) {
+  body {
+    font-size: 1.2499875rem;
+    line-height: 1.4444;
+    font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
+  }
 }
 body a {
   color: #074574;
@@ -192,6 +199,21 @@ a.skiplink:focus {
   top: 0;
   outline: none;
 }
+.no-effect,
+.in-site-footer .sm {
+  color: #222222;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.no-effect:hover,
+.no-effect:focus,
+.in-site-footer .sm:hover,
+.in-site-footer .sm:focus {
+  color: inherit;
+  background-color: inherit;
+}
 img {
   max-width: 100%;
 }
@@ -203,13 +225,16 @@ acronym {
   background-color: #0b65aa;
   color: #eeeeee;
   margin-left: 0%;
+  display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
+  display: -ms-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
   -moz-justify-content: flex-end;
   -ms-justify-content: flex-end;
@@ -260,33 +285,116 @@ acronym {
 main {
   margin-top: -1.62495rem;
   margin-left: 0%;
+  display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
+  display: -ms-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 @media screen and (min-width:65em) {
   main {
+    -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     -moz-justify-content: space-between;
     -ms-justify-content: space-between;
     justify-content: space-between;
   }
 }
-main p {
+article h2,
+.sect-col {
+  padding: 0 1.6666%;
+}
+article {
+  padding: 0 0;
+  -webkit-box-flex: 1 0 100%;
+  -moz-box-flex: 1 0 100%;
+  -webkit-flex: 1 0 100%;
+  -ms-flex: 1 0 100%;
+  flex: 1 0 100%;
+}
+@media screen and (min-width:105em) {
+  article {
+    padding: 0 0;
+    -webkit-box-flex: 0 0 75rem;
+    -moz-box-flex: 0 0 75rem;
+    -webkit-flex: 0 0 75rem;
+    -ms-flex: 0 0 75rem;
+    flex: 0 0 75rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.sect-col p:first-child::first-letter {
+  font-size: 1.62495rem;
+  line-height: 1;
+  font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+@media screen and (min-width:45em) {
+  .sect-col {
+    padding: 0;
+    margin-bottom: 1.62495rem;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 0;
+    -moz-column-gap: 0;
+    column-gap: 0;
+    /* You have to set the multiplicator of @gutWidth in padding according
+		 * to the column-count */
+  }
+  .sect-col > * {
+    padding: 0 3.3332%;
+    /* columns produce unpredictable margins after the last element,
+			 * so we cut it and do the margin on the container */
+  }
+  .sect-col > *:last-child {
+    margin-bottom: 0;
+  }
+}
+@media screen and (min-width:65em) {
+  .sect-col {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+  .sect-col > * {
+    padding: 0 4.9998%;
+  }
+}
+@media screen and (min-width:45em) {
+  .short-content {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    width: 75%;
+    margin: 0 auto;
+    padding: 0 1.6666%;
+  }
+  .sect-col.short-content > * {
+    padding: 0;
+  }
+}
+@media screen and (min-width:65em) {
+  .short-content {
+    width: 50%;
+  }
+}
+.text-illustrate {
+  display: block;
+  margin: 0 auto 1.62495rem;
   padding: 0 1.6666%;
 }
 @media screen and (min-width:45em) {
-  main p {
-    padding: 0 1.6666%;
-    -webkit-box-flex: 1 0 50%;
-    -moz-box-flex: 1 0 50%;
-    -webkit-flex: 1 0 50%;
-    -ms-flex: 1 0 50%;
-    flex: 1 0 50%;
+  .text-illustrate {
+    max-width: 50%;
+  }
+  .short-content .text-illustrate {
+    max-width: 100%;
   }
 }
 .teaser {
@@ -294,14 +402,28 @@ main p {
   color: #eeeeee;
   font-size: 1.2375rem;
   line-height: 1.31309091;
-  font-family: Helvetica, Arial, 'Liberation Sans', sans-serif;
+  font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
 }
 .teaser .portrait {
   text-align: center;
   width: 100%;
+  -webkit-ordinal-group: 1;
+  -moz-ordinal-group: 1;
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+}
+.teaser p {
+  padding: 0 1.6666%;
 }
 @media screen and (min-width:45em) {
   .teaser p {
+    padding: 0 1.6666%;
+    -webkit-box-flex: 1 0 50%;
+    -moz-box-flex: 1 0 50%;
+    -webkit-flex: 1 0 50%;
+    -ms-flex: 1 0 50%;
+    flex: 1 0 50%;
     text-align: right;
     -webkit-ordinal-group: 1;
     -moz-ordinal-group: 1;
@@ -309,14 +431,14 @@ main p {
     -ms-flex-order: 1;
     order: 1;
   }
-  .teaser .portrait {
+  .teaser p.portrait {
     -webkit-ordinal-group: 2;
     -moz-ordinal-group: 2;
     -webkit-order: 2;
     -ms-flex-order: 2;
     order: 2;
   }
-  .teaser .portrait img {
+  .teaser p.portrait img {
     vertical-align: bottom;
   }
 }
@@ -332,7 +454,7 @@ main p {
     -ms-flex: 0 1 50%;
     flex: 0 1 50%;
   }
-  .teaser .portrait {
+  .teaser p.portrait {
     padding: 0 1.6666%;
     -webkit-box-flex: 0 1 41.66666667%;
     -moz-box-flex: 0 1 41.66666667%;
@@ -341,6 +463,13 @@ main p {
     flex: 0 1 41.66666667%;
     text-align: right;
   }
+}
+.teaser nav {
+  -webkit-ordinal-group: 3;
+  -moz-ordinal-group: 3;
+  -webkit-order: 3;
+  -ms-flex-order: 3;
+  order: 3;
 }
 .main-navi {
   padding: 0 0;
@@ -355,12 +484,14 @@ main p {
 }
 .main-navi ul {
   margin-left: 0%;
+  display: -ms-flexbox;
   display: -webkit-box;
   display: -moz-box;
-  display: -ms-flexbox;
   display: -webkit-flex;
+  display: -ms-flex;
   display: flex;
   -webkit-flex-wrap: no-wrap;
+  -ms-flex-wrap: no-wrap;
   flex-wrap: no-wrap;
   justify-content: space-around;
 }
@@ -378,7 +509,7 @@ main p {
   color: #eeeeee;
   display: inline-block;
   padding: 0.5em .2em;
-  width: 100%;
+  width: auto;
   height: 100%;
 }
 .main-navi a:focus,
@@ -408,9 +539,7 @@ main p {
     flex: 0 1 50%;
   }
 }
-main {
-  /* adjust margin for navi on other than landing page */
-}
+/* adjust margin for navi on other than landing page */
 main:not(.teaser) .main-navi {
   margin-bottom: 1.62495rem;
 }
@@ -463,6 +592,18 @@ h4.in-site-footer:first-child {
   h4.in-site-footer + p {
     padding-left: 0;
   }
+}
+/* Firefox-Bug: image-scaling in flex-containers */
+.ff-flexbox-correction {
+  max-width: 96.6668vw;
+}
+@media screen and (min-width:45em) {
+  .ff-flexbox-correction {
+    max-width: 46.6668vw;
+  }
+}
+.ff-flexbox-correction .ff-flexbox-correction {
+  max-width: 100%;
 }
 /*!
  *  Font Awesome 4.1.0 by @davegandy - http://fontawesome.io - @fontawesome
