@@ -31,19 +31,20 @@
 // Größen
 
 @fontsizevalue: 1.125;
+@multiplier: 1.111;
 @fontsize: (@fontsizevalue * 1rem);
-@multiplier: 1.1111;
 @m-fontsizevalue: (@fontsizevalue * @multiplier);
 @m-fontsize: (@m-fontsizevalue * 1rem);
 @lineheight: 1.4444;
 @vertical: (@fontsize * @lineheight);
+
 @verticalem: (@fontsizevalue * 1em * @lineheight);
 @pagewidth: 100%;
 @inhaltpadding:1em;
 
 // Schrift
 
-@fontfamily: 'Liberation Sans', Helvetica, Arial, sans-serif;
+@fontfamily: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
 @logofont:'Dosis', Helvetica, Arial, sans-serif;
 
 // Media Queries
@@ -70,6 +71,18 @@
 @m6:~"@{m} and (min-width:@{w6})";
 @m7:~"@{m} and (min-width:@{w7})";
 
+/** 
+ * Mixin für die Änderung der Zeilenhöhe. Korrespondiert mit der
+ * Schriftgrößenänderung für body.
+**/
+.vertical(@property; @multi:1) {
+	@{property}: (@vertical * @multi);
+	@media @m2 {
+		@{property}: (@vertical * @multiplier * @multi);
+	}
+}
+
+
 // === Variablen Ende === \\
 
 // === Global === \\
@@ -87,7 +100,7 @@ body {
 }
 
 p,ul,ol,dl,aside,section,article,h1,h3,h4,h5,h6,address,hr,main,table,iframe,header {
-	margin-bottom:@vertical;
+	.vertical(margin-bottom);
 }
 
 /* Bei h2 passt @vertical nicht. */
@@ -172,7 +185,7 @@ abbr,acronym {
 		opacity:0;
 	}
 	h1 {
-		margin-top:@vertical;
+		.vertical(margin-top);
 		font-size:@mega;
 		line-height:@megaline;
 		margin-bottom:0;
@@ -192,7 +205,7 @@ abbr,acronym {
 }
 
 main {
-	margin-top: (-1 * @vertical);
+	.vertical(margin-top;-1);
 	.flex-cont();
 	@media @m2 {
 		.justify(space-between);
@@ -214,12 +227,15 @@ article {
 
 .sect-col {
 	& p:first-child::first-letter {
-		.font(@h2,@h2line);
+		.font((@fontsize * @lineheight);.7);
+		@media @m2 {
+			.font((@fontsize * @lineheight * @multiplier);.7);
+		}
 		font-weight:bold;
 	}
 	@media @m1 {
 		padding: 0;
-		margin-bottom:@vertical;
+		.vertical(margin-bottom);
 		.column-count();
 		.column-gap(0);
 		/* You have to set the multiplicator of @gutWidth in padding according
@@ -246,6 +262,7 @@ article {
 		.column-count(1);
 		width:75%;
 		margin:0 auto;
+		.vertical(margin-bottom);
 		padding:0 @gutWidth;
 		.sect-col& > * {
 			padding:0; 
@@ -258,7 +275,8 @@ article {
 
 .text-illustrate {
 	display:block;
-	margin:0 auto @vertical;
+	margin:0 auto;
+	.vertical(margin-bottom);
 	padding:0 @gutWidth;
 	@media @m1 {
 		max-width:50%;
@@ -350,7 +368,7 @@ article {
 main {
 	&:not(.teaser) {
 		.main-navi {
-			margin-bottom:@vertical;
+			.vertical(margin-bottom);
 			ul {
 				margin-bottom:0;
 			}
@@ -359,7 +377,7 @@ main {
 }
 
 .site-footer {
-	padding-bottom:@vertical;
+	.vertical(padding-bottom);
 	@media @m1 {
 		.column-count();
 		.column-gap(0);
@@ -372,13 +390,13 @@ main {
 		margin-bottom:0;
 	}
 	h3&, h4& {
-		margin-top:@vertical;
+		.vertical(margin-top);
 		&:first-child {
 			margin-top:0;
 		}
 	}
 	.sm {
-		font-size:(2*@vertical);
+		.vertical(font-size;2);
 		display:inline-block;
 		&:extend(.no-effect all);
 	}

@@ -126,20 +126,24 @@ blockquote {
 .hidden {
   display: none;
 }
+/** 
+ * Mixin für die Änderung der Zeilenhöhe. Korrespondiert mit der
+ * Schriftgrößenänderung für body.
+**/
 body {
   width: 100%;
   margin: 0 auto;
   font-size: 1.125rem;
   line-height: 1.4444;
-  font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
+  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
   background-color: #ffffff;
   color: #222222;
 }
 @media screen and (min-width:65em) {
   body {
-    font-size: 1.2499875rem;
+    font-size: 1.249875rem;
     line-height: 1.4444;
-    font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
+    font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
   }
 }
 body a {
@@ -174,6 +178,28 @@ table,
 iframe,
 header {
   margin-bottom: 1.62495rem;
+}
+@media screen and (min-width:65em) {
+  p,
+  ul,
+  ol,
+  dl,
+  aside,
+  section,
+  article,
+  h1,
+  h3,
+  h4,
+  h5,
+  h6,
+  address,
+  hr,
+  main,
+  table,
+  iframe,
+  header {
+    margin-bottom: 1.80531945rem;
+  }
 }
 /* Bei h2 passt @vertical nicht. */
 h2 {
@@ -272,6 +298,11 @@ acronym {
   line-height: 1.15552;
   margin-bottom: 0;
 }
+@media screen and (min-width:65em) {
+  .site-head h1 {
+    margin-top: 1.80531945rem;
+  }
+}
 .site-head .tagline {
   font-size: 1.62495rem;
   line-height: 1;
@@ -294,6 +325,11 @@ main {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+@media screen and (min-width:65em) {
+  main {
+    margin-top: -1.80531945rem;
+  }
 }
 @media screen and (min-width:65em) {
   main {
@@ -330,9 +366,16 @@ article {
 }
 .sect-col p:first-child::first-letter {
   font-size: 1.62495rem;
-  line-height: 1;
-  font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
+  line-height: 0.7;
+  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
   font-weight: bold;
+}
+@media screen and (min-width:65em) {
+  .sect-col p:first-child::first-letter {
+    font-size: 1.80531945rem;
+    line-height: 0.7;
+    font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
+  }
 }
 @media screen and (min-width:45em) {
   .sect-col {
@@ -356,6 +399,11 @@ article {
     margin-bottom: 0;
   }
 }
+@media screen and (min-width:45em) and screen and (min-width:65em) {
+  .sect-col {
+    margin-bottom: 1.80531945rem;
+  }
+}
 @media screen and (min-width:65em) {
   .sect-col {
     -webkit-column-count: 3;
@@ -373,10 +421,16 @@ article {
     column-count: 1;
     width: 75%;
     margin: 0 auto;
+    margin-bottom: 1.62495rem;
     padding: 0 1.6666%;
   }
   .sect-col.short-content > * {
     padding: 0;
+  }
+}
+@media screen and (min-width:45em) and screen and (min-width:65em) {
+  .short-content {
+    margin-bottom: 1.80531945rem;
   }
 }
 @media screen and (min-width:65em) {
@@ -386,8 +440,14 @@ article {
 }
 .text-illustrate {
   display: block;
-  margin: 0 auto 1.62495rem;
+  margin: 0 auto;
+  margin-bottom: 1.62495rem;
   padding: 0 1.6666%;
+}
+@media screen and (min-width:65em) {
+  .text-illustrate {
+    margin-bottom: 1.80531945rem;
+  }
 }
 @media screen and (min-width:45em) {
   .text-illustrate {
@@ -402,7 +462,7 @@ article {
   color: #eeeeee;
   font-size: 1.2375rem;
   line-height: 1.31309091;
-  font-family: 'Liberation Sans', Helvetica, Arial, sans-serif;
+  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
 }
 .teaser .portrait {
   text-align: center;
@@ -543,11 +603,21 @@ article {
 main:not(.teaser) .main-navi {
   margin-bottom: 1.62495rem;
 }
+@media screen and (min-width:65em) {
+  main:not(.teaser) .main-navi {
+    margin-bottom: 1.80531945rem;
+  }
+}
 main:not(.teaser) .main-navi ul {
   margin-bottom: 0;
 }
 .site-footer {
   padding-bottom: 1.62495rem;
+}
+@media screen and (min-width:65em) {
+  .site-footer {
+    padding-bottom: 1.80531945rem;
+  }
 }
 @media screen and (min-width:45em) {
   .site-footer {
@@ -569,6 +639,12 @@ h3.in-site-footer,
 h4.in-site-footer {
   margin-top: 1.62495rem;
 }
+@media screen and (min-width:65em) {
+  h3.in-site-footer,
+  h4.in-site-footer {
+    margin-top: 1.80531945rem;
+  }
+}
 h3.in-site-footer:first-child,
 h4.in-site-footer:first-child {
   margin-top: 0;
@@ -576,6 +652,11 @@ h4.in-site-footer:first-child {
 .in-site-footer .sm {
   font-size: 3.2499rem;
   display: inline-block;
+}
+@media screen and (min-width:65em) {
+  .in-site-footer .sm {
+    font-size: 3.6106389rem;
+  }
 }
 @media screen and (min-width:45em) {
   .in-site-footer {
