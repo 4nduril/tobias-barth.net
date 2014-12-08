@@ -238,7 +238,8 @@ module.exports = function (grunt) {
 			options: {
 				jshintrc: true,
 			},
-			files: ['js/*.js']
+			gruntfile: ['Gruntfile.js'],
+			prodCode: ['js/*.js']
 		},
 		less: {
 			options: {
@@ -367,13 +368,17 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
+			checkGruntfile: {
+				files: ['Gruntfile.js'],
+				tasks: ['jshint:gruntfile']
+			},
 			compileCss: {
 				files: ['css/*.less'],
 				tasks: ['less:dev']
 			},
 			catJs: {
 				files: ['js/*.js'],
-				tasks: ['concat:dev', 'jshint']
+				tasks: ['jshint:prodCode', 'concat:dev']
 			},
 			copyPages: {
 				files: ['pages/**/*'],
