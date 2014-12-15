@@ -123,6 +123,60 @@ blockquote {
   border-left: 3px solid #ddd;
 }
 /* === Reset Ende === */
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.4444;
+}
+@media screen and (min-width:65em) {
+  h1 {
+    font-size: 2.49975rem;
+  }
+}
+h2 {
+  font-size: 1.62495rem;
+  line-height: 1;
+}
+@media screen and (min-width:65em) {
+  h2 {
+    font-size: 1.80531945rem;
+  }
+}
+h3 {
+  font-size: 1.35rem;
+  line-height: 1.20366667;
+}
+@media screen and (min-width:65em) {
+  h3 {
+    font-size: 1.49985rem;
+  }
+}
+h4 {
+  font-size: 1.2375rem;
+  line-height: 1.31309091;
+}
+@media screen and (min-width:65em) {
+  h4 {
+    font-size: 1.3748625rem;
+  }
+}
+h5 {
+  font-size: 1.125rem;
+  line-height: 1.4444;
+}
+@media screen and (min-width:65em) {
+  h5 {
+    font-size: 1.249875rem;
+  }
+}
+h6 {
+  font-size: 1.125rem;
+  line-height: 1.4444;
+}
+@media screen and (min-width:65em) {
+  h6 {
+    font-size: 1.249875rem;
+  }
+}
 .hidden {
   display: none;
 }
@@ -246,6 +300,18 @@ img {
 abbr,
 acronym {
   cursor: help;
+}
+dt {
+  font-style: italic;
+}
+dd {
+  padding-left: 2em;
+  margin-bottom: 1.62495rem;
+}
+@media screen and (min-width:65em) {
+  dd {
+    margin-bottom: 1.80531945rem;
+  }
 }
 .site-head {
   background-color: #0b65aa;
@@ -659,9 +725,6 @@ main:not(.teaser) .main-navi ul {
 .in-site-footer {
   text-align: center;
 }
-p.in-site-footer {
-  margin-bottom: 0;
-}
 h3.in-site-footer,
 h4.in-site-footer {
   margin-top: 1.62495rem;
@@ -672,12 +735,15 @@ h4.in-site-footer {
     margin-top: 1.80531945rem;
   }
 }
-h3.in-site-footer:first-child,
-h4.in-site-footer:first-child {
+h3.in-site-footer:first-child {
   margin-top: 0;
+}
+h3 + h4.in-site-footer {
+  margin: 0;
 }
 .in-site-footer .sm {
   font-size: 3.2499rem;
+  line-height: 1;
   display: inline-block;
 }
 @media screen and (min-width:65em) {
@@ -692,7 +758,7 @@ h4.in-site-footer:first-child {
   }
   h4.in-site-footer,
   h4.in-site-footer + p {
-    display: inline;
+    display: inline-block;
   }
   h4.in-site-footer {
     padding-right: 0;
@@ -700,18 +766,6 @@ h4.in-site-footer:first-child {
   h4.in-site-footer + p {
     padding-left: 0;
   }
-}
-/* Firefox-Bug: image-scaling in flex-containers */
-.ff-flexbox-correction {
-  max-width: 96.6668vw;
-}
-@media screen and (min-width:45em) {
-  .ff-flexbox-correction {
-    max-width: 46.6668vw;
-  }
-}
-.ff-flexbox-correction .ff-flexbox-correction {
-  max-width: 100%;
 }
 /*!
  *  Font Awesome 4.1.0 by @davegandy - http://fontawesome.io - @fontawesome

@@ -159,6 +159,13 @@ abbr,acronym {
 
 // === Site-specific styles === \\
 
+dt {
+	font-style:italic;
+}
+dd {
+	padding-left:2em;
+	.vertical(margin-bottom);
+}
 
 .site-head {
 	background-color:@maincolor;
@@ -386,17 +393,20 @@ main {
 
 .in-site-footer {
 	text-align:center;
-	p& {
-		margin-bottom:0;
-	}
 	h3&, h4& {
 		.vertical(margin-top);
+	}
+	h3& {
 		&:first-child {
 			margin-top:0;
 		}
 	}
+	h3 + h4& {
+		margin:0;
+	}
 	.sm {
 		.vertical(font-size;2);
+		line-height:1;
 		display:inline-block;
 		&:extend(.no-effect all);
 	}
@@ -404,7 +414,7 @@ main {
 		padding:0 (2*@gutWidth);
 		text-align:left;
 		h4&, h4& + p {
-			display:inline;
+			display:inline-block;
 		}
 		h4& {
 			padding-right:0;
@@ -412,18 +422,6 @@ main {
 		h4& + p {
 			padding-left:0;
 		}
-	}
-}
-
-/* Firefox-Bug: image-scaling in flex-containers */
-
-.ff-flexbox-correction {
-	max-width:(100vw - (2*@gutWidth));
-	@media @m1 {
-		max-width:(50vw - (2 * @gutWidth));
-	}
-	& & {
-		max-width:100%;
 	}
 }
 
