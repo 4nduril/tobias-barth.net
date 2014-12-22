@@ -722,6 +722,10 @@ main:not(.teaser) .main-navi ul {
     column-gap: 0;
   }
 }
+.sm span {
+  display: inline-block;
+  text-indent: -999em;
+}
 .in-site-footer {
   text-align: center;
 }
