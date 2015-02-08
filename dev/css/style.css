@@ -755,6 +755,22 @@ h3 + h4.in-site-footer {
     font-size: 3.6106389rem;
   }
 }
+.in-site-footer .sm.u-photo {
+  width: 3.087405rem;
+  margin-right: 1.62495rem;
+  vertical-align: text-bottom;
+  border-radius: 50%;
+}
+@media screen and (min-width:65em) {
+  .in-site-footer .sm.u-photo {
+    width: 3.43010695rem;
+  }
+}
+@media screen and (min-width:65em) {
+  .in-site-footer .sm.u-photo {
+    margin-right: 1.80531945rem;
+  }
+}
 @media screen and (min-width:45em) {
   .in-site-footer {
     padding: 0 3.3332%;
