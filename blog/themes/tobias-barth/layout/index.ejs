@@ -1,0 +1,7 @@
+<% if (page.posts && page.posts.length) { %>
+	<% page.posts.each(function(post) { %>
+		<%- partial('partials/article', {post: post}) %>
+	<% }) %>
+<% } else { %>
+	<p>Daddeldidu</p>
+<% } %>
