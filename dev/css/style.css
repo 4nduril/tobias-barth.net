@@ -542,11 +542,6 @@ article {
 .teaser .portrait {
   text-align: center;
   width: 100%;
-  -webkit-ordinal-group: 1;
-  -moz-ordinal-group: 1;
-  -webkit-order: 1;
-  -ms-flex-order: 1;
-  order: 1;
 }
 .teaser p {
   padding: 0 1.6666%;
@@ -753,6 +748,22 @@ h3 + h4.in-site-footer {
 @media screen and (min-width:65em) {
   .in-site-footer .sm {
     font-size: 3.6106389rem;
+  }
+}
+.in-site-footer .sm.u-photo {
+  width: 3.087405rem;
+  margin-right: 1.62495rem;
+  vertical-align: text-bottom;
+  border-radius: 50%;
+}
+@media screen and (min-width:65em) {
+  .in-site-footer .sm.u-photo {
+    width: 3.43010695rem;
+  }
+}
+@media screen and (min-width:65em) {
+  .in-site-footer .sm.u-photo {
+    margin-right: 1.80531945rem;
   }
 }
 @media screen and (min-width:45em) {

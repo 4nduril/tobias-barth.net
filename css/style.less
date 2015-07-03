@@ -300,7 +300,6 @@ article {
 	.portrait {
 		text-align:center;
 		width:100%;
-		.order(1);
 	}
 	p {
 		padding:0 @gutWidth;
@@ -414,6 +413,12 @@ main {
 		line-height:1;
 		display:inline-block;
 		&:extend(.no-effect all);
+		&.u-photo {
+			.vertical(width;1.9);
+			.vertical(margin-right);
+			vertical-align:text-bottom;
+			border-radius:50%;
+		}
 	}
 	@media @m1 {
 		padding:0 (2*@gutWidth);
