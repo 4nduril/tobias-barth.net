@@ -155,6 +155,10 @@ abbr,acronym {
 	cursor:help;
 }
 
+figure + p {
+	.vertical(margin-top);
+}
+
 // === Global Ende === \\
 
 // === Site-specific styles === \\
@@ -384,9 +388,16 @@ main {
 
 /* Blog styles */
 
-.blog-post {
+.blog-textcontainer {
 	flex: 1 0 100%;
 	padding: 0 @gutWidth;
+	min-width: 0px;
+	max-width: 33em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.blog-post {
 }
 
 .blog-post-header {

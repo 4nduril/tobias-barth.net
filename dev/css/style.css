@@ -301,6 +301,14 @@ abbr,
 acronym {
   cursor: help;
 }
+figure + p {
+  margin-top: 1.62495rem;
+}
+@media screen and (min-width:65em) {
+  figure + p {
+    margin-top: 1.80531945rem;
+  }
+}
 dt {
   font-style: italic;
 }
@@ -700,9 +708,13 @@ main:not(.teaser) .main-navi ul {
   margin-bottom: 0;
 }
 /* Blog styles */
-.blog-post {
+.blog-textcontainer {
   flex: 1 0 100%;
   padding: 0 1.6666%;
+  min-width: 0px;
+  max-width: 33em;
+  margin-left: auto;
+  margin-right: auto;
 }
 .blog-post-header {
   margin-top: 1em;
