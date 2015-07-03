@@ -699,6 +699,152 @@ main:not(.teaser) .main-navi {
 main:not(.teaser) .main-navi ul {
   margin-bottom: 0;
 }
+/* Blog styles */
+.blog-post {
+  flex: 1 0 100%;
+  padding: 0 1.6666%;
+}
+.blog-post-header {
+  margin-top: 1em;
+}
+.blog-post-title {
+  padding: 0;
+}
+/* Code highlighting */
+pre,
+.highlight {
+  white-space: pre;
+  background: #2d2d2d;
+  padding: 15px 20px;
+  border-style: solid;
+  border-color: #ddd;
+  border-width: 1px 0;
+  overflow: auto;
+  color: #ccc;
+  font-size: 1.0125rem;
+  line-height: 1.60488889;
+  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
+}
+@media screen and (min-width:65em) {
+  pre,
+  .highlight {
+    font-size: 1.1248875rem;
+    line-height: 1.44454445;
+    font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
+  }
+}
+.highlight .gutter pre,
+.highlight .gist .gist-file .gist-data .line-numbers {
+  color: #666;
+  font-size: 0.85em;
+  line-height: 1.88810458;
+  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
+}
+@media screen and (min-width:65em) {
+  .highlight .gutter pre,
+  .highlight .gist .gist-file .gist-data .line-numbers {
+    font-size: 0.85em;
+    line-height: 1.69946406;
+    font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
+  }
+}
+.highlight pre {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.highlight table {
+  margin: 0;
+  width: auto;
+}
+.highlight td {
+  border: none;
+  padding: 0;
+}
+.highlight figcaption {
+  font-size: 0.85em;
+  color: #999;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+.highlight figcaption a {
+  float: right;
+}
+.highlight .gutter pre {
+  text-align: right;
+  padding-right: 20px;
+}
+code {
+  word-wrap: break-word;
+  background: #eee;
+  text-shadow: 0 1px #fff;
+  padding: 0 0.3em;
+  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+}
+pre code {
+  background: none;
+  text-shadow: none;
+  padding: 0;
+}
+pre {
+  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+}
+pre .comment,
+pre .title {
+  color: #999;
+}
+pre .variable,
+pre .attribute,
+pre .tag,
+pre .regexp,
+pre .ruby .constant,
+pre .xml .tag .title,
+pre .xml .pi,
+pre .xml .doctype,
+pre .html .doctype,
+pre .css .id,
+pre .css .class,
+pre .css .pseudo {
+  color: #f2777a;
+}
+pre .number,
+pre .preprocessor,
+pre .built_in,
+pre .literal,
+pre .params,
+pre .constant {
+  color: #f99157;
+}
+pre .class,
+pre .ruby .class .title,
+pre .css .rules .attribute {
+  color: #9c9;
+}
+pre .string,
+pre .value,
+pre .inheritance,
+pre .header,
+pre .ruby .symbol,
+pre .xml .cdata {
+  color: #9c9;
+}
+pre .css .hexcolor {
+  color: #6cc;
+}
+pre .function,
+pre .python .decorator,
+pre .python .title,
+pre .ruby .function .title,
+pre .ruby .title .keyword,
+pre .perl .sub,
+pre .javascript .title,
+pre .coffeescript .title {
+  color: #69c;
+}
+pre .keyword,
+pre .javascript .function {
+  color: #c9c;
+}
 .site-footer {
   padding-bottom: 1.62495rem;
 }

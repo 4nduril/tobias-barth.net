@@ -382,6 +382,119 @@ main {
 	}
 }
 
+/* Blog styles */
+
+.blog-post {
+	flex: 1 0 100%;
+	padding: 0 @gutWidth;
+}
+
+.blog-post-header {
+	margin-top: 1em;
+}
+
+.blog-post-title {
+	padding: 0;
+}
+
+/* Code highlighting */
+
+pre, .highlight {
+	white-space:pre;
+	background: #2d2d2d;
+	padding: 15px 20px;
+	border-style: solid;
+	border-color: #ddd;
+	border-width: 1px 0;
+	overflow: auto;
+	color: #ccc;
+	.font((0.9 * @fontsize), (@lineheight / 0.9));
+	@media @m2 {
+		.font((0.9 * @m-fontsize), (@lineheight / (@multiplier * 0.9)));
+	}
+//	line-height: 22.400000000000002px;
+}
+
+.highlight {
+	.gutter pre, .gist .gist-file .gist-data .line-numbers {
+		color: #666;
+		.font(.85em; (@lineheight / (0.9 * 0.85)));
+		@media @m2 {
+			.font(.85em; (@lineheight / (@multiplier * 0.9 *0.85)));
+		}
+	}
+	pre {
+		border: none;
+		margin: 0;
+		padding: 0;
+	}
+	table {
+		margin: 0;
+		width: auto;
+	}
+	td {
+		border: none;
+		padding: 0;
+	}
+	figcaption {
+		font-size: 0.85em;
+		color: #999;
+		line-height: 1em;
+		margin-bottom: 1em;
+		a {
+			float: right;
+		}
+	}
+	.gutter pre {
+		text-align: right;
+		padding-right: 20px;
+	}
+	.line {
+//		height: 22.400000000000002px;
+	}
+}
+
+code {
+	word-wrap: break-word;
+	background: #eee;
+	text-shadow: 0 1px #fff;
+	padding: 0 0.3em;
+	font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+	pre & {
+	background: none;
+	text-shadow: none;
+	padding: 0;
+	}
+}
+
+pre {
+	font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+	.comment, .title {
+		color: #999;
+	}
+	.variable,.attribute,.tag,.regexp,.ruby .constant,.xml .tag .title,.xml .pi,.xml .doctype,.html .doctype,.css .id,.css .class,.css .pseudo {
+		color: #f2777a;
+	}
+	.number,.preprocessor,.built_in,.literal,.params,.constant {
+		color: #f99157;
+	}
+	.class,.ruby .class .title,.css .rules .attribute {
+		color: #9c9;
+	}
+	.string,.value,.inheritance,.header,.ruby .symbol,.xml .cdata {
+		color: #9c9;
+	}
+	.css .hexcolor {
+		color: #6cc;
+	}
+	.function,.python .decorator,.python .title,.ruby .function .title,.ruby .title .keyword,.perl .sub,.javascript .title,.coffeescript .title {
+		color: #69c;
+	}
+	.keyword,.javascript .function {
+		color: #c9c;
+	}
+}
+
 .site-footer {
 	.vertical(padding-bottom);
 	@media @m1 {
