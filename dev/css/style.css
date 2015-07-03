@@ -542,11 +542,6 @@ article {
 .teaser .portrait {
   text-align: center;
   width: 100%;
-  -webkit-ordinal-group: 1;
-  -moz-ordinal-group: 1;
-  -webkit-order: 1;
-  -ms-flex-order: 1;
-  order: 1;
 }
 .teaser p {
   padding: 0 1.6666%;
