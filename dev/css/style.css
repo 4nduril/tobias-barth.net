@@ -655,7 +655,7 @@ article {
   -webkit-flex: 1 1 0%;
   -ms-flex: 1 1 0%;
   flex: 1 1 0%;
-  margin: 1.6666%;
+  margin: 0, 1.6666%;
   text-align: center;
 }
 .main-navi a {
