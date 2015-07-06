@@ -203,10 +203,10 @@ body {
 body a {
   color: #074574;
   text-decoration: none;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s, ease-in ease-in-out;
+  -moz-transition: all 0.5s, ease-in ease-in-out;
+  -o-transition: all 0.5s, ease-in ease-in-out;
+  transition: all 0.5s, ease-in ease-in-out;
 }
 body a:hover,
 body a:focus {
@@ -300,6 +300,10 @@ img {
 abbr,
 acronym {
   cursor: help;
+}
+figure {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
 }
 figure + p {
   margin-top: 1.62495rem;
@@ -611,7 +615,7 @@ article {
     text-align: right;
   }
 }
-.teaser nav {
+.teaser .main-navi {
   -webkit-ordinal-group: 3;
   -moz-ordinal-group: 3;
   -webkit-order: 3;
@@ -631,6 +635,7 @@ article {
   font-weight: bold;
   /* Set color for other pages than landing */
   background-color: #0b65aa;
+  overflow: hidden;
 }
 .main-navi ul {
   margin-left: 0%;
@@ -720,7 +725,9 @@ main:not(.teaser) .main-navi ul {
   margin-top: 1em;
 }
 .blog-post-title {
-  padding: 0;
+  background-color: inherit;
+  padding: 0 .2em;
+  border-radius: 2px;
 }
 /* Code highlighting */
 pre,
@@ -728,9 +735,7 @@ pre,
   white-space: pre;
   background: #2d2d2d;
   padding: 15px 20px;
-  border-style: solid;
-  border-color: #ddd;
-  border-width: 1px 0;
+  border: none;
   overflow: auto;
   color: #ccc;
   font-size: 1.0125rem;

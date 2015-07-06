@@ -1,6 +1,12 @@
 <article id="<%= post.slug %>" class="blog-post">
 	<header class="blog-post-header">
+	<% if (index) { %>
+	<a class="blog-post-title-link" href="<%- url_for(post.path) %>">
+	<% } %>
 		<h2 class="blog-post-title"><%= post.title %></h2>
+	<% if (index) { %>
+	</a>
+	<% } %>
 	</header>
 	<div class="blog-post-content">
 		<%- post.content %>

@@ -131,7 +131,7 @@ a.skiplink {
 	a {
 		color:@linkcolor;
 		text-decoration:none;
-		.transition();
+		.transition(all; .5s, ease-in);
 		&:hover, &:focus {
 			color:@bgcolor;
 			background-color:@linkcolor;
@@ -156,8 +156,12 @@ abbr,acronym {
 	cursor:help;
 }
 
-figure + p {
-	.vertical(margin-top);
+figure {
+	box-shadow: 0 2px 4px rgba(0,0,0,.5);
+	border-radius: 2px;
+	& + p {
+		.vertical(margin-top);
+	}
 }
 
 // === Global Ende === \\
@@ -330,7 +334,7 @@ article {
 			}
 		}
 	}
-	nav {
+	.main-navi {
 		.order(3);
 	}
 }
@@ -340,6 +344,7 @@ article {
 	font-weight:bold;
 	/* Set color for other pages than landing */
 	background-color:@maincolor;
+	overflow: hidden;
 	ul {
 		.flex-cont(0;no-wrap);
 		justify-content:space-around;
@@ -406,7 +411,9 @@ main {
 }
 
 .blog-post-title {
-	padding: 0;
+	background-color: inherit;
+	padding: 0 .2em;
+	border-radius: 2px;
 }
 
 /* Code highlighting */
@@ -415,9 +422,7 @@ pre, .highlight {
 	white-space:pre;
 	background: #2d2d2d;
 	padding: 15px 20px;
-	border-style: solid;
-	border-color: #ddd;
-	border-width: 1px 0;
+	border: none;
 	overflow: auto;
 	color: #ccc;
 	font-size: (0.9 * @fontsize);
