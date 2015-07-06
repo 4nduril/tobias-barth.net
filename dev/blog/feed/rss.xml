@@ -1,65 +1,25 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-	<meta charset="utf-8" />
-	<title>tobias-barth.net | Modernes Webdesign aus Köln</title>
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/css/style.css" />
-	<!--[if lt IE 9]>
-		<link rel="stylesheet" href="/css/old-ie.css" />
-	<![endif]-->
-
-	<!--[if lt IE 9]>
-		<script src="/js/old-ie.js"></script>
-	<![endif]-->
-	<script type="text/javascript">
-	  WebFontConfig = {
-		google: { families: [ 'Dosis:300:latin', 'PT+Sans:400,400italic,700:latin' ] }
-	  };
-	  (function() {
-		var wf = document.createElement('script');
-		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-		  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-		wf.type = 'text/javascript';
-		wf.async = 'true';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(wf, s);
-	  })(); </script>
-	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
-
-</head>
-<body>
-	<header class="site-head">
-			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
-			<p class="tagline in-site-head">Modernes Webdesign aus Köln</p></a>
-		</header>
-
-
-		<main>
-			<nav class="main-navi" id="main-navi">
-				<ul>
-					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
-				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
-<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
-				</ul>
-			</nav>
-		<div class="blog-textcontainer">
-
-	
-		<article id="Vererbung-von-viewport-percentage-lengths-in-Chrome" class="blog-post">
-	<header class="blog-post-header">
-	
-	<a class="blog-post-title-link" href="/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/">
-	
-		<h2 class="blog-post-title">Vererbung von viewport-percentage lengths in Chrome</h2>
-	
-	</a>
-	
-	<p class="blog-post-date">Geschrieben am <time datetime="2013-06-05T14:59:00.000Z">05. Juni 2013</time></p>
-	</header>
-	<div class="blog-post-content">
-		<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths" target="_blank" rel="external">viewport-relativen Längen</a> in CSS. Die Situation war konkret folgende:</p>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    
+    <title><![CDATA[Blog]]></title>
+    <link>http://tb.localhost/blog/blog//</link>
+    <atom:link href="/blog/feed/rss.xml" rel="self" type="application/rss+xml"/>
+    <description></description>
+    <pubDate>Fri, 03 Jul 2015 06:48:57 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[Vererbung von viewport-percentage lengths in Chrome]]></title>
+      <link>http://tb.localhost/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
+      <guid>http://tb.localhost/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
+      <pubDate>Wed, 05 Jun 2013 14:59:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths" target="_blank" rel="ext]]>
+      </description>
+      <content:encoded><![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths" target="_blank" rel="external">viewport-relativen Längen</a> in CSS. Die Situation war konkret folgende:</p>
 <p>Ich hatte eine ungeordnete Liste, deren Elemente je ein <code>&lt;div&gt;</code> enthielten, in dem sich wiederum ein <code>&lt;a&gt;</code> befand:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>Test<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Zuerst ein Beispiel, wie es funktionieren sollte. Die <code>&lt;li&gt;</code>-Elemente sollen eine definierte Höhe haben und die <code>&lt;div&gt;</code>s sollten genauso hoch sein. Das CSS dazu:</p>
@@ -71,24 +31,20 @@
 <p>Im Firefox sieht es immer noch genau so aus wie vorher. Das würde man (ich) auch erwarten. Schließlich hat das Listenelement eine definierte Größe und ich sage, dass sein direktes Kindelement 100% dieser Größe haben soll. Sieht man sich das Ergebnis in Chrome an, zeigt sich aber ein anderes Bild.</p>
 <p>Das <code>&lt;li&gt;</code> hat zwar die richtige Größe, aber das <code>&lt;div&gt;</code> ist nur so hoch, wie es sein Inhalt (eine Textzeile) erfordert. Sogar im IE9 wird es korrekt (wie im FF) dargestellt. Opera unterstützt derzeit keine viewport-related lengths, aber da auch dort <a href="http://business.opera.com/press/releases/general/opera-gears-up-at-300-million-users" target="_blank" rel="external">demnächst ein Webkit rendert</a>, wird es sich wohl auch nur mittelmäßig zum Guten ändern.</p>
 <p>Anscheinend muss man derzeit also entweder für Chrome in solchen Fällen auch jedem Kindelement die <code>v*</code>-Größe zuweisen, oder mit anderen Längeneinheiten arbeiten. Schade.</p>
-
-	</div>
-</article>
-
-	
-		<article id="jQuerys-scrollTop-und-border-box" class="blog-post">
-	<header class="blog-post-header">
-	
-	<a class="blog-post-title-link" href="/blog/2013/01/jQuerys-scrollTop-und-border-box/">
-	
-		<h2 class="blog-post-title">jQuerys scrollTop() und border-box</h2>
-	
-	</a>
-	
-	<p class="blog-post-date">Geschrieben am <time datetime="2013-01-28T21:01:00.000Z">28. Januar 2013</time></p>
-	</header>
-	<div class="blog-post-content">
-		<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
+]]></content:encoded>
+      <comments>http://tb.localhost/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_comments</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[jQuerys scrollTop() und border-box]]></title>
+      <link>http://tb.localhost/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
+      <guid>http://tb.localhost/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
+      <pubDate>Mon, 28 Jan 2013 21:01:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
+<p>Letzte Woche habe ich den ersten Kandidaten für den ir]]>
+      </description>
+      <content:encoded><![CDATA[<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
 <p>Letzte Woche habe ich den ersten Kandidaten für den irrsten Bug in diesem Jahr gefunden.</p>
 <p>Der Fehler, den der Kunde berichtete, beruhte darauf, dass das ursprünglich verwendete <code>$(document).scrollTop()</code> nicht im IE8 funktionierte und nachdem er dies durch das funktionierende <code>$(&#39;html&#39;).scrollTop()</code> ersetzt hatte, lief es nicht mehr in Webkit-Browsern.</p>
 <p>Die Lösung dafür war relativ schnell gefunden: Ich ersetzte einfach in dem betreffenden Script den einen <code>scrollTop()</code>-Aufruf durch den Ausdruck <code>($(document).scrollTop() || $(&#39;html&#39;).scrollTop())</code>. Damit war der Drops gelutscht und jeder Browser konnte sich aussuchen, was ihm passte (bzw. was nicht gleich 0 war, da der Code nur beim Scrollen zur Anwendung kam, reichte das aus).</p>
@@ -102,37 +58,29 @@
 <p>Darauf muss man erstmal kommen</p>
 <p>Ab jQuery 1.8 besteht das Problem nicht mehr, weil dann nicht mehr auf Box-Model-Support getestet wird bzw. dieser Test nicht mehr in <code>scrollTop()</code> abgerufen wird.</p>
 <p>Warum Webkit übrigens <code>$(&#39;html&#39;).scrollTop()</code> nicht versteht, ist mir noch nicht so ganz klar.</p>
-
-	</div>
-</article>
-
-	
-
-</div>
-
-		</main>
-<!--	<nav class="skip-links">
-		<a title="Navigation überspringen" class="skiplink ym-skip" href="#content">Um direkt zum Hauptinhalt zu gelangen, drücken Sie Enter.</a>
-	</nav>-->
-	<footer class="site-footer">
-		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
-		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net">contact@tobias-barth.net</a><br />
-		Telefon: <a href="tel:+492215706935">+49 221 570 69 35</a></p>
-		<h3 class="in-site-footer cta">Finden Sie mich</h3>
-		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril"><span>Github</span></a></p>
-		<h3 class="in-site-footer">Impressum</h3>
-		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
-		Tobias&nbsp;Barth<br />
-		Vincenzstr.&nbsp;25<br />
-		51065&nbsp;Köln</p>
-		<h4 class="in-site-footer">Fotos</h4>
-		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
-	</footer>
-
-	<script src="js/tobias-barth-net.js"></script>
-	<!--[if lt IE 9]>
-		<script src="js/old-ie2-superweirdbehaviour.js"></script>
-	<![endif]-->
-</body>
-
-</html>
+]]></content:encoded>
+      <comments>http://tb.localhost/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_comments</comments>
+    </item>
+    
+    <item>
+      <title><![CDATA[.htaccess-Spielereien]]></title>
+      <link>http://tb.localhost/blog/blog/2011/12/-htaccess-Spielereien/</link>
+      <guid>http://tb.localhost/blog/blog/2011/12/-htaccess-Spielereien/</guid>
+      <pubDate>Sun, 04 Dec 2011 12:47:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es l]]>
+      </description>
+      <content:encoded><![CDATA[<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es lassen sich zum Beispiel einzelne Verzeichnisse nur für Nutzer mit einer bestimmten IP freigeben. Oder man kann Passwörter für den Zugang vergeben. Vor ein paar Tagen habe ich herausgefunden, dass man mit ihnen auch wunderbar beliebige andere Servervariablen abfragen kann.</p>
+<p>Mit dem Modul <a href="https://httpd.apache.org/docs/2.2/mod/mod_setenvif.html" target="_blank" rel="external">mod_setenvif</a> nämlich lassen sich mit Hilfe der zwei Direktiven <em>BrowserMatch</em> und <em>SetEnvIf</em> (und deren Varianten, denen Groß- und Kleinschreibung egal ist) Umgebungsvariablen abfragen und davon abhängig den Zugang zu Ressourcen regeln.</p>
+<p>Ich habe das benutzt, um folgendes zu tun. Ein PHP-Dokument bindet mit <code>require</code> eine HTML-Datei ein und zwar abhängig vom Rückgabewert eines If-Statements:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (…) &#123; <span class="keyword">require</span> <span class="string">"eingebunden.html"</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>Auch wenn ich den Namen der HTML-Datei so wähle, dass er schwer erraten werden kann, möchte ich sichergehen, dass niemand einfach die Adresse der Datei in den Browser eingeben und so ihren Inhalt anzeigen kann. Das geht jetzt ziemlich einfach, indem ich eine .htaccess-Datei in das Verzeichnis lege, in dem sich die fragliche HTML-Datei befindet und sie mit diesem Inhalt versehe:</p>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SetEnvIf</span> Request_URI <span class="string">"eingebunden\.html$"</span> verboten</span><br><span class="line"><span class="keyword"><span class="common">Deny</span></span> from env=verboten</span><br></pre></td></tr></table></figure>
+<p>Mit der SetEnvIf-Direktive setze ich eine Variable namens &bdquo;verboten&ldquo; genau dann wenn der <abbr title="Uniform Resource Identifier">URI</abbr>-String, den der Browser als Request gesendet hat, mit dem regulären Ausdruck <code>&quot;eingebunden\.html$&quot;</code> übereinstimmt. Als nächstes sage ich dem Server, dass er Anfragen, für die er diese Variable erzeugt hat, ablehnen soll. Versucht man jetzt die HTML-Datei direkt im Browser aufzurufen, ist das einzige, was man sieht, ein 403.</p>
+<p><a href="http://flattr.com/thing/449791/-htaccess-Spielereien" target="_blank" rel="external"><img src="http://kritikant.de/media/blogs/kritikant/flattr-badge-large.png" alt="Flattr this" title="Flattr this"></a></p>
+]]></content:encoded>
+      <comments>http://tb.localhost/blog/blog/2011/12/-htaccess-Spielereien/#disqus_comments</comments>
+    </item>
+    
+  </channel>
+</rss>
