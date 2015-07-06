@@ -46,6 +46,7 @@
 
 @fontfamily: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
 @logofont:'Dosis', Helvetica, Arial, sans-serif;
+@monospace: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 
 // Media Queries
 
@@ -419,9 +420,11 @@ pre, .highlight {
 	border-width: 1px 0;
 	overflow: auto;
 	color: #ccc;
-	.font((0.9 * @fontsize), (@lineheight / 0.9));
+	font-size: (0.9 * @fontsize);
+	line-height: (@lineheight / 0.9);
 	@media @m2 {
-		.font((0.9 * @m-fontsize), (@lineheight / (@multiplier * 0.9)));
+		font-size: (0.9 * @m-fontsize);
+		line-height: (@lineheight / (@multiplier * 0.9));
 	}
 //	line-height: 22.400000000000002px;
 }
@@ -429,10 +432,11 @@ pre, .highlight {
 .highlight {
 	.gutter pre, .gist .gist-file .gist-data .line-numbers {
 		color: #666;
-		.font(.85em; (@lineheight / (0.9 * 0.85)));
+		/*font-size: .85em;
+		line-height: (@lineheight / (0.9 * 0.85));
 		@media @m2 {
-			.font(.85em; (@lineheight / (@multiplier * 0.9 *0.85)));
-		}
+			line-height: (@lineheight / (@multiplier * 0.9 *0.85));
+		}*/
 	}
 	pre {
 		border: none;
@@ -470,7 +474,7 @@ code {
 	background: #eee;
 	text-shadow: 0 1px #fff;
 	padding: 0 0.3em;
-	font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+	font-family: @monospace;
 	pre & {
 	background: none;
 	text-shadow: none;
@@ -479,7 +483,7 @@ code {
 }
 
 pre {
-	font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+	font-family: @monospace;
 	.comment, .title {
 		color: #999;
 	}

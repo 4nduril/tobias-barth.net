@@ -735,30 +735,22 @@ pre,
   color: #ccc;
   font-size: 1.0125rem;
   line-height: 1.60488889;
-  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
 }
 @media screen and (min-width:65em) {
   pre,
   .highlight {
     font-size: 1.1248875rem;
     line-height: 1.44454445;
-    font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
   }
 }
 .highlight .gutter pre,
 .highlight .gist .gist-file .gist-data .line-numbers {
   color: #666;
-  font-size: 0.85em;
-  line-height: 1.88810458;
-  font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
-}
-@media screen and (min-width:65em) {
-  .highlight .gutter pre,
-  .highlight .gist .gist-file .gist-data .line-numbers {
-    font-size: 0.85em;
-    line-height: 1.69946406;
-    font-family: 'PT Sans', 'Liberation Sans', Helvetica, Arial, sans-serif;
-  }
+  /*font-size: .85em;
+		line-height: (@lineheight / (0.9 * 0.85));
+		@media @m2 {
+			line-height: (@lineheight / (@multiplier * 0.9 *0.85));
+		}*/
 }
 .highlight pre {
   border: none;
