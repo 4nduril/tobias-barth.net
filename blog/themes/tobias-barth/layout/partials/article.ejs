@@ -7,6 +7,7 @@
 	<% if (index) { %>
 	</a>
 	<% } %>
+	<p class="blog-post-date">Geschrieben am <time datetime="<%= date_xml(post.date) %>"><%= date(post.date) %></time></p>
 	</header>
 	<div class="blog-post-content">
 		<%- post.content %>
