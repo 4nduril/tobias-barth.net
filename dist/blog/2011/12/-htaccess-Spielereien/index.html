@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>tobias-barth.net | Modernes Webdesign aus Köln</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.min.css" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/css/old-ie.min.css" />
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+		<script src="/js/old-ie.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+	  WebFontConfig = {
+		google: { families: [ 'Dosis:300:latin', 'PT+Sans:400,400italic,700:latin' ] }
+	  };
+	  (function() {
+		var wf = document.createElement('script');
+		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = 'true';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	  })(); </script>
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+
+</head>
+<body>
+	<header class="site-head">
+			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Modernes Webdesign aus Köln</p></a>
+		</header>
+
+
+		<main>
+			<nav class="main-navi" id="main-navi">
+				<ul>
+					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
+				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
+<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
+				</ul>
+			</nav>
+		<div class="blog-textcontainer">
+<article id="-htaccess-Spielereien" class="blog-post">
+	<header class="blog-post-header">
+	
+		<h2 class="blog-post-title">.htaccess-Spielereien</h2>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2011-12-04T12:47:00.000Z">04. Dezember 2011</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es lassen sich zum Beispiel einzelne Verzeichnisse nur für Nutzer mit einer bestimmten IP freigeben. Oder man kann Passwörter für den Zugang vergeben. Vor ein paar Tagen habe ich herausgefunden, dass man mit ihnen auch wunderbar beliebige andere Servervariablen abfragen kann.</p>
+<p>Mit dem Modul <a href="https://httpd.apache.org/docs/2.2/mod/mod_setenvif.html">mod_setenvif</a> nämlich lassen sich mit Hilfe der zwei Direktiven <em>BrowserMatch</em> und <em>SetEnvIf</em> (und deren Varianten, denen Groß- und Kleinschreibung egal ist) Umgebungsvariablen abfragen und davon abhängig den Zugang zu Ressourcen regeln.</p>
+<p>Ich habe das benutzt, um folgendes zu tun. Ein PHP-Dokument bindet mit <code>require</code> eine HTML-Datei ein und zwar abhängig vom Rückgabewert eines If-Statements:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (…) &#123; <span class="keyword">require</span> <span class="string">"eingebunden.html"</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>Auch wenn ich den Namen der HTML-Datei so wähle, dass er schwer erraten werden kann, möchte ich sichergehen, dass niemand einfach die Adresse der Datei in den Browser eingeben und so ihren Inhalt anzeigen kann. Das geht jetzt ziemlich einfach, indem ich eine .htaccess-Datei in das Verzeichnis lege, in dem sich die fragliche HTML-Datei befindet und sie mit diesem Inhalt versehe:</p>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SetEnvIf</span> Request_URI <span class="string">"eingebunden\.html$"</span> verboten</span><br><span class="line"><span class="keyword"><span class="common">Deny</span></span> from env=verboten</span><br></pre></td></tr></table></figure>
+<p>Mit der SetEnvIf-Direktive setze ich eine Variable namens &bdquo;verboten&ldquo; genau dann wenn der <abbr title="Uniform Resource Identifier">URI</abbr>-String, den der Browser als Request gesendet hat, mit dem regulären Ausdruck <code>&quot;eingebunden\.html$&quot;</code> übereinstimmt. Als nächstes sage ich dem Server, dass er Anfragen, für die er diese Variable erzeugt hat, ablehnen soll. Versucht man jetzt die HTML-Datei direkt im Browser aufzurufen, ist das einzige, was man sieht, ein 403.</p>
+<p><a href="http://flattr.com/thing/449791/-htaccess-Spielereien"><img src="http://kritikant.de/media/blogs/kritikant/flattr-badge-large.png" alt="Flattr this" title="Flattr this"></a></p>
+
+	</div>
+</article>
+
+</div>
+
+		</main>
+<!--	<nav class="skip-links">
+		<a title="Navigation überspringen" class="skiplink ym-skip" href="#content">Um direkt zum Hauptinhalt zu gelangen, drücken Sie Enter.</a>
+	</nav>-->
+	<footer class="site-footer">
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net">contact@tobias-barth.net</a><br />
+		Telefon: <a href="tel:+492215706935">+49 221 570 69 35</a></p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril"><span>Github</span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		Tobias&nbsp;Barth<br />
+		Vincenzstr.&nbsp;25<br />
+		51065&nbsp;Köln</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
+	</footer>
+
+	<script src="js/tobias-barth-net.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="js/old-ie2-superweirdbehaviour.min.js"></script>
+	<![endif]-->
+</body>
+
+</html>

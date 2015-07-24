@@ -392,6 +392,13 @@ module.exports = function (grunt) {
 				files: ['dev/**/*'],
 				tasks: ['rsync:dev']
 			}
+		},
+		hexo: {
+			dist: {
+				options: {
+					root: '/blog/'
+				}
+			}
 		}
 	});
 
@@ -405,6 +412,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-rsync');
+	grunt.loadNpmTasks('grunt-hexo');
 
 	grunt.registerTask('copy:dev', [
 		'copy:pages',
