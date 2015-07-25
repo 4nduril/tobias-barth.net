@@ -420,6 +420,7 @@ module.exports = function (grunt) {
 	]);
 	grunt.registerTask('default', [
 		'less:dev',
+		'hexo',
 		'copy:dev',
 		'concat:dev',
 		'jshint',
@@ -430,6 +431,7 @@ module.exports = function (grunt) {
 		'less:dist',
 		'less:ie-dist',
 		'uglify:dist',
+		'hexo',
 		'copy:dist',
 		'regex-replace:dist',
 		'imagemin:dist'

@@ -4,16 +4,39 @@
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title><![CDATA[Front(-End)-Berichte]]></title>
-    <link>http://tb.localhost/blog</link>
+    <link>http://tobias-barth.net/blog</link>
     <atom:link href="/blog/feed/rss.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[Das Blog von Tobi über Web-Development, Arbeit und Technik]]></description>
-    <pubDate>Fri, 03 Jul 2015 06:48:57 GMT</pubDate>
+    <pubDate>Sat, 25 Jul 2015 00:40:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
+      <title><![CDATA[Mein Blog]]></title>
+      <link>http://tobias-barth.net/blog/2015/07/Mein-Blog/</link>
+      <guid>http://tobias-barth.net/blog/2015/07/Mein-Blog/</guid>
+      <pubDate>Sat, 25 Jul 2015 00:24:16 GMT</pubDate>
+      <description>
+      <![CDATA[<p>Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.</p>
+<p>Ich hatte ja schon im zugehörigen Github-Issue geschr]]>
+      </description>
+      <content:encoded><![CDATA[<p>Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.</p>
+<p>Ich hatte ja schon im zugehörigen Github-Issue geschrieben, dass ich mich für das Hexo-Framework entschieden hatte. Ich fand es spannend, ein bisschen ungewöhnlich und natürlich toll, dass es in Nodejs geschrieben ist. So kann ich schnell Dinge ändern bzw. fixen, die mich stören.</p>
+<p>Das erste habe ich schon gefixt, nämlich das hexo-generator-feed-Plugin. Das erzeugte in meiner Konfiguration (also Hexo-Blog in Unterordner) falsche Permalinks. Ich habe den Autor zwar unter dem betreffenden Commit gefragt, wofür der war (er hat es kaputt geändert), aber bisher keine Antwort. Ich werd’s wohl demnächst auch mal als Bug oder gleich als Pull Request filen. Die reparierte Version findet man zur Zeit bei mir: <a href="https://github.com/4nduril/hexo-generator-feed">4ndurils hexo-generator-feed</a>.</p>
+<p>Ich habe zwar schon länger ein privates Blog gehabt, in dem auch hin und wieder Web-Kram landete, aber ich wollte jetzt gern im richtigen Rahmen und öfter Sachen aus dem Frontend-Alltag (oder Säuremiene, wie manche sagen) posten. Zwei, drei alte Posts vom anderen Blog habe ich hier der Vollständigkeit halber importiert, aber die sind wirklich schon betagt.</p>
+<p>Achso, zwei Dinge noch:</p>
+<ol>
+<li>Das hier ist nur die minimalist working version. Es gibt z.B. noch keine vernünftige Integration von Kategorien und Tags (sie werden zumindest noch nicht dargestellt). Das wird sich über die Zeit aber immer weiter verbessern. Die Grundfunktion eines Blogs sind Einträge und der Feed. Beides geht.</li>
+<li>Es gibt keine Kommentarsektion. Das ist auch Absicht und wird erstmal so bleiben. Ob ich meine Meinung ändere, weiß ich noch nicht, derzeit steht sie aber fest. Kommentare und Anmerkungen erhalte ich aber trotzdem sehr gern per Twitter oder Email.</li>
+</ol>
+<p>Viel Spaß. Ich freu mich!</p>
+]]></content:encoded>
+      <comments>http://tobias-barth.net/blog/2015/07/Mein-Blog/#disqus_comments</comments>
+    </item>
+    
+    <item>
       <title><![CDATA[Vererbung von viewport-percentage lengths in Chrome]]></title>
-      <link>http://tb.localhost/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
-      <guid>http://tb.localhost/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
+      <link>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
+      <guid>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
       <pubDate>Wed, 05 Jun 2013 14:59:00 GMT</pubDate>
       <description>
       <![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths">viewport-relativen Länge]]>
@@ -31,13 +54,13 @@
 <p>Das <code>&lt;li&gt;</code> hat zwar die richtige Größe, aber das <code>&lt;div&gt;</code> ist nur so hoch, wie es sein Inhalt (eine Textzeile) erfordert. Sogar im IE9 wird es korrekt (wie im FF) dargestellt. Opera unterstützt derzeit keine viewport-related lengths, aber da auch dort <a href="http://business.opera.com/press/releases/general/opera-gears-up-at-300-million-users">demnächst ein Webkit rendert</a>, wird es sich wohl auch nur mittelmäßig zum Guten ändern.</p>
 <p>Anscheinend muss man derzeit also entweder für Chrome in solchen Fällen auch jedem Kindelement die <code>v*</code>-Größe zuweisen, oder mit anderen Längeneinheiten arbeiten. Schade.</p>
 ]]></content:encoded>
-      <comments>http://tb.localhost/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_comments</comments>
     </item>
     
     <item>
       <title><![CDATA[jQuerys scrollTop() und border-box]]></title>
-      <link>http://tb.localhost/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
-      <guid>http://tb.localhost/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
+      <link>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
+      <guid>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
       <pubDate>Mon, 28 Jan 2013 21:01:00 GMT</pubDate>
       <description>
       <![CDATA[<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
@@ -58,13 +81,13 @@
 <p>Ab jQuery 1.8 besteht das Problem nicht mehr, weil dann nicht mehr auf Box-Model-Support getestet wird bzw. dieser Test nicht mehr in <code>scrollTop()</code> abgerufen wird.</p>
 <p>Warum Webkit übrigens <code>$(&#39;html&#39;).scrollTop()</code> nicht versteht, ist mir noch nicht so ganz klar.</p>
 ]]></content:encoded>
-      <comments>http://tb.localhost/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_comments</comments>
     </item>
     
     <item>
       <title><![CDATA[.htaccess-Spielereien]]></title>
-      <link>http://tb.localhost/blog/2011/12/-htaccess-Spielereien/</link>
-      <guid>http://tb.localhost/blog/2011/12/-htaccess-Spielereien/</guid>
+      <link>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/</link>
+      <guid>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/</guid>
       <pubDate>Sun, 04 Dec 2011 12:47:00 GMT</pubDate>
       <description>
       <![CDATA[<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es l]]>
@@ -78,7 +101,7 @@
 <p>Mit der SetEnvIf-Direktive setze ich eine Variable namens &bdquo;verboten&ldquo; genau dann wenn der <abbr title="Uniform Resource Identifier">URI</abbr>-String, den der Browser als Request gesendet hat, mit dem regulären Ausdruck <code>&quot;eingebunden\.html$&quot;</code> übereinstimmt. Als nächstes sage ich dem Server, dass er Anfragen, für die er diese Variable erzeugt hat, ablehnen soll. Versucht man jetzt die HTML-Datei direkt im Browser aufzurufen, ist das einzige, was man sieht, ein 403.</p>
 <p><a href="http://flattr.com/thing/449791/-htaccess-Spielereien"><img src="http://kritikant.de/media/blogs/kritikant/flattr-badge-large.png" alt="Flattr this" title="Flattr this"></a></p>
 ]]></content:encoded>
-      <comments>http://tb.localhost/blog/2011/12/-htaccess-Spielereien/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/#disqus_comments</comments>
     </item>
     
   </channel>
