@@ -9,7 +9,7 @@ categories:
 
 Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.
 
-Ich hatte ja schon im zugehörigen Github-Issue geschrieben, dass ich mich für das Hexo-Framework entschieden hatte. Ich fand es spannend, ein bisschen ungewöhnlich und natürlich toll, dass es in Nodejs geschrieben ist. So kann ich schnell Dinge ändern bzw. fixen, die mich stören.
+Ich hatte ja schon im zugehörigen [Github-Issue](https://github.com/4nduril/my-website/issues/5) geschrieben, dass ich mich für das [Hexo-Framework](https://hexo.io) entschieden hatte. Ich fand es spannend, ein bisschen ungewöhnlich und natürlich toll, dass es in Nodejs geschrieben ist. So kann ich schnell Dinge ändern bzw. fixen, die mich stören.
 
 Das erste habe ich schon gefixt, nämlich das hexo-generator-feed-Plugin. Das erzeugte in meiner Konfiguration (also Hexo-Blog in Unterordner) falsche Permalinks. Ich habe den Autor zwar unter dem betreffenden Commit gefragt, wofür der war (er hat es kaputt geändert), aber bisher keine Antwort. Ich werd's wohl demnächst auch mal als Bug oder gleich als Pull Request filen. Die reparierte Version findet man zur Zeit bei mir: [4ndurils hexo-generator-feed](https://github.com/4nduril/hexo-generator-feed).
 
