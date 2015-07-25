@@ -313,6 +313,10 @@ figure + p {
     margin-top: 1.80531945rem;
   }
 }
+ol,
+ul {
+  list-style-position: inside;
+}
 dt {
   font-style: italic;
 }
