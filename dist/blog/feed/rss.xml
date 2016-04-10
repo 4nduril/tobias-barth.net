@@ -7,13 +7,33 @@
     <link>http://tobias-barth.net/blog</link>
     <atom:link href="/blog/feed/rss.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[Das Blog von Tobi über Web-Development, Arbeit und Technik]]></description>
-    <pubDate>Sat, 25 Jul 2015 01:39:09 GMT</pubDate>
+    <pubDate>Sat, 09 Apr 2016 18:11:48 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
+      <title><![CDATA[Node.js Performance und socket hangup]]></title>
+      <link>http://tobias-barth.net/blog/blog/2016/04/node-js-performance-socket-hangup/</link>
+      <guid>http://tobias-barth.net/blog/blog/2016/04/node-js-performance-socket-hangup/</guid>
+      <pubDate>Sat, 09 Apr 2016 16:45:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p>In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in]]>
+      </description>
+      <content:encoded><![CDATA[<p>In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in unseren Logfiles aufschlägt.</p>
+<p>Wir haben dort eine Express-basierte Webapp, die den Content im Grunde vollständig auf dem Server rendert. Dafür werden unter anderem diverse Microservices angesprochen, d.h. bei jedem Request an die Express-App fragt diese per AJAX mehrere interne, separate Dienste nach Daten und rendert basierend auf deren Antworten den Content, der an den Client gesendet wird.</p>
+<p>Das funkioniert auch ziemlich gut, allerdings haben wir in den Logfiles unserer App ungewöhnlich viele “ERROR: socket hang up”-Meldungen. Nicht so viele, dass wir ernsthafte Schwierigkeiten hätten, die auch sichtbar wären, aber, und das ist besonders interessant, es sind wesentlich mehr als bei anderen Webapps, die Java-basiert sind und dieselben Services bei jedem Request anfragen.</p>
+<p>Es scheint also primär nichts mit den internen Services zu tun zu haben, sondern mit unserer Node-App. Bisher haben wir nicht so wirklich eine Idee, was es sein könnte. Für die AJAX-calls nutzen wir <a href="https://github.com/mzabriskie/axios">Axios</a> und definieren damit auch ein Timeout, das bei 60ms liegt. Das kann es allerdings nicht sein, denn dann sähen wir timeout-Errors und nicht Socket-hang-ups. </p>
+<p>Also habe ich mal das Internet danach durchforstet, was diese Socket-hangups bei Node erzeugen könnte. Dabei bin ich auf einen interessanten <a href="http://www.murvinlai.com/remote-http-request.html">Blogpost</a> gestoßen. Dort wird beschrieben, dass solche Fehler zwar auch von der Remote-Seite kommen können, aber eben auch von den Limitierungen des Systems, auf dem der Node-Server läuft. Es gibt ein Limit für die Zahl der gleichzeitig offenen Files, wobei dieses Limit pro Login=User gilt. Der Standardwert ist 1024. Ein Socket ist wie alles auf unixoiden Systemen eine Datei. Ein User (in dem Fall der User, dem der Node-Prozess gehört), kann also maximal 1024 Dateien gleichzeitig öffnen.</p>
+<p>Das wäre auf jeden Fall mal ein Ansatz. Der Verfasser des erwähnten Blogartikels empfiehlt ein Limit von 10240, also das Zehnfache. Außerdem sollte der maxSockets-Wert des http.Agents von Node auf eine Zahl knapp unter dem ulimit gesetzt werden. Nodes Standard für maxSockets ist (mittlerweile) <code>Infinity</code>, aber bei uns ist es derzeit auf 25 gesetzt. Ich muss noch mal nachforschen, was der Grund für dieses Limit war. </p>
+<p>Ohne dass ich weiß, wie unsere Java-Apps funktionieren oder konfiguriert sind, gefällt mir der Gedanke, dass unsere Node.js-App ankommende Anfragen so schnell verarbeitet und dementsprechend oft parallel die Services anspricht, dass es an Systemlimits stößt, die von den Java-Kreuzern nie tangiert werden.</p>
+<p>Schauen wir mal.</p>
+]]></content:encoded>
+      <comments>http://tobias-barth.net/blog/blog/2016/04/node-js-performance-socket-hangup/#disqus_comments</comments>
+    </item>
+    
+    <item>
       <title><![CDATA[Mein Blog]]></title>
-      <link>http://tobias-barth.net/blog/2015/07/Mein-Blog/</link>
-      <guid>http://tobias-barth.net/blog/2015/07/Mein-Blog/</guid>
+      <link>http://tobias-barth.net/blog/blog/2015/07/Mein-Blog/</link>
+      <guid>http://tobias-barth.net/blog/blog/2015/07/Mein-Blog/</guid>
       <pubDate>Sat, 25 Jul 2015 00:24:16 GMT</pubDate>
       <description>
       <![CDATA[<p>Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.</p>
@@ -30,37 +50,37 @@
 </ol>
 <p>Viel Spaß. Ich freu mich!</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/2015/07/Mein-Blog/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/blog/2015/07/Mein-Blog/#disqus_comments</comments>
     </item>
     
     <item>
       <title><![CDATA[Vererbung von viewport-percentage lengths in Chrome]]></title>
-      <link>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
-      <guid>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
+      <link>http://tobias-barth.net/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
+      <guid>http://tobias-barth.net/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
       <pubDate>Wed, 05 Jun 2013 14:59:00 GMT</pubDate>
       <description>
       <![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths">viewport-relativen Länge]]>
       </description>
       <content:encoded><![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths">viewport-relativen Längen</a> in CSS. Die Situation war konkret folgende:</p>
 <p>Ich hatte eine ungeordnete Liste, deren Elemente je ein <code>&lt;div&gt;</code> enthielten, in dem sich wiederum ein <code>&lt;a&gt;</code> befand:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>Test<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Zuerst ein Beispiel, wie es funktionieren sollte. Die <code>&lt;li&gt;</code>-Elemente sollen eine definierte Höhe haben und die <code>&lt;div&gt;</code>s sollten genauso hoch sein. Das CSS dazu:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* <span class="rules">&#123; <span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span></span></span>; <span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">0</span></span></span>; &#125;</span></span><br><span class="line"><span class="tag">ul</span> <span class="rules">&#123; <span class="rule"><span class="attribute">list-style-type</span>:<span class="value">none</span></span>; &#125;</span></span><br><span class="line"><span class="tag">li</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value">blue</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">10em</span></span></span>; </span><br><span class="line">&#125;</span></span><br><span class="line"><span class="tag">div</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value">red</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100%</span></span></span>; <span class="comment">/* Genau so hoch wie sein Container */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* &#123; <span class="attribute">margin</span>:<span class="number">0</span>; <span class="attribute">padding</span>:<span class="number">0</span>; &#125;</span><br><span class="line"><span class="selector-tag">ul</span> &#123; <span class="attribute">list-style-type</span>:none; &#125;</span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>:blue;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">10em</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>:red;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">100%</span>; <span class="comment">/* Genau so hoch wie sein Container */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a href="http://jsfiddle.net/PgTZ2/2/">Hier ist ein JS-Fiddle dazu</a>. Wie erwartet bedeckt das rote <code>&lt;div&gt;</code> das gesamte Listenelement. Ruhig auch mal in verschiedenen Browsern ansehen.</p>
 <p>Jetzt geben wir dem <code>&lt;li&gt;</code>-Element aber eine vom Viewport abhängige Größe:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">li</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">30vw</span></span></span>; <span class="comment">/* Die Höhe soll 30 Prozent der Breite des Viewports betragen */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">30vw</span>; <span class="comment">/* Die Höhe soll 30 Prozent der Breite des Viewports betragen */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a href="http://jsfiddle.net/PgTZ2/3/">Hier die geänderte Demo</a>.</p>
 <p>Im Firefox sieht es immer noch genau so aus wie vorher. Das würde man (ich) auch erwarten. Schließlich hat das Listenelement eine definierte Größe und ich sage, dass sein direktes Kindelement 100% dieser Größe haben soll. Sieht man sich das Ergebnis in Chrome an, zeigt sich aber ein anderes Bild.</p>
 <p>Das <code>&lt;li&gt;</code> hat zwar die richtige Größe, aber das <code>&lt;div&gt;</code> ist nur so hoch, wie es sein Inhalt (eine Textzeile) erfordert. Sogar im IE9 wird es korrekt (wie im FF) dargestellt. Opera unterstützt derzeit keine viewport-related lengths, aber da auch dort <a href="http://business.opera.com/press/releases/general/opera-gears-up-at-300-million-users">demnächst ein Webkit rendert</a>, wird es sich wohl auch nur mittelmäßig zum Guten ändern.</p>
 <p>Anscheinend muss man derzeit also entweder für Chrome in solchen Fällen auch jedem Kindelement die <code>v*</code>-Größe zuweisen, oder mit anderen Längeneinheiten arbeiten. Schade.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_comments</comments>
     </item>
     
     <item>
       <title><![CDATA[jQuerys scrollTop() und border-box]]></title>
-      <link>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
-      <guid>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
+      <link>http://tobias-barth.net/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
+      <guid>http://tobias-barth.net/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
       <pubDate>Mon, 28 Jan 2013 21:01:00 GMT</pubDate>
       <description>
       <![CDATA[<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
@@ -81,13 +101,13 @@
 <p>Ab jQuery 1.8 besteht das Problem nicht mehr, weil dann nicht mehr auf Box-Model-Support getestet wird bzw. dieser Test nicht mehr in <code>scrollTop()</code> abgerufen wird.</p>
 <p>Warum Webkit übrigens <code>$(&#39;html&#39;).scrollTop()</code> nicht versteht, ist mir noch nicht so ganz klar.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_comments</comments>
     </item>
     
     <item>
       <title><![CDATA[.htaccess-Spielereien]]></title>
-      <link>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/</link>
-      <guid>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/</guid>
+      <link>http://tobias-barth.net/blog/blog/2011/12/-htaccess-Spielereien/</link>
+      <guid>http://tobias-barth.net/blog/blog/2011/12/-htaccess-Spielereien/</guid>
       <pubDate>Sun, 04 Dec 2011 12:47:00 GMT</pubDate>
       <description>
       <![CDATA[<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es l]]>
@@ -97,11 +117,11 @@
 <p>Ich habe das benutzt, um folgendes zu tun. Ein PHP-Dokument bindet mit <code>require</code> eine HTML-Datei ein und zwar abhängig vom Rückgabewert eines If-Statements:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (…) &#123; <span class="keyword">require</span> <span class="string">"eingebunden.html"</span>;&#125;</span><br></pre></td></tr></table></figure>
 <p>Auch wenn ich den Namen der HTML-Datei so wähle, dass er schwer erraten werden kann, möchte ich sichergehen, dass niemand einfach die Adresse der Datei in den Browser eingeben und so ihren Inhalt anzeigen kann. Das geht jetzt ziemlich einfach, indem ich eine .htaccess-Datei in das Verzeichnis lege, in dem sich die fragliche HTML-Datei befindet und sie mit diesem Inhalt versehe:</p>
-<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SetEnvIf</span> Request_URI <span class="string">"eingebunden\.html$"</span> verboten</span><br><span class="line"><span class="keyword"><span class="common">Deny</span></span> from env=verboten</span><br></pre></td></tr></table></figure>
+<figure class="highlight apacheconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">SetEnvIf</span> Request_URI <span class="string">"eingebunden\.html$"</span> verboten</span><br><span class="line"><span class="attribute"><span class="nomarkup">Deny</span></span> from env=verboten</span><br></pre></td></tr></table></figure>
 <p>Mit der SetEnvIf-Direktive setze ich eine Variable namens &bdquo;verboten&ldquo; genau dann wenn der <abbr title="Uniform Resource Identifier">URI</abbr>-String, den der Browser als Request gesendet hat, mit dem regulären Ausdruck <code>&quot;eingebunden\.html$&quot;</code> übereinstimmt. Als nächstes sage ich dem Server, dass er Anfragen, für die er diese Variable erzeugt hat, ablehnen soll. Versucht man jetzt die HTML-Datei direkt im Browser aufzurufen, ist das einzige, was man sieht, ein 403.</p>
 <p><a href="http://flattr.com/thing/449791/-htaccess-Spielereien"><img src="http://kritikant.de/media/blogs/kritikant/flattr-badge-large.png" alt="Flattr this" title="Flattr this"></a></p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/#disqus_comments</comments>
+      <comments>http://tobias-barth.net/blog/blog/2011/12/-htaccess-Spielereien/#disqus_comments</comments>
     </item>
     
   </channel>
