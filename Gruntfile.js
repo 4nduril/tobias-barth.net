@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 	];
 	var minJsRegExString = '(' +
 		ownJs.join('|') +
-		')' + 
+		')' +
 		'(?:\\.min)*(\\.js)(?!o)';
 	var minJsRegEx = new RegExp(minJsRegExString, 'g');
 	var devDest = '/srv/http/tobias-barth.net';
@@ -236,7 +236,7 @@ module.exports = function (grunt) {
 		},
 		jshint: {
 			options: {
-				jshintrc: true,
+				jshintrc: './.jshintrc',
 			},
 			gruntfile: ['Gruntfile.js'],
 			prodCode: ['js/*.js']

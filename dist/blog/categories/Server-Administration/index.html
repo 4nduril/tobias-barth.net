@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>tobias-barth.net | Modernes Webdesign aus Köln</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.min.css" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/css/old-ie.min.css" />
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+		<script src="/js/old-ie.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+	  WebFontConfig = {
+		google: { families: [ 'Dosis:300:latin', 'PT+Sans:400,400italic,700:latin' ] }
+	  };
+	  (function() {
+		var wf = document.createElement('script');
+		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = 'true';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	  })(); </script>
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+
+</head>
+<body>
+	<header class="site-head">
+			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Modernes Webdesign aus Köln</p></a>
+		</header>
+
+
+		<main>
+			<nav class="main-navi" id="main-navi">
+				<ul>
+					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
+				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
+<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
+				</ul>
+			</nav>
+		<div class="blog-textcontainer">
+
+	
+		<article id="Ezjail-und-IPv6-alias-Adressen" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/">
+	
+		<h2 class="blog-post-title">Ezjail und IPv6 alias Adressen</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2017-07-01T09:39:12.000Z">01. Juli 2017</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine public v4 IP-Adresse und ein <code>/124</code> v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.</p>
+<p>Das heißt, ich brauche kein NAT sondern kann den Jails direkt public IPs zuweisen, die ich als Aliases auf das Interface lege.</p>
+<p>Bisher habe ich mit <code>ezjail</code> zwei Jails eingrichtet: <code>git</code> und <code>backup</code>. DO weißt dem Interface automatisch die v6-IP mit der Endziffer <code>1</code> zu. In meiner <code>rc.conf</code> steht entsprechend für die beiden Jail-IPs:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ifconfig_vtnet0_alias1</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2 prefixlen 64"</span></span><br><span class="line"><span class="attr">ifconfig_vtnet0_alias2</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3 prefixlen 64"</span></span><br><span class="line"><span class="attr">cloned_interfaces</span>=<span class="string">"lo1"</span></span><br><span class="line"><span class="attr">ezjail_enable</span>=<span class="string">"YES"</span></span><br></pre></td></tr></table></figure>
+<p>Heute musste ich das Droplet powercyclen und beim Boot kam nur der <code>git</code>-Jail hoch. Ich probierte, den zweiten selbst zu starten:</p>
+<pre><code># ezjail-admin start backup
+</code></pre><p>Das gab diesen Fehler aus:</p>
+<pre><code>ifconfig: ioctl (SIOCAIFADDR): Invalid argument)
+</code></pre><p>Erst wusste ich damit nichts anzufangen. Dann fiel mir auf, dass in der Zeile davor der Befehl stand, der versucht wurde auszuführen:</p>
+<pre><code>/usr/sbin/ifconfig vtnet0 inet6 &lt;adresse&gt;/128 alias
+</code></pre><p>Hoppala. <code>ezjail</code> versuchte selbst einen Alias anzulegen, obwohl schon einer existiert. Tatsächlich habe ich dann nochmal selbst den <code>ifconfig</code> Befehl getestet, geht tatsächlich nicht.</p>
+<p>Ist auch klar: Mit dieser IP war bereits ein Alias definiert <em>mit der Präfixlänge 64</em>. Hier wurde versucht ein Alias für dieselbe IP anzulegen, <em>aber mit der Präfixlänge 128</em>, was natürlich nicht geht.</p>
+<p>Ein Blick in die <code>ezjail</code>-Config-files für die beiden Jails zeigt, dass ich bei dem <code>git</code>-Jail die IP so konfiguriert habe:</p>
+<pre><code>export jail_git_ip=&quot;xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2&quot;
+</code></pre><p>Bei dem <code>backup</code>-Jail brauchte ich aber wegen eines Dienstes darin ein Loopback-Interface, das ich in der <code>rc.conf</code> oben als <code>lo1</code> angelegt habe. Also muss ich dem Jail zwei Interfaces mit IPs übergeben und das mache ich so:</p>
+<pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3&quot;
+</code></pre><p>Offenbar führt die fehlende Präfixlängenangabe hier dazu, dass <code>ezjail</code> (oder <code>ifconfig</code>) sie auf 128 setzt. Also änderte ich die Zeile zu: </p>
+<pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3/64&quot;
+</code></pre><p>Und schon läuft es.</p>
+
+	</div>
+</article>
+
+	
+
+</div>
+
+		</main>
+<!--	<nav class="skip-links">
+		<a title="Navigation überspringen" class="skiplink ym-skip" href="#content">Um direkt zum Hauptinhalt zu gelangen, drücken Sie Enter.</a>
+	</nav>-->
+	<footer class="site-footer">
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net">contact@tobias-barth.net</a><br />
+		Telefon: <a href="tel:+492215706935">+49 221 570 69 35</a></p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril"><span>Github</span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		Tobias&nbsp;Barth<br />
+		Vincenzstr.&nbsp;25<br />
+		51065&nbsp;Köln</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
+	</footer>
+
+	<script src="js/tobias-barth-net.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="js/old-ie2-superweirdbehaviour.min.js"></script>
+	<![endif]-->
+</body>
+
+</html>

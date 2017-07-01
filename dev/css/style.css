@@ -230,7 +230,9 @@ hr,
 main,
 table,
 iframe,
-header {
+header,
+pre,
+figure {
   margin-bottom: 1.62495rem;
 }
 @media screen and (min-width:65em) {
@@ -251,7 +253,9 @@ header {
   main,
   table,
   iframe,
-  header {
+  header,
+  pre,
+  figure {
     margin-bottom: 1.80531945rem;
   }
 }
@@ -304,14 +308,6 @@ acronym {
 figure {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   border-radius: 2px;
-}
-figure + p {
-  margin-top: 1.62495rem;
-}
-@media screen and (min-width:65em) {
-  figure + p {
-    margin-top: 1.80531945rem;
-  }
 }
 ol,
 ul {
