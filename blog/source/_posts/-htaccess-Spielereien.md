@@ -25,5 +25,3 @@ Auch wenn ich den Namen der HTML-Datei so wähle, dass er schwer erraten werden 
 {% endcode %}
 
 Mit der SetEnvIf-Direktive setze ich eine Variable namens &bdquo;verboten&ldquo; genau dann wenn der <abbr title="Uniform Resource Identifier">URI</abbr>-String, den der Browser als Request gesendet hat, mit dem regulären Ausdruck `"eingebunden\.html$"` übereinstimmt. Als nächstes sage ich dem Server, dass er Anfragen, für die er diese Variable erzeugt hat, ablehnen soll. Versucht man jetzt die HTML-Datei direkt im Browser aufzurufen, ist das einzige, was man sieht, ein 403.
-
-[![Flattr this](http://kritikant.de/media/blogs/kritikant/flattr-badge-large.png "Flattr this")](http://flattr.com/thing/449791/-htaccess-Spielereien)
