@@ -3,22 +3,26 @@
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title><![CDATA[Front(-End)-Berichte]]></title>
-    <link>http://tobias-barth.net/blog</link>
+    <title>Front(-End)-Berichte</title>
+    <link>http://tobias-barth.net/blog/</link>
     <atom:link href="/blog/feed/rss.xml" rel="self" type="application/rss+xml"/>
-    <description><![CDATA[Das Blog von Tobi über Web-Development, Arbeit und Technik]]></description>
-    <pubDate>Sat, 01 Jul 2017 09:41:58 GMT</pubDate>
+    
+    <description>Das Blog von Tobi über Web-Development, Arbeit und Technik</description>
+    <pubDate>Sat, 01 Jul 2017 11:55:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title><![CDATA[Ezjail und IPv6 alias Adressen]]></title>
-      <link>http://tobias-barth.net/blog/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/</link>
-      <guid>http://tobias-barth.net/blog/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/</guid>
+      <title>Ezjail und IPv6 alias Adressen</title>
+      <link>http://tobias-barth.net/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/</link>
+      <guid>http://tobias-barth.net/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/</guid>
       <pubDate>Sat, 01 Jul 2017 09:39:12 GMT</pubDate>
       <description>
-      <![CDATA[<p>Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt ]]>
+      
+        &lt;p&gt;Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt 
+      
       </description>
-      <content:encoded><![CDATA[<p>Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine publiv v4 IP-Adresse und ein <code>/124</code> v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.</p>
+      
+      <content:encoded><![CDATA[<p>Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine public v4 IP-Adresse und ein <code>/124</code> v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.</p>
 <p>Das heißt, ich brauche kein NAT sondern kann den Jails direkt public IPs zuweisen, die ich als Aliases auf das Interface lege.</p>
 <p>Bisher habe ich mit <code>ezjail</code> zwei Jails eingrichtet: <code>git</code> und <code>backup</code>. DO weißt dem Interface automatisch die v6-IP mit der Endziffer <code>1</code> zu. In meiner <code>rc.conf</code> steht entsprechend für die beiden Jail-IPs:</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ifconfig_vtnet0_alias1</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2 prefixlen 64"</span></span><br><span class="line"><span class="attr">ifconfig_vtnet0_alias2</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3 prefixlen 64"</span></span><br><span class="line"><span class="attr">cloned_interfaces</span>=<span class="string">"lo1"</span></span><br><span class="line"><span class="attr">ezjail_enable</span>=<span class="string">"YES"</span></span><br></pre></td></tr></table></figure>
@@ -38,17 +42,21 @@
 <pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3/64&quot;
 </code></pre><p>Und schon läuft es.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/#disqus_thread</comments>
     </item>
     
     <item>
-      <title><![CDATA[Einfache Foto-Upload-App mit Node.js]]></title>
-      <link>http://tobias-barth.net/blog/blog/2017/05/Einfache-Foto-Upload-App-mit-Node-js/</link>
-      <guid>http://tobias-barth.net/blog/blog/2017/05/Einfache-Foto-Upload-App-mit-Node-js/</guid>
+      <title>Einfache Foto-Upload-App mit Node.js</title>
+      <link>http://tobias-barth.net/blog/2017/05/Einfache-Foto-Upload-App-mit-Node-js/</link>
+      <guid>http://tobias-barth.net/blog/2017/05/Einfache-Foto-Upload-App-mit-Node-js/</guid>
       <pubDate>Tue, 30 May 2017 17:08:00 GMT</pubDate>
       <description>
-      <![CDATA[<p>Meine Frau brauchte für ein Projekt mit Kindern eine einfache Möglichkeit, Fotos von Smartphones auf ihren Laptop zu laden. Es gibt viele]]>
+      
+        &lt;p&gt;Meine Frau brauchte für ein Projekt mit Kindern eine einfache Möglichkeit, Fotos von Smartphones auf ihren Laptop zu laden. Es gibt viele
+      
       </description>
+      
       <content:encoded><![CDATA[<p>Meine Frau brauchte für ein Projekt mit Kindern eine einfache Möglichkeit, Fotos von Smartphones auf ihren Laptop zu laden. Es gibt viele Methoden das zu machen: Bluetooth, USB, SD-Karten-Austausch, und natürlich die üblichen Internet-Lösungen wie Dropbox.</p>
 <p>Bei 20 Zehn- bis Vierzehnjährigen sind 1-zu-1-Verbindungen mit Bluetooth oder Kabel nicht so richtig praktisch. Internetbasierte Lösungen waren aus verschiedenen Gründen ebenfalls nicht das Richtige. Also habe ich angeboten, eine kleine Eigenbau-Lösung zu basteln.</p>
 <p>Das Konzept: Wir stellen einen WLAN-Router auf, mit dem sich alle verbinden. Er braucht keinen Internet-Uplink. Die Projektleiterin startet einen Node.js-Webserver auf ihrem Macbook, der eine Seite mit einem Webformular ausliefert, das nichts anderes tut, als einen Datei-Upload zu ermöglichen. Der Server speichert die hochgeladenen Files auf dem Laptop und das wars. </p>
@@ -109,17 +117,21 @@ Listening on port 3000
 <p>Was noch schön wäre, weil wir ja das File-Input-Element kaputtgemacht haben, mit ein bisschen Browser-Javascript das zum Upload ausgewählte Bild anzuzeigen. Entweder als schnöden Dateinamen oder sogar als Thumbnail. Ideen dazu gibt es <a href="https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications">hier</a>.</p>
 <p>Außerdem wollen wir eher ungern die Kursleiterin dazu zwingen, sich Node.js zu installieren, <code>npm install</code> zu machen und so weiter. Daher bietet sich ein Packager wie <code>pkg</code> von zeit an.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2017/05/Einfache-Foto-Upload-App-mit-Node-js/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2017/05/Einfache-Foto-Upload-App-mit-Node-js/#disqus_thread</comments>
     </item>
     
     <item>
-      <title><![CDATA[Node.js Performance und socket hangup]]></title>
-      <link>http://tobias-barth.net/blog/blog/2016/04/node-js-performance-socket-hangup/</link>
-      <guid>http://tobias-barth.net/blog/blog/2016/04/node-js-performance-socket-hangup/</guid>
+      <title>Node.js Performance und socket hangup</title>
+      <link>http://tobias-barth.net/blog/2016/04/node-js-performance-socket-hangup/</link>
+      <guid>http://tobias-barth.net/blog/2016/04/node-js-performance-socket-hangup/</guid>
       <pubDate>Sat, 09 Apr 2016 16:45:00 GMT</pubDate>
       <description>
-      <![CDATA[<p>In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in]]>
+      
+        &lt;p&gt;In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in
+      
       </description>
+      
       <content:encoded><![CDATA[<p>In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in unseren Logfiles aufschlägt.</p>
 <p>Wir haben dort eine Express-basierte Webapp, die den Content im Grunde vollständig auf dem Server rendert. Dafür werden unter anderem diverse Microservices angesprochen, d.h. bei jedem Request an die Express-App fragt diese per AJAX mehrere interne, separate Dienste nach Daten und rendert basierend auf deren Antworten den Content, der an den Client gesendet wird.</p>
 <p>Das funkioniert auch ziemlich gut, allerdings haben wir in den Logfiles unserer App ungewöhnlich viele “ERROR: socket hang up”-Meldungen. Nicht so viele, dass wir ernsthafte Schwierigkeiten hätten, die auch sichtbar wären, aber, und das ist besonders interessant, es sind wesentlich mehr als bei anderen Webapps, die Java-basiert sind und dieselben Services bei jedem Request anfragen.</p>
@@ -129,18 +141,22 @@ Listening on port 3000
 <p>Ohne dass ich weiß, wie unsere Java-Apps funktionieren oder konfiguriert sind, gefällt mir der Gedanke, dass unsere Node.js-App ankommende Anfragen so schnell verarbeitet und dementsprechend oft parallel die Services anspricht, dass es an Systemlimits stößt, die von den Java-Kreuzern nie tangiert werden.</p>
 <p>Schauen wir mal.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2016/04/node-js-performance-socket-hangup/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2016/04/node-js-performance-socket-hangup/#disqus_thread</comments>
     </item>
     
     <item>
-      <title><![CDATA[Mein Blog]]></title>
-      <link>http://tobias-barth.net/blog/blog/2015/07/Mein-Blog/</link>
-      <guid>http://tobias-barth.net/blog/blog/2015/07/Mein-Blog/</guid>
+      <title>Mein Blog</title>
+      <link>http://tobias-barth.net/blog/2015/07/Mein-Blog/</link>
+      <guid>http://tobias-barth.net/blog/2015/07/Mein-Blog/</guid>
       <pubDate>Sat, 25 Jul 2015 00:24:16 GMT</pubDate>
       <description>
-      <![CDATA[<p>Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.</p>
-<p>Ich hatte ja schon im zugehörigen <a href="https://gi]]>
+      
+        &lt;p&gt;Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.&lt;/p&gt;
+&lt;p&gt;Ich hatte ja schon im zugehörigen &lt;a href=&quot;https://gi
+      
       </description>
+      
       <content:encoded><![CDATA[<p>Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.</p>
 <p>Ich hatte ja schon im zugehörigen <a href="https://github.com/4nduril/my-website/issues/5">Github-Issue</a> geschrieben, dass ich mich für das <a href="https://hexo.io">Hexo-Framework</a> entschieden hatte. Ich fand es spannend, ein bisschen ungewöhnlich und natürlich toll, dass es in Nodejs geschrieben ist. So kann ich schnell Dinge ändern bzw. fixen, die mich stören.</p>
 <p>Das erste habe ich schon gefixt, nämlich das hexo-generator-feed-Plugin. Das erzeugte in meiner Konfiguration (also Hexo-Blog in Unterordner) falsche Permalinks. Ich habe den Autor zwar unter dem betreffenden Commit gefragt, wofür der war (er hat es kaputt geändert), aber bisher keine Antwort. Ich werd’s wohl demnächst auch mal als Bug oder gleich als Pull Request filen. Die reparierte Version findet man zur Zeit bei mir: <a href="https://github.com/4nduril/hexo-generator-feed">4ndurils hexo-generator-feed</a>.</p>
@@ -152,17 +168,21 @@ Listening on port 3000
 </ol>
 <p>Viel Spaß. Ich freu mich!</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2015/07/Mein-Blog/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2015/07/Mein-Blog/#disqus_thread</comments>
     </item>
     
     <item>
-      <title><![CDATA[Vererbung von viewport-percentage lengths in Chrome]]></title>
-      <link>http://tobias-barth.net/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
-      <guid>http://tobias-barth.net/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
+      <title>Vererbung von viewport-percentage lengths in Chrome</title>
+      <link>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</link>
+      <guid>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/</guid>
       <pubDate>Wed, 05 Jun 2013 14:59:00 GMT</pubDate>
       <description>
-      <![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths">viewport-relativen Länge]]>
+      
+        &lt;p&gt;Ich stolperte neulich über ein Problem mit &lt;a href=&quot;http://www.w3.org/TR/css3-values/#viewport-relative-lengths&quot;&gt;viewport-relativen Länge
+      
       </description>
+      
       <content:encoded><![CDATA[<p>Ich stolperte neulich über ein Problem mit <a href="http://www.w3.org/TR/css3-values/#viewport-relative-lengths">viewport-relativen Längen</a> in CSS. Die Situation war konkret folgende:</p>
 <p>Ich hatte eine ungeordnete Liste, deren Elemente je ein <code>&lt;div&gt;</code> enthielten, in dem sich wiederum ein <code>&lt;a&gt;</code> befand:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -176,18 +196,22 @@ Listening on port 3000
 <p>Das <code>&lt;li&gt;</code> hat zwar die richtige Größe, aber das <code>&lt;div&gt;</code> ist nur so hoch, wie es sein Inhalt (eine Textzeile) erfordert. Sogar im IE9 wird es korrekt (wie im FF) dargestellt. Opera unterstützt derzeit keine viewport-related lengths, aber da auch dort <a href="http://business.opera.com/press/releases/general/opera-gears-up-at-300-million-users">demnächst ein Webkit rendert</a>, wird es sich wohl auch nur mittelmäßig zum Guten ändern.</p>
 <p>Anscheinend muss man derzeit also entweder für Chrome in solchen Fällen auch jedem Kindelement die <code>v*</code>-Größe zuweisen, oder mit anderen Längeneinheiten arbeiten. Schade.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2013/06/Vererbung-von-viewport-percentage-lengths-in-Chrome/#disqus_thread</comments>
     </item>
     
     <item>
-      <title><![CDATA[jQuerys scrollTop() und border-box]]></title>
-      <link>http://tobias-barth.net/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
-      <guid>http://tobias-barth.net/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
+      <title>jQuerys scrollTop() und border-box</title>
+      <link>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/</link>
+      <guid>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/</guid>
       <pubDate>Mon, 28 Jan 2013 21:01:00 GMT</pubDate>
       <description>
-      <![CDATA[<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
-<p>Letzte Woche habe ich den ersten Kandidaten für den ir]]>
+      
+        &lt;p&gt;&lt;strong&gt;Das Folgende betrifft soweit ich sehe nur jQuery &amp;lt; 1.8.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Letzte Woche habe ich den ersten Kandidaten für den ir
+      
       </description>
+      
       <content:encoded><![CDATA[<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
 <p>Letzte Woche habe ich den ersten Kandidaten für den irrsten Bug in diesem Jahr gefunden.</p>
 <p>Der Fehler, den der Kunde berichtete, beruhte darauf, dass das ursprünglich verwendete <code>$(document).scrollTop()</code> nicht im IE8 funktionierte und nachdem er dies durch das funktionierende <code>$(&#39;html&#39;).scrollTop()</code> ersetzt hatte, lief es nicht mehr in Webkit-Browsern.</p>
@@ -203,17 +227,21 @@ Listening on port 3000
 <p>Ab jQuery 1.8 besteht das Problem nicht mehr, weil dann nicht mehr auf Box-Model-Support getestet wird bzw. dieser Test nicht mehr in <code>scrollTop()</code> abgerufen wird.</p>
 <p>Warum Webkit übrigens <code>$(&#39;html&#39;).scrollTop()</code> nicht versteht, ist mir noch nicht so ganz klar.</p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2013/01/jQuerys-scrollTop-und-border-box/#disqus_thread</comments>
     </item>
     
     <item>
-      <title><![CDATA[.htaccess-Spielereien]]></title>
-      <link>http://tobias-barth.net/blog/blog/2011/12/-htaccess-Spielereien/</link>
-      <guid>http://tobias-barth.net/blog/blog/2011/12/-htaccess-Spielereien/</guid>
+      <title>.htaccess-Spielereien</title>
+      <link>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/</link>
+      <guid>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/</guid>
       <pubDate>Sun, 04 Dec 2011 12:47:00 GMT</pubDate>
       <description>
-      <![CDATA[<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es l]]>
+      
+        &lt;p&gt;Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es l
+      
       </description>
+      
       <content:encoded><![CDATA[<p>Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es lassen sich zum Beispiel einzelne Verzeichnisse nur für Nutzer mit einer bestimmten IP freigeben. Oder man kann Passwörter für den Zugang vergeben. Vor ein paar Tagen habe ich herausgefunden, dass man mit ihnen auch wunderbar beliebige andere Servervariablen abfragen kann.</p>
 <p>Mit dem Modul <a href="https://httpd.apache.org/docs/2.2/mod/mod_setenvif.html">mod_setenvif</a> nämlich lassen sich mit Hilfe der zwei Direktiven <em>BrowserMatch</em> und <em>SetEnvIf</em> (und deren Varianten, denen Groß- und Kleinschreibung egal ist) Umgebungsvariablen abfragen und davon abhängig den Zugang zu Ressourcen regeln.</p>
 <p>Ich habe das benutzt, um folgendes zu tun. Ein PHP-Dokument bindet mit <code>require</code> eine HTML-Datei ein und zwar abhängig vom Rückgabewert eines If-Statements:</p>
@@ -223,7 +251,8 @@ Listening on port 3000
 <p>Mit der SetEnvIf-Direktive setze ich eine Variable namens &bdquo;verboten&ldquo; genau dann wenn der <abbr title="Uniform Resource Identifier">URI</abbr>-String, den der Browser als Request gesendet hat, mit dem regulären Ausdruck <code>&quot;eingebunden\.html$&quot;</code> übereinstimmt. Als nächstes sage ich dem Server, dass er Anfragen, für die er diese Variable erzeugt hat, ablehnen soll. Versucht man jetzt die HTML-Datei direkt im Browser aufzurufen, ist das einzige, was man sieht, ein 403.</p>
 <p><a href="http://flattr.com/thing/449791/-htaccess-Spielereien"><img src="http://kritikant.de/media/blogs/kritikant/flattr-badge-large.png" alt="Flattr this" title="Flattr this"></a></p>
 ]]></content:encoded>
-      <comments>http://tobias-barth.net/blog/blog/2011/12/-htaccess-Spielereien/#disqus_comments</comments>
+      
+      <comments>http://tobias-barth.net/blog/2011/12/-htaccess-Spielereien/#disqus_thread</comments>
     </item>
     
   </channel>

@@ -113,6 +113,16 @@ module.exports = function (grunt) {
 					},
 					{
 						expand: true,
+						cwd: 'css/fonts/',
+						src: [
+							'*.woff',
+							'*.woff2',
+							'*.ttf',
+						],
+						dest: 'dev/fonts'
+					},
+					{
+						expand: true,
 						cwd: 'images/',
 						src: [
 							'**/*.{jpg,JPG,jpeg}',
@@ -154,6 +164,16 @@ module.exports = function (grunt) {
 							'*.ttf',
 							'*.svg',
 							'*.otf'
+						],
+						dest: 'dist/fonts'
+					},
+					{
+						expand: true,
+						cwd: 'css/fonts/',
+						src: [
+							'*.woff',
+							'*.woff2',
+							'*.ttf',
 						],
 						dest: 'dist/fonts'
 					}
