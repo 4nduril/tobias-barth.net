@@ -394,8 +394,6 @@ dd {
   /*.flex(1;1;100%;@gutWidth);*/
   /* For -webkit- Syntax? */
   width: 100%;
-  /* Webfont FOUT */
-  opacity: 0;
 }
 .site-head h1 {
   margin-top: 1.62495rem;
@@ -412,11 +410,6 @@ dd {
   font-size: 1.62495rem;
   line-height: 1;
   letter-spacing: .015em;
-}
-/* Webfont FOUT */
-.wf-dosis-n3-active .site-head h1,
-.wf-dosis-n3-active .site-head .tagline {
-  opacity: 1;
 }
 main {
   margin-top: -1.62495rem;
