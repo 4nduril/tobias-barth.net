@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>tobias-barth.net | Moderne Webentwicklung aus Köln</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.min.css" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/css/old-ie.min.css" />
+	<![endif]-->
+
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+
+</head>
+<body>
+	<header class="site-head">
+			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Moderne Webentwicklung aus Köln</p></a>
+		</header>
+
+
+		<main>
+			<nav class="main-navi" id="main-navi">
+				<ul>
+					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
+				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
+<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
+				</ul>
+			</nav>
+		<div class="blog-textcontainer">
+
+	
+		<article id="Handle-lid-closing-correctly-in-XFCE-power-settings" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2019/05/Handle-lid-closing-correctly-in-XFCE-power-settings/">
+	
+		<h2 class="blog-post-title">Handle lid closing correctly in XFCE power settings</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2019-05-21T13:55:25.000Z">21. Mai 2019</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>This is mainly just a note for my future self. I always had problems with the power management settings on my laptop. It’s running Manjaro Linux (Arch derivate). Regardless of what I set in the XFCE power settings, the actions that should happen on lid closing didn’t work as expected. I wanted that the machine does a suspend-to-RAM when I close the lid and the power cable is plugged in. And when it is not plugged in I wanted the machine to suspend-to-disk (hibernate). </p>
+<p>On some point I just disabled everything in <code>/etc/systemd/logind.conf</code> (set it to ignore lid actions) and lived with the fact.</p>
+<p>Today on Googling™ I came across two things: First a mention of the file <code>~/.config/xfce4/xconf/xfce-perchannel-xml/xfce4-power-manager.xml</code>. There, all the settings you can set in the graphical power settings tool are saved as XML. Second: A forum post (<a href="https://bbs.archlinux.org/viewtopic.php?pid=1690134#p1690134">https://bbs.archlinux.org/viewtopic.php?pid=1690134#p1690134</a>) that points to the fact that in this XML file there is a setting you can’t set graphical: “logind-handle-lid-switch”. Which is set to <code>true</code> for reasons that are beyond me.</p>
+<p>Probably you can do all sorts of things with <code>acpid</code> and/or systemd to control the actions on lid-close and lid-open. But you can also just issue:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/logind-handle-lid-switch <span class="_">-s</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>on the shell and then your settings in XFCEs power settings are used by the system and work. Of course I also set the content in <code>logind.conf</code> back to default.</p>
+
+	</div>
+</article>
+
+	
+		<article id="Fix-speed-issue-when-writing-to-NAS-system" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2019/05/Fix-speed-issue-when-writing-to-NAS-system/">
+	
+		<h2 class="blog-post-title">Fix speed issue when writing to NAS system</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2019-05-03T09:36:54.000Z">03. Mai 2019</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>I just fixed an issue with my FreeBSD home server. It is set up as a file server for Mac (AFP) and Linux Clients (NFS). My local network is Gigabit-based sothe limitating factor on read/write speeds should be the hard disk drives in the server.</p>
+<p>The server has a Core i3-6100T CPU @ 3.20GHz, 8GB RAM, a ZFS setup with two mirror vdevs each consisting of two disks connected to the board via SATA3. And of course the onboard Gbit NIC (Realtek).</p>
+<p>I know very well that write speed was at around 50–60MB/sec, which I would expect. But lately, it dropped amazingly to ~1MB/sec. And I just couldn’t think of, why. I suspected the cable, the AFP, the RAM anything.</p>
+<p>What I didn’t suspect — until today, that is — was the network interface. But I had time today for some googling and even if I didn’t found the solution directly, I stumbled across something related to the output of <code>ifconfig</code>. So I hacked that into the console and stared at it.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">re0:</span> flags=<span class="number">8843</span>&lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&gt; metric <span class="number">0</span> mtu <span class="number">1500</span></span><br><span class="line">        options=<span class="number">8209</span>b&lt;RXCSUM,TXCSUM,VLAN_MTU,VLAN_HWTAGGING,VLAN_HWCSUM,WOL_MAGIC,LINKSTATE&gt;</span><br><span class="line">        ether <span class="number">4</span><span class="string">c:</span><span class="string">cc:</span><span class="number">6</span><span class="string">a:</span><span class="string">b3:</span><span class="number">3</span><span class="string">c:</span>f5</span><br><span class="line">        hwaddr <span class="number">4</span><span class="string">c:</span><span class="string">cc:</span><span class="number">6</span><span class="string">a:</span><span class="string">b3:</span><span class="number">3</span><span class="string">c:</span>f5</span><br><span class="line">        inet6 <span class="string">fd23:</span><span class="number">16</span>:<span class="number">7</span>:<span class="number">7</span>::<span class="number">1</span> prefixlen <span class="number">64</span></span><br><span class="line">        inet6 <span class="string">fe80:</span>:<span class="number">4</span><span class="string">ecc:</span><span class="number">6</span><span class="string">aff:</span><span class="string">feb3:</span><span class="number">3</span>cf5%re0 prefixlen <span class="number">64</span> scopeid <span class="number">0x1</span></span><br><span class="line">        inet <span class="number">192.168</span><span class="number">.10</span><span class="number">.118</span> netmask <span class="number">0xffffff00</span> broadcast <span class="number">192.168</span><span class="number">.10</span><span class="number">.255</span></span><br><span class="line">        nd6 options=<span class="number">21</span>&lt;PERFORMNUD,AUTO_LINKLOCAL&gt;</span><br><span class="line"><span class="symbol">        media:</span> Ethernet autoselect (<span class="number">10</span>baseT/UTP &lt;full-duplex&gt;)</span><br><span class="line"><span class="symbol">        status:</span> active</span><br></pre></td></tr></table></figure>
+<p>Do you spot it? </p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">media:</span> Ethernet autoselect (<span class="number">10</span>baseT/UTP <span class="params">&lt;full-duplex&gt;</span>)</span><br></pre></td></tr></table></figure>
+<p>Well, that is … unfortunate. The output of <code>ifconfig -m re0</code> gave me:</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">supported media:</span><br><span class="line">		media autoselect mediaopt flowcontrol</span><br><span class="line">		media autoselect</span><br><span class="line">		media <span class="number">1000</span>baseT mediaopt <span class="literal">full</span><span class="attr">-duplex</span>,flowcontrol,master</span><br><span class="line">		media <span class="number">1000</span>baseT mediaopt <span class="literal">full</span><span class="attr">-duplex</span>,flowcontrol</span><br><span class="line">		media <span class="number">1000</span>baseT mediaopt <span class="literal">full</span><span class="attr">-duplex</span>,master</span><br><span class="line">		media <span class="number">1000</span>baseT mediaopt <span class="literal">full</span><span class="attr">-duplex</span></span><br><span class="line">		media <span class="number">100</span>baseTX mediaopt <span class="literal">full</span><span class="attr">-duplex</span>,flowcontrol</span><br><span class="line">		media <span class="number">100</span>baseTX mediaopt <span class="literal">full</span><span class="attr">-duplex</span></span><br><span class="line">		media <span class="number">100</span>baseTX</span><br><span class="line">		media <span class="number">10</span>baseT/UTP mediaopt <span class="literal">full</span><span class="attr">-duplex</span>,flowcontrol</span><br><span class="line">		media <span class="number">10</span>baseT/UTP mediaopt <span class="literal">full</span><span class="attr">-duplex</span></span><br><span class="line">		media <span class="number">10</span>baseT/UTP</span><br><span class="line">		media <span class="literal">none</span></span><br></pre></td></tr></table></figure>
+<p>So I ran <code>sudo ifconfig re0 media 1000baseTX mediaopt full-duplex</code> and it worked. After that I also ran <code>sudo ifconfig re0 media autoselect</code> which also set the media type to 1000baseT full-duplex. I have no idea why the system did that wrong (or when) but I will monitor what happens after the next reboot. Maybe I have to do some configuration but maybe it was just an hickup.</p>
+<p>Speeds are up to 60MB/sec again.</p>
+
+	</div>
+</article>
+
+	
+		<article id="Execute-Promise-based-code-in-order-over-an-array" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2019/04/Execute-Promise-based-code-in-order-over-an-array/">
+	
+		<h2 class="blog-post-title">Execute Promise-based code in order over an array</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2019-04-18T12:47:53.000Z">18. April 2019</time></p>
+	</header>
+	<div class="blog-post-content">
+		<h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><p>I recently faced a problem: I had a list (an array) of input data and wanted to execute a function for every item in that list. </p>
+<p>No problem, you say, take <code>Array.prototype.map</code>, that’s what it’s for. <strong>BUT</strong> the function in question returns a Promise and I want to be able to only continue in the program flow when all of these Promises are resolved.</p>
+<p>No problem, you say, wrap it in <code>Promise.all</code>, that’s what it’s for. <strong>BUT</strong> the function in question is very expensive. So expensive that it spawns a child process (the whole code runs in NodeJS on my computer) and that child process is using so much CPU power that my computer comes to grinding halt when my input list is longer than a few elements.</p>
+<p>And that’s because effectively, all the heavy child processes get started in near parallel. Actually they get started in order but the next will not wait for the previous to finish.</p>
+<h3 id="The-first-solution"><a href="#The-first-solution" class="headerlink" title="The first solution"></a>The first solution</h3><p>So what I need is a way to traverse the array, execute the function for the current element, <em>wait</em> until the Promise resolves and <em>only then</em> go to the next element and call the function with it. That means <code>map</code> will not work because I have no control over the execution flow. So I will have to build my own <code>map</code>. And while I am on it, I will implement it a bit nicer as stand-alone function that takes the mapper function first and then the data array:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> sequentialMap = fn =&gt;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">innerSequentialMap</span>(<span class="params">[head, ...tail]</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve([])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fn(head).then(headResult =&gt;</span><br><span class="line">      innerSequentialMap(tail).then(tailResult =&gt; [headResult, ...tailResult])</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>So, what does this? It takes the function <code>fn</code> that should be applied to all values in the array and returns a new function. This new function expects an array as input. You see that the function is curried in that it takes only ever one argument and the real execution starts when all arguments are provided. That allows us for example to “preload” <code>sequentialMap</code> with a mapper function and reuse it on different input data:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// preloading</span></span><br><span class="line"><span class="keyword">const</span> mapWithHeavyComputations = sequentialMap(heavyAsyncComputation)</span><br><span class="line"></span><br><span class="line"><span class="comment">// execution</span></span><br><span class="line"><span class="keyword">const</span> result = mapWithHeavyComputations([…])</span><br></pre></td></tr></table></figure>
+<p>But in this case the currying enables (or simplifies) another technique: recursion.</p>
+<p>We say a function is recursive when it calls itself repeatedly. Recursion is the functional equivalent to looping in imperative programming. You can refactor one into the other as long as the programming language allows both ways. Or so I thought.</p>
+<p>I used a recursive function here because I could not think of a way to wait for a Promise resolving in a loop. How would I use <code>.then()</code> and jump to the next iteration step <em>within</em> that <code>then</code>?</p>
+<p>Anyway, let’s go further through the code. In the body of the internal or second function firstly I define a condition to terminate the recursion: I check if the first element is falsy and if it is falsy I just return a Promise that resolves to an empty array. That is because the main path of the function returns its data as an array wrapped in a Promise. So if we return the same type of data when we terminate all will fit nicely together.</p>
+<p>Next, if we don’t terminate (which means the first element of the given list is truthy) we apply the mapper function to it. That will return a Promise and we wait for its resolving with <code>.then</code>. Once it resolves the whole thing gets a bit magical, but not too much.</p>
+<p>What we do then is to build a nested Promise. Normally, when you work with Promises and want to apply several functions to the inner values you would build a “Promise chain”:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = firstPromise</span><br><span class="line">  .then(doSomethingWithIt)</span><br><span class="line">  .then(doSomthingElseAfterThat)</span><br><span class="line">  …</span><br></pre></td></tr></table></figure>
+<p>The problem we have here is that to build the final result (the mapped array), we need the result from the first resolved Promise and then also the result values from all the other Promises which are not computed <em>upon</em> each other but <em>independent</em>.</p>
+<p>So we use two features to solve that: nested scope and Promise-flattening (did someone say Monad?).</p>
+<p>For the nested scope first: When we define a function within a function then the inner function can access variables that are defined not within itself but in the outer function (the outer or surrounding scope):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params">arg1</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> outerValue = arg1 + <span class="number">42</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> outerValue + <span class="number">23</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(inner())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">outer(<span class="number">666</span>) <span class="comment">// logs 731</span></span><br></pre></td></tr></table></figure>
+<p>And Promise-flattening means essentially that if you have a Promise of a Promise of a value that is the same as if you just had a Promise of the value.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> p2 = <span class="built_in">Promise</span>.resolve(<span class="built_in">Promise</span>.resolve(<span class="number">1</span>))</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">p2.then(<span class="built_in">console</span>.log) <span class="comment">// logs 1</span></span><br><span class="line">p1.then(<span class="built_in">console</span>.log) <span class="comment">// logs 1</span></span><br></pre></td></tr></table></figure>
+<p>To recall, here is what the code we are talking about looks like:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> fn(head).then(headResult =&gt;</span><br><span class="line">  sequentialMapInternal(tail).then(tailResult =&gt; [headResult, ...tailResult])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>We keep the <code>headResult</code> in scope and then we generate the next Promise by calling the inner function recursively again but with a shorter list without the first element. We wait again with <code>.then</code> for the final result and only then we build our result array.</p>
+<p>This is done by spreading the <code>tailResult</code> after the <code>headResult</code>: We know we get one value from calling <code>fn(head)</code> but we get a list of values from calling <code>sequentialMapInternal(tail)</code>. So with the spread operator we get a nice flat array of result values.</p>
+<p>Note that the function inside the first <code>then</code>, that gets <code>headResult</code> as parameter immediately returns the next Promise(-chain). And that is essentially where we use Promise-flattening. <code>.then</code> returns a Promise in itself and now we are returning a Promise inside of that. But the result will look like an ordinary Promise – no nesting visible.</p>
+<h3 id="The-better-way"><a href="#The-better-way" class="headerlink" title="The better way"></a>The better way</h3><p>While that works perfectly and my computer remains usable also when I call my script now, all these nested <code>then</code>s do not look so nice. We can fix that when we have async functions at our disposal:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sequentialMap = fn =&gt;</span><br><span class="line">  <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">innerSequentialMap</span>(<span class="params">[head, ...tail]</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve([])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> headResult = <span class="keyword">await</span> fn(head)</span><br><span class="line">    <span class="keyword">const</span> tailResult = <span class="keyword">await</span> innerSequentialMap(tail)</span><br><span class="line">    <span class="keyword">return</span> [headResult, ...tailResult]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>Yes, that is much better. Now the exection is paused until <code>headResult</code> is there and then paused again until <code>tailResult</code> is there and only then we build our result array and are finished.</p>
+<h3 id="The-shortest-way"><a href="#The-shortest-way" class="headerlink" title="The shortest way"></a>The shortest way</h3><p>Wait. Did I just say I can pause execution with <code>await</code>? Wouldn’t this work also within a loop?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> loopVersion = fn =&gt;</span><br><span class="line">  <span class="keyword">async</span> list =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> elem <span class="keyword">of</span> list) &#123;</span><br><span class="line">      result.push(<span class="keyword">await</span> fn(elem))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>See, this is what happens to people like me that are too deep into functional programming paradigms. Yes, you should generally avoid loops because they are not declarative and you end up telling the machine (and your coworker) not <em>what</em> you want to happen but <em>how</em> you want it to happen. That is, again, generally, no good practice. But in this case that is exactly what we wanted: To give a step-by-step schema on how to execute our code. To optimize for resource usage.</p>
+
+	</div>
+</article>
+
+	
+
+</div>
+
+		</main>
+	<footer class="site-footer h-card" aria-describedby="dse">
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net" rel="me" class="u-email">contact@tobias-barth.net</a><br />
+		Telefon: <a href="tel:+4915111215929">+49 151 112 15 929</a></p>
+		<p id="dse" class="in-site-footer">(Bitte beachten Sie vor der Kontaktaufnahme meine Datenschutzerklärung.)</p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril" rel="me"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril" rel="me"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril" rel="me"><span>Github</span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		<a href="http://tobias-barth.net" class="p-name u-url">Tobias&nbsp;Barth</a><br />
+		<span class="p-street-address">Vincenzstr.&nbsp;25</span><br />
+		<span class="p-locality p-postal-code">51065&nbsp;Köln</span></p>
+		<p class="in-site-footer">USt-ID: DE304359556</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
+		<p class="in-site-footer"><a href="dse.html">Datenschutzerklärung</a></p>
+	</footer>
+</body>
+
+</html>
