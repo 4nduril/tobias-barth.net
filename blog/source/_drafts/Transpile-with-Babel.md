@@ -32,7 +32,7 @@ The first thing to do before publishing a library is obviously to write one. Let
 
 What now? What do we want to achieve in this tutorial?
 
-1. Transpile modern language features so that every browser in one of the last 2 versions can understand our code.
+1. Compile modern language features so that every browser in one of the last 2 versions can understand our code.
 1. Avoid duplicating compile-stage helpers to keep the library as small as possible.
 1. Ensure code quality with linting and tests.
 1. Bundle our modules into one consumable, installable file.
@@ -48,9 +48,11 @@ The chapters of this series will not only show configurations I think you should
 
 ## Go!
 
-We will start with the first points on our list above. As new articles arrive, I will add them here as links and I will also try to keep the finished articles updated when the tools they use get new features or change APIs. If you find something that's not true anymore, please give me a hint.
+We will start with the first point on our list above: 
 
-1. [Transpile modern language features – With Babel]().
+1. [Compile modern language features – With Babel]().
+
+As new articles arrive I will add them here as links and I will also try to keep the finished articles updated when the tools they use get new features or change APIs. If you find something that's not true anymore, please give me a hint.
 
 Oh and one last thing™: I'll be using `npm` throughout the series because I like it. If you like `yarn` better, just exchange the commands.
 
