@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>tobias-barth.net | Moderne Webentwicklung aus Köln</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.min.css" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/css/old-ie.min.css" />
+	<![endif]-->
+
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+
+</head>
+<body>
+	<header class="site-head">
+			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Moderne Webentwicklung aus Köln</p></a>
+		</header>
+
+
+		<main>
+			<nav class="main-navi" id="main-navi">
+				<ul>
+					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
+				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
+<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
+				</ul>
+			</nav>
+		<div class="blog-textcontainer">
+<article id="Publish-a-modern-JavaScript-or-TypeScript-library" class="blog-post">
+	<header class="blog-post-header">
+	
+		<h2 class="blog-post-title">Publish a modern JavaScript (or TypeScript) library</h2>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2019-07-05T14:02:26.000Z">05. Juli 2019</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>Did you ever write some library code together and then wanted to publish it as an NPM package but realized you have no idea what is the technique du jour to do so?</p>
+<p>Did you ever wonder “Should I use Webpack or Rollup?”, “What about ES modules?”, “What about any other package format, actually?”, “How to publish Types along with the compiled code?” and so on?</p>
+<p>Perfect! You have found the right place. In this series of articles I will try to answer every one of these questions. With example configurations for most of the possible combinations of these tools and wishes.</p>
+<h3 id="Technology-base"><a href="#Technology-base" class="headerlink" title="Technology base"></a>Technology base</h3><p>This is the set of tools and their respective version range for which this tutorial is tested:</p>
+<ul>
+<li>ES2018 </li>
+<li>Webpack &gt;= 4</li>
+<li>Babel &gt;= 7.4</li>
+<li>TypeScript &gt;= 3</li>
+<li>Rollup &gt;= 1</li>
+<li>React &gt;= 16.8<br>( code aimed at other libraries like Vue or Angular should work the same )</li>
+</ul>
+<p>Some or even most of that what follows could be applied to older versions of these tools, too. But I will not guarantee or test it. </p>
+<h3 id="Creation"><a href="#Creation" class="headerlink" title="Creation"></a>Creation</h3><p>The first thing to do before publishing a library is obviously to write one. Let’s say we have already done that. In fact, it’s <a href="https://github.com/4nduril/library-starter/tree/init">this one</a>. It consists of several source files and therefore, modules. We have provided our desired functionality, used our favorite, modern JavaScript (or TypeScript) features and crafted it with our beloved editor settings.</p>
+<p>What now? What do we want to achieve in this tutorial?</p>
+<ol>
+<li>Transpile modern language features so that every browser in one of the last 2 versions can understand our code.</li>
+<li>Avoid duplicating compile-stage helpers to keep the library as small as possible.</li>
+<li>Ensure code quality with linting and tests.</li>
+<li>Bundle our modules into one consumable, installable file.</li>
+<li>Provide ES modules to make the library tree-shakable.</li>
+<li>Provide typings if we wrote our library in TypeScript.</li>
+<li>Improve collaborating with other developers (from our team or, if it is an open source library, from the public).</li>
+</ol>
+<p>Wow. That’s a whole lot of things. Let’s see if we can make it.</p>
+<p>Note that some of these steps can be done with different tools or maybe differ depending on the code being written in TypeScript or JavaScript. We’ll cover all of that. Well, probably not all of that, but I will try to cover the most common combinations.</p>
+<p>The chapters of this series will not only show configurations I think you should use, but also will I explain the reasoning behind it and how it works. If you aren’t interested in these backgrounds, there will be a link right at the top of each post down to the configurations and steps to execute without much around.</p>
+<h3 id="Go"><a href="#Go" class="headerlink" title="Go!"></a>Go!</h3><p>We will start with the first points on our list above. As new articles arrive, I will add them here as links and I will also try to keep the finished articles updated when the tools they use get new features or change APIs. If you find something that’s not true anymore, please give me a hint.</p>
+<ol>
+<li><a href="http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/">Transpile modern language features – With Babel</a>.</li>
+</ol>
+<p>Oh and one last thing™: I’ll be using <code>npm</code> throughout the series because I like it. If you like <code>yarn</code> better, just exchange the commands.</p>
+
+	</div>
+</article>
+
+</div>
+
+		</main>
+	<footer class="site-footer h-card" aria-describedby="dse">
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net" rel="me" class="u-email">contact@tobias-barth.net</a><br />
+		Telefon: <a href="tel:+4915111215929">+49 151 112 15 929</a></p>
+		<p id="dse" class="in-site-footer">(Bitte beachten Sie vor der Kontaktaufnahme meine Datenschutzerklärung.)</p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril" rel="me"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril" rel="me"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril" rel="me"><span>Github</span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		<a href="http://tobias-barth.net" class="p-name u-url">Tobias&nbsp;Barth</a><br />
+		<span class="p-street-address">Vincenzstr.&nbsp;25</span><br />
+		<span class="p-locality p-postal-code">51065&nbsp;Köln</span></p>
+		<p class="in-site-footer">USt-ID: DE304359556</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
+		<p class="in-site-footer"><a href="dse.html">Datenschutzerklärung</a></p>
+	</footer>
+</body>
+
+</html>

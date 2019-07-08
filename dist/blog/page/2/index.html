@@ -31,6 +31,58 @@
 		<div class="blog-textcontainer">
 
 	
+		<article id="node-js-performance-socket-hangup" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2016/04/node-js-performance-socket-hangup/">
+	
+		<h2 class="blog-post-title">Node.js Performance und socket hangup</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2016-04-09T16:45:00.000Z">09. April 2016</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in unseren Logfiles aufschlägt.</p>
+<p>Wir haben dort eine Express-basierte Webapp, die den Content im Grunde vollständig auf dem Server rendert. Dafür werden unter anderem diverse Microservices angesprochen, d.h. bei jedem Request an die Express-App fragt diese per AJAX mehrere interne, separate Dienste nach Daten und rendert basierend auf deren Antworten den Content, der an den Client gesendet wird.</p>
+<p>Das funkioniert auch ziemlich gut, allerdings haben wir in den Logfiles unserer App ungewöhnlich viele “ERROR: socket hang up”-Meldungen. Nicht so viele, dass wir ernsthafte Schwierigkeiten hätten, die auch sichtbar wären, aber, und das ist besonders interessant, es sind wesentlich mehr als bei anderen Webapps, die Java-basiert sind und dieselben Services bei jedem Request anfragen.</p>
+<p>Es scheint also primär nichts mit den internen Services zu tun zu haben, sondern mit unserer Node-App. Bisher haben wir nicht so wirklich eine Idee, was es sein könnte. Für die AJAX-calls nutzen wir <a href="https://github.com/mzabriskie/axios">Axios</a> und definieren damit auch ein Timeout, das bei 60ms liegt. Das kann es allerdings nicht sein, denn dann sähen wir timeout-Errors und nicht Socket-hang-ups. </p>
+<p>Also habe ich mal das Internet danach durchforstet, was diese Socket-hangups bei Node erzeugen könnte. Dabei bin ich auf einen interessanten <a href="http://www.murvinlai.com/remote-http-request.html">Blogpost</a> gestoßen. Dort wird beschrieben, dass solche Fehler zwar auch von der Remote-Seite kommen können, aber eben auch von den Limitierungen des Systems, auf dem der Node-Server läuft. Es gibt ein Limit für die Zahl der gleichzeitig offenen Files, wobei dieses Limit pro Login=User gilt. Der Standardwert ist 1024. Ein Socket ist wie alles auf unixoiden Systemen eine Datei. Ein User (in dem Fall der User, dem der Node-Prozess gehört), kann also maximal 1024 Dateien gleichzeitig öffnen.</p>
+<p>Das wäre auf jeden Fall mal ein Ansatz. Der Verfasser des erwähnten Blogartikels empfiehlt ein Limit von 10240, also das Zehnfache. Außerdem sollte der maxSockets-Wert des http.Agents von Node auf eine Zahl knapp unter dem ulimit gesetzt werden. Nodes Standard für maxSockets ist (mittlerweile) <code>Infinity</code>, aber bei uns ist es derzeit auf 25 gesetzt. Ich muss noch mal nachforschen, was der Grund für dieses Limit war. </p>
+<p>Ohne dass ich weiß, wie unsere Java-Apps funktionieren oder konfiguriert sind, gefällt mir der Gedanke, dass unsere Node.js-App ankommende Anfragen so schnell verarbeitet und dementsprechend oft parallel die Services anspricht, dass es an Systemlimits stößt, die von den Java-Kreuzern nie tangiert werden.</p>
+<p>Schauen wir mal.</p>
+
+	</div>
+</article>
+
+	
+		<article id="Mein-Blog" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2015/07/Mein-Blog/">
+	
+		<h2 class="blog-post-title">Mein Blog</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2015-07-25T00:24:16.000Z">25. Juli 2015</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.</p>
+<p>Ich hatte ja schon im zugehörigen <a href="https://github.com/4nduril/my-website/issues/5">Github-Issue</a> geschrieben, dass ich mich für das <a href="https://hexo.io">Hexo-Framework</a> entschieden hatte. Ich fand es spannend, ein bisschen ungewöhnlich und natürlich toll, dass es in Nodejs geschrieben ist. So kann ich schnell Dinge ändern bzw. fixen, die mich stören.</p>
+<p>Das erste habe ich schon gefixt, nämlich das hexo-generator-feed-Plugin. Das erzeugte in meiner Konfiguration (also Hexo-Blog in Unterordner) falsche Permalinks. Ich habe den Autor zwar unter dem betreffenden Commit gefragt, wofür der war (er hat es kaputt geändert), aber bisher keine Antwort. Ich werd’s wohl demnächst auch mal als Bug oder gleich als Pull Request filen. Die reparierte Version findet man zur Zeit bei mir: <a href="https://github.com/4nduril/hexo-generator-feed">4ndurils hexo-generator-feed</a>.</p>
+<p>Ich habe zwar schon länger ein privates Blog gehabt, in dem auch hin und wieder Web-Kram landete, aber ich wollte jetzt gern im richtigen Rahmen und öfter Sachen aus dem Frontend-Alltag (oder Säuremiene, wie manche sagen) posten. Zwei, drei alte Posts vom anderen Blog habe ich hier der Vollständigkeit halber importiert, aber die sind wirklich schon betagt.</p>
+<p>Achso, zwei Dinge noch:</p>
+<ol>
+<li>Das hier ist nur die minimalist working version. Es gibt z.B. noch keine vernünftige Integration von Kategorien und Tags (sie werden zumindest noch nicht dargestellt). Das wird sich über die Zeit aber immer weiter verbessern. Die Grundfunktion eines Blogs sind Einträge und der Feed. Beides geht.</li>
+<li>Es gibt keine Kommentarsektion. Das ist auch Absicht und wird erstmal so bleiben. Ob ich meine Meinung ändere, weiß ich noch nicht, derzeit steht sie aber fest. Kommentare und Anmerkungen erhalte ich aber trotzdem sehr gern per Twitter oder Email.</li>
+</ol>
+<p>Viel Spaß. Ich freu mich!</p>
+
+	</div>
+</article>
+
+	
 		<article id="Vererbung-von-viewport-percentage-lengths-in-Chrome" class="blog-post">
 	<header class="blog-post-header">
 	
