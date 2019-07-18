@@ -3,7 +3,9 @@ tags:
   - typescript
   - library
   - howto
+date: 2019-07-18 13:24:59
 ---
+
 
 ### Preface
 
@@ -13,22 +15,22 @@ This article is part 2 of the series "Publish a modern JavaScript (or TypeScript
 
 **If you are not interested in the background and reasoning behind the setup, [jump directly to the conclusion](#cmlfwttc-conclusion)**
 
-In the last article we set up Babel to transpile modern JavaScript or even TypeScript to a form which is understood by our target browsers. But we can also instead use the TypeScript compiler `tsc` to do that. For illustrating purposes I have rewritten my small [example library](https://github.com/4nduril/library-starter/tree/typescript-babel) in TypeScript. Be sure to look at one of the `typescript-` prefixed branches. The `master` is still written in JavaScript.
+In the last article we set up Babel to transpile modern JavaScript or even TypeScript to a form which is understood by our target browsers. But we can also instead use the TypeScript compiler `tsc` to do that. For illustrating purposes I have rewritten my small [example library](https://github.com/4nduril/library-starter/tree/rewrite-in-typescript) in TypeScript. Be sure to look at one of the `typescript-` prefixed branches. The `master` is still written in JavaScript.
 
 I will assume that you already know how to setup a TypeScript project. How else would you have been able to write your library in TS? Rather, I will focus only on the best configuration possible for transpiling for the purposes of delivering a library.
 
 You already know, the configuration is done via a `tsconfig.json` in the root of your project. It should contain the following options that I will discuss further below:
 
-```json
+```javascript
 {
-	"include": ["./src/**/*"],
-	"compilerOptions": {
-		"outDir": "./dist",
-		"target": "es2017",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"importHelpers": true
-	}
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "es2017",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true
+  }
 }
 ```
 
@@ -96,14 +98,14 @@ Make sure your `tsconfig.json` contains at least the following options:
 
 ```javascript
 {
-	"compilerOptions": {
-		"outDir": "./dist", // where should tsc put the transpiled files
-		"target": "es2017", // set of features that we assume our targets can handle themselves
-		"module": "esnext", // emit ESModules to allow treeshaking
-		"moduleResolution": "node", // necessary with 'module: esnext'
-		"importHelpers": true // use tslib for helper deduplication
-	},
-	"include": ["./src/**/*"] // which files to compile
+  "compilerOptions": {
+    "outDir": "./dist", // where should tsc put the transpiled files
+    "target": "es2017", // set of features that we assume our targets can handle themselves
+    "module": "esnext", // emit ESModules to allow treeshaking
+    "moduleResolution": "node", // necessary with 'module: esnext'
+    "importHelpers": true // use tslib for helper deduplication
+  },
+  "include": ["./src/**/*"] // which files to compile
 }
 ```
 
