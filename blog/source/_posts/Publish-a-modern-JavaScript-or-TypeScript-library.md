@@ -53,6 +53,7 @@ The chapters of this series will not only show configurations I think you should
 We will start with the first points on our list above. As new articles arrive, I will add them here as links and I will also try to keep the finished articles updated when the tools they use get new features or change APIs. If you find something that's not true anymore, please give me a hint.
 
 1. [Transpile modern language features – With Babel](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/).
+1. 2. [Compiling modern language features with the TypeScript compiler](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/).
 
 Oh and one last thing™: I'll be using `npm` throughout the series because I like it. If you like `yarn` better, just exchange the commands.
 
