@@ -31,6 +31,42 @@
 		<div class="blog-textcontainer">
 
 	
+		<article id="Ezjail-und-IPv6-alias-Adressen" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/">
+	
+		<h2 class="blog-post-title">Ezjail und IPv6 alias Adressen</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2017-07-01T09:39:12.000Z">01. Juli 2017</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine public v4 IP-Adresse und ein <code>/124</code> v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.</p>
+<p>Das heißt, ich brauche kein NAT sondern kann den Jails direkt public IPs zuweisen, die ich als Aliases auf das Interface lege.</p>
+<p>Bisher habe ich mit <code>ezjail</code> zwei Jails eingrichtet: <code>git</code> und <code>backup</code>. DO weißt dem Interface automatisch die v6-IP mit der Endziffer <code>1</code> zu. In meiner <code>rc.conf</code> steht entsprechend für die beiden Jail-IPs:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ifconfig_vtnet0_alias1</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2 prefixlen 64"</span></span><br><span class="line"><span class="attr">ifconfig_vtnet0_alias2</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3 prefixlen 64"</span></span><br><span class="line"><span class="attr">cloned_interfaces</span>=<span class="string">"lo1"</span></span><br><span class="line"><span class="attr">ezjail_enable</span>=<span class="string">"YES"</span></span><br></pre></td></tr></table></figure>
+<p>Heute musste ich das Droplet powercyclen und beim Boot kam nur der <code>git</code>-Jail hoch. Ich probierte, den zweiten selbst zu starten:</p>
+<pre><code># ezjail-admin start backup
+</code></pre><p>Das gab diesen Fehler aus:</p>
+<pre><code>ifconfig: ioctl (SIOCAIFADDR): Invalid argument)
+</code></pre><p>Erst wusste ich damit nichts anzufangen. Dann fiel mir auf, dass in der Zeile davor der Befehl stand, der versucht wurde auszuführen:</p>
+<pre><code>/usr/sbin/ifconfig vtnet0 inet6 &lt;adresse&gt;/128 alias
+</code></pre><p>Hoppala. <code>ezjail</code> versuchte selbst einen Alias anzulegen, obwohl schon einer existiert. Tatsächlich habe ich dann nochmal selbst den <code>ifconfig</code> Befehl getestet, geht tatsächlich nicht.</p>
+<p>Ist auch klar: Mit dieser IP war bereits ein Alias definiert <em>mit der Präfixlänge 64</em>. Hier wurde versucht ein Alias für dieselbe IP anzulegen, <em>aber mit der Präfixlänge 128</em>, was natürlich nicht geht.</p>
+<p>Ein Blick in die <code>ezjail</code>-Config-files für die beiden Jails zeigt, dass ich bei dem <code>git</code>-Jail die IP so konfiguriert habe:</p>
+<pre><code>export jail_git_ip=&quot;xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2&quot;
+</code></pre><p>Bei dem <code>backup</code>-Jail brauchte ich aber wegen eines Dienstes darin ein Loopback-Interface, das ich in der <code>rc.conf</code> oben als <code>lo1</code> angelegt habe. Also muss ich dem Jail zwei Interfaces mit IPs übergeben und das mache ich so:</p>
+<pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3&quot;
+</code></pre><p>Offenbar führt die fehlende Präfixlängenangabe hier dazu, dass <code>ezjail</code> (oder <code>ifconfig</code>) sie auf 128 setzt. Also änderte ich die Zeile zu: </p>
+<pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3/64&quot;
+</code></pre><p>Und schon läuft es.</p>
+
+	</div>
+</article>
+
+	
 		<article id="Einfache-Foto-Upload-App-mit-Node-js" class="blog-post">
 	<header class="blog-post-header">
 	

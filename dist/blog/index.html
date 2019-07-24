@@ -31,6 +31,45 @@
 		<div class="blog-textcontainer">
 
 	
+		<article id="Building-your-library-Part-1" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2019/07/Building-your-library-Part-1/">
+	
+		<h2 class="blog-post-title">Building your library: Part 1</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2019-07-24T08:39:26.000Z">24. Juli 2019</time></p>
+	</header>
+	<div class="blog-post-content">
+		<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>This article is part 3 of the series “Publish a modern JavaScript (or TypeScript) library”. Check out the motivation and links to other parts <a href="http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/">in the introduction</a>.</p>
+<p><em>Note:</em> I have promised in <a href="http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/">part 2 of this series</a> that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.</p>
+<h3 id="Our-first-build"><a href="#Our-first-build" class="headerlink" title="Our first build"></a>Our first build</h3><p>Up until now we have discussed how to set up Babel or the TypeScript Compiler, respectively, for transpiling our thoughtfully crafted library code. But we didn’t actually use them. After all, the goal for our work here should be a fully functioning build chain that does everything we need for publishing our library.</p>
+<p>So let’s start this now. As you can tell from the title of this article, we will refine our build with every item in our tool belt that we installed and configured. While the “normal” posts each focus on one tool for one purpose, these “build” articles will gather all configurations of our various tool combinations that we have at our disposal.</p>
+<p>We will leverage NPM scripts to kick off everything we do. For JavaScript/TypeScript projects it’s the natural thing to do: You <code>npm install</code> and <code>npm test</code> and <code>npm start</code> all the time, so we will <code>npm run build</code> also.</p>
+<p>For today we will be done with it relatively quickly. We only have the choice between Babel and TSC and transpiling is the only thing that we do when we build.</p>
+<h3 id="Build-JavaScript-with-Babel"><a href="#Build-JavaScript-with-Babel" class="headerlink" title="Build JavaScript with Babel"></a>Build JavaScript with Babel</h3><p>You define a <code>build</code> script as you may now in the <code>package.json</code> file inside of the root of your project. The relevant keys are <code>scripts</code> and <code>module</code> and we change it so that they contain at least the following:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"module"</span>: <span class="string">"dist/index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"babel -d dist/ src/"</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Using-module"><a href="#Using-module" class="headerlink" title="Using module"></a>Using <code>module</code></h4><p>The standard key to point to the entry file of a package is <code>main</code>. But we are using <code>module</code> here. This goes back to a <a href="https://github.com/rollup/rollup/wiki/pkg.module">proposal by the bundler Rollup</a>. The idea here is that the entry point under a <code>main</code> key is valid ES5 only. Especially regarding module syntax. The code there should use things like CommonJS, AMD or UMD but not ESModules. While bundlers like Webpack and Rollup can deal with legacy modules they can’t tree-shake them. (Read <a href="http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/">the article on Babel</a> again if you forgot why that is.)</p>
+<p>Therefore the proposal states that you can provide an entry point under <code>module</code> to indicate that the code there is using modern ESModules. The bundlers will always look first if there is a <code>module</code> key in your package.json and in that case just use it. Only when they don’t find it they will fall back to <code>main</code>.</p>
+<h4 id="Call-Babel"><a href="#Call-Babel" class="headerlink" title="Call Babel"></a>Call Babel</h4><p>The “script” under the name of <code>build</code> is just a single call to the Babel command line interface (CLI) with one option <code>-d dist</code> which tells Babel where to put the transpiled files (<code>-d</code> : <code>--out-dir</code>). Finally we tell it where to find the source files. When we give it a directory like <code>src</code> Babel will transpile every file it understands. That is, every file with an extension from the following list: <code>.es6,.js,.es,.jsx,.mjs</code>.</p>
+<h3 id="Build-TypeScript-with-Babel"><a href="#Build-TypeScript-with-Babel" class="headerlink" title="Build TypeScript with Babel"></a>Build TypeScript with Babel</h3><p>This is almost the same as above. The only difference is the options we pass to the Babel CLI. The relevant parts in <code>package.json</code> look like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"module"</span>: <span class="string">"dist/index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"babel -d dist/ --extensions .ts,.tsx src/"</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As I mentioned above, Babel wouldn’t know that it should transpile the <code>.ts</code> and <code>.tsx</code> files in <code>src</code>. We have to explicitly tell it to with the <code>--extensions</code> option.</p>
+<h3 id="Build-TypeScript-with-TSC"><a href="#Build-TypeScript-with-TSC" class="headerlink" title="Build TypeScript with TSC"></a>Build TypeScript with TSC</h3><p>For using the TypeScript Compiler we configure our build in the <code>package.json</code> like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"module"</span>: <span class="string">"dist/index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"tsc"</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We don’t have to tell TSC where to find and where to put files because it’s all in the tsconfig.json. The only thing our build script has to do is calling <code>tsc</code>.</p>
+<h3 id="Ready-to-run"><a href="#Ready-to-run" class="headerlink" title="Ready to run"></a>Ready to run</h3><p>And that is it. All you have to do now to get production-ready code is typing</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> build</span><br></pre></td></tr></table></figure>
+<p>And you have your transpiled library code inside of the <code>dist</code> directory. It may not seem to be much but I tell you, if you were to <code>npm publish</code> that package or install it in <a href="https://docs.npmjs.com/cli/install.html">one of the other ways aside from the registry</a> it could be used in an application. And it would not be that bad. It may have no exported types, no tests, no contribution helpers, no semantic versioning and no build automation, <strong>BUT</strong> it ships modern code that is tree-shakable – which is more than many others have.</p>
+<p>Be sure to check out the <a href="https://github.com/4nduril/library-starter">example code repository</a> that I set up for this series. There are currently three branches: <code>master</code>, <code>typescript</code> and <code>typescript-tsc</code>. Master reflects my personal choice of tools for JS projects, <code>typescript</code> is my choice in TS projects and the third one is an alternative to the second. The README has a table with branches and their features.</p>
+<p>Next up: Type-Checking and providing type declarations (and this time for real ;) )</p>
+
+	</div>
+</article>
+
+	
 		<article id="Compiling-modern-language-features-with-the-TypeScript-compiler" class="blog-post">
 	<header class="blog-post-header">
 	
@@ -207,6 +246,8 @@
 <h3 id="Go"><a href="#Go" class="headerlink" title="Go!"></a>Go!</h3><p>We will start with the first points on our list above. As new articles arrive, I will add them here as links and I will also try to keep the finished articles updated when the tools they use get new features or change APIs. If you find something that’s not true anymore, please give me a hint.</p>
 <ol>
 <li><a href="http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/">Transpile modern language features – With Babel</a>.</li>
+<li><a href="http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/">Compiling modern language features with the TypeScript compiler</a>.</li>
+<li><a href="http://tobias-barth.net/blog/2019/07/Building-your-library-Part-1/">Building your library: Part 1</a></li>
 </ol>
 <p>Oh and one last thing™: I’ll be using <code>npm</code> throughout the series because I like it. If you like <code>yarn</code> better, just exchange the commands.</p>
 
@@ -408,42 +449,6 @@
 <p>Let’s start. I go to my DO account and add a new Droplet. After logging in I click on “Create” and choose “Droplets”. I am prompted to choose an image. I will have FreeBSD, version “11.1 x64 ZFS”. Next is choosing a size. I go with the smallest (and cheapest) size because I can resize it later if I need to. So “1GB RAM, 1 vCPU, 25GB disk, 1TB transfer” it is. I skip backups and block storage for now and change the datacenter location to Frankfurt, Germany because that’s nearest to where I live. Under “Select additional options” I select IPv6. Don’t ask. Do. Finally I need to choose an SSH-Key to preload the Droplet with. Here I can just select my previously generated (on my own computer!) and uploaded public key. If you don’t have one, generate it on your machine (see “man ssh-keygen”) and upload it via the “New SSH key” button.</p>
 <p>The very last thing to do is to enter a name. I’ll go with pioneer-3 for now. Hit create.</p>
 <p>After a few seconds the Droplet is ready. In my dashboard I switch it off for now.</p>
-
-	</div>
-</article>
-
-	
-		<article id="Ezjail-und-IPv6-alias-Adressen" class="blog-post">
-	<header class="blog-post-header">
-	
-	<a class="blog-post-title-link" href="/blog/2017/07/Ezjail-und-IPv6-alias-Adressen/">
-	
-		<h2 class="blog-post-title">Ezjail und IPv6 alias Adressen</h2>
-	
-	</a>
-	
-	<p class="blog-post-date">Geschrieben am <time datetime="2017-07-01T09:39:12.000Z">01. Juli 2017</time></p>
-	</header>
-	<div class="blog-post-content">
-		<p>Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine public v4 IP-Adresse und ein <code>/124</code> v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.</p>
-<p>Das heißt, ich brauche kein NAT sondern kann den Jails direkt public IPs zuweisen, die ich als Aliases auf das Interface lege.</p>
-<p>Bisher habe ich mit <code>ezjail</code> zwei Jails eingrichtet: <code>git</code> und <code>backup</code>. DO weißt dem Interface automatisch die v6-IP mit der Endziffer <code>1</code> zu. In meiner <code>rc.conf</code> steht entsprechend für die beiden Jail-IPs:</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ifconfig_vtnet0_alias1</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2 prefixlen 64"</span></span><br><span class="line"><span class="attr">ifconfig_vtnet0_alias2</span>=<span class="string">"inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3 prefixlen 64"</span></span><br><span class="line"><span class="attr">cloned_interfaces</span>=<span class="string">"lo1"</span></span><br><span class="line"><span class="attr">ezjail_enable</span>=<span class="string">"YES"</span></span><br></pre></td></tr></table></figure>
-<p>Heute musste ich das Droplet powercyclen und beim Boot kam nur der <code>git</code>-Jail hoch. Ich probierte, den zweiten selbst zu starten:</p>
-<pre><code># ezjail-admin start backup
-</code></pre><p>Das gab diesen Fehler aus:</p>
-<pre><code>ifconfig: ioctl (SIOCAIFADDR): Invalid argument)
-</code></pre><p>Erst wusste ich damit nichts anzufangen. Dann fiel mir auf, dass in der Zeile davor der Befehl stand, der versucht wurde auszuführen:</p>
-<pre><code>/usr/sbin/ifconfig vtnet0 inet6 &lt;adresse&gt;/128 alias
-</code></pre><p>Hoppala. <code>ezjail</code> versuchte selbst einen Alias anzulegen, obwohl schon einer existiert. Tatsächlich habe ich dann nochmal selbst den <code>ifconfig</code> Befehl getestet, geht tatsächlich nicht.</p>
-<p>Ist auch klar: Mit dieser IP war bereits ein Alias definiert <em>mit der Präfixlänge 64</em>. Hier wurde versucht ein Alias für dieselbe IP anzulegen, <em>aber mit der Präfixlänge 128</em>, was natürlich nicht geht.</p>
-<p>Ein Blick in die <code>ezjail</code>-Config-files für die beiden Jails zeigt, dass ich bei dem <code>git</code>-Jail die IP so konfiguriert habe:</p>
-<pre><code>export jail_git_ip=&quot;xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2&quot;
-</code></pre><p>Bei dem <code>backup</code>-Jail brauchte ich aber wegen eines Dienstes darin ein Loopback-Interface, das ich in der <code>rc.conf</code> oben als <code>lo1</code> angelegt habe. Also muss ich dem Jail zwei Interfaces mit IPs übergeben und das mache ich so:</p>
-<pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3&quot;
-</code></pre><p>Offenbar führt die fehlende Präfixlängenangabe hier dazu, dass <code>ezjail</code> (oder <code>ifconfig</code>) sie auf 128 setzt. Also änderte ich die Zeile zu: </p>
-<pre><code>export jail_git_ip=&quot;lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3/64&quot;
-</code></pre><p>Und schon läuft es.</p>
 
 	</div>
 </article>

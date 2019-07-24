@@ -4,7 +4,9 @@ tags:
   - typescript
   - library
   - howto
+date: 2019-07-24 10:39:26
 ---
+
 
 ### Preface
 
@@ -31,7 +33,7 @@ You define a `build` script as you may now in the `package.json` file inside of 
   // ...
   "module": "dist/index.js",
   "scripts": {
-    "build": "babel -d dist src"
+    "build": "babel -d dist/ src/"
   }
   // ...
 }
@@ -39,7 +41,7 @@ You define a `build` script as you may now in the `package.json` file inside of 
 
 #### Using `module`
 
-The standard key to point to the entry file of a package is `main`. But we are using `module` here. This goes back to a [proposal by the bundler Rollup](https://github.com/rollup/rollup/wiki/pkg.module). The idea here is that the entry point under a `main` key is valid ES5 only. Especially regarding module syntax. The code there should use things like CommonJS, AMD/UMD but not ESModules. While bundlers like Webpack and Rollup can deal with legacy modules they can't tree-shake them. (Read [the article on Babel](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/) again if you forgot why that is.)
+The standard key to point to the entry file of a package is `main`. But we are using `module` here. This goes back to a [proposal by the bundler Rollup](https://github.com/rollup/rollup/wiki/pkg.module). The idea here is that the entry point under a `main` key is valid ES5 only. Especially regarding module syntax. The code there should use things like CommonJS, AMD or UMD but not ESModules. While bundlers like Webpack and Rollup can deal with legacy modules they can't tree-shake them. (Read [the article on Babel](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/) again if you forgot why that is.)
 
 Therefore the proposal states that you can provide an entry point under `module` to indicate that the code there is using modern ESModules. The bundlers will always look first if there is a `module` key in your package.json and in that case just use it. Only when they don't find it they will fall back to `main`.
 
@@ -56,7 +58,7 @@ This is almost the same as above. The only difference is the options we pass to 
   // ...
   "module": "dist/index.js",
   "scripts": {
-    "build": "babel -d dist --extensions .ts,.tsx src"
+    "build": "babel -d dist/ --extensions .ts,.tsx src/"
   }
   // ...
 }
@@ -92,6 +94,6 @@ npm run build
 
 And you have your transpiled library code inside of the `dist` directory. It may not seem to be much but I tell you, if you were to `npm publish` that package or install it in [one of the other ways aside from the registry](https://docs.npmjs.com/cli/install.html) it could be used in an application. And it would not be that bad. It may have no exported types, no tests, no contribution helpers, no semantic versioning and no build automation, **BUT** it ships modern code that is tree-shakable – which is more than many others have.
 
-Be sure to check out the [example code repository](https://github.com/4nduril/library-starter) that I set up for this series. There are currently three branches: `master`, `typescript` and `typescript-tsc`. Master reflects my personal choice of toolsfor JS projects, `typescript` is my choice in TS porjects and the third one is an alternative to the second. The README has a table with branches and their features.
+Be sure to check out the [example code repository](https://github.com/4nduril/library-starter) that I set up for this series. There are currently three branches: `master`, `typescript` and `typescript-tsc`. Master reflects my personal choice of tools for JS projects, `typescript` is my choice in TS projects and the third one is an alternative to the second. The README has a table with branches and their features.
 
 Next up: Type-Checking and providing type declarations (and this time for real ;) )
