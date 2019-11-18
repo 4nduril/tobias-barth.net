@@ -1,15 +1,16 @@
----
 title: How to bundle your library and why
 tags:
   - javascript
   - webpack
   - rollup
   - parcel
+date: 2019-11-18 21:58:14
 ---
+
 
 ### Preface
 
-This article is part 5 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 6 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 ### Publishing formats – do you even need a bundle?
 
@@ -48,7 +49,7 @@ Right now we have created `.js` files that are in ES Module syntax. Therefore, w
 }
 ```
 
-Note that you oftentimes will come across the advice to use `*.mjs` file extensions. Don't do that. `*.js` is *the* extension for JavaScript files and will probably always be. Let's use the default naming for the current standards like ESM syntax. If you have for whatever reason files inside your package that must use CommonJS syntax, give *them* another extension: `*.cjs*`. Node.js will know what to do with it.
+Note that you oftentimes will come across the advice to use `*.mjs` file extensions. Don't do that. `*.js` is *the* extension for JavaScript files and will probably always be. Let's use the default naming for the current standards like ESM syntax. If you have for whatever reason files inside your package that must use CommonJS syntax, give *them* another extension: `*.cjs`. Node.js will know what to do with it.
 
 There are a few caveats:
 

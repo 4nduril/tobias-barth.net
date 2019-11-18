@@ -11,7 +11,7 @@ date: 2019-07-05 16:05:11
 
 ### Preface
 
-This article is part 1 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 2 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 ### Why Babel and how should you use it in a library?
 

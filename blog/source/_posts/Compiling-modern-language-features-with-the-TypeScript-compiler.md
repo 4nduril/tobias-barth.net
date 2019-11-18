@@ -9,7 +9,7 @@ date: 2019-07-18 13:24:59
 
 ### Preface
 
-This article is part 2 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 3 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 ### How to use the TypeScript compiler `tsc` to transpile your code
 

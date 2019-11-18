@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>tobias-barth.net | Moderne Webentwicklung aus Köln</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.css" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/css/old-ie.css" />
+	<![endif]-->
+
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+
+</head>
+<body>
+	<header class="site-head">
+			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Moderne Webentwicklung aus Köln</p></a>
+		</header>
+
+
+		<main>
+			<nav class="main-navi" id="main-navi">
+				<ul>
+					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
+				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
+<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
+				</ul>
+			</nav>
+		<div class="blog-textcontainer">
+
+	
+		<article id="node-js-performance-socket-hangup" class="blog-post">
+	<header class="blog-post-header">
+	
+	<a class="blog-post-title-link" href="/blog/2016/04/node-js-performance-socket-hangup/">
+	
+		<h2 class="blog-post-title">Node.js Performance und socket hangup</h2>
+	
+	</a>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2016-04-09T16:45:00.000Z">09. April 2016</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p>In dem Team bei einer großen deutschen Internetfirma, in dem ich gerade arbeite, haben wir ein bisher eher unerklärliches Problem, das in unseren Logfiles aufschlägt.</p>
+<p>Wir haben dort eine Express-basierte Webapp, die den Content im Grunde vollständig auf dem Server rendert. Dafür werden unter anderem diverse Microservices angesprochen, d.h. bei jedem Request an die Express-App fragt diese per AJAX mehrere interne, separate Dienste nach Daten und rendert basierend auf deren Antworten den Content, der an den Client gesendet wird.</p>
+<p>Das funkioniert auch ziemlich gut, allerdings haben wir in den Logfiles unserer App ungewöhnlich viele “ERROR: socket hang up”-Meldungen. Nicht so viele, dass wir ernsthafte Schwierigkeiten hätten, die auch sichtbar wären, aber, und das ist besonders interessant, es sind wesentlich mehr als bei anderen Webapps, die Java-basiert sind und dieselben Services bei jedem Request anfragen.</p>
+<p>Es scheint also primär nichts mit den internen Services zu tun zu haben, sondern mit unserer Node-App. Bisher haben wir nicht so wirklich eine Idee, was es sein könnte. Für die AJAX-calls nutzen wir <a href="https://github.com/mzabriskie/axios">Axios</a> und definieren damit auch ein Timeout, das bei 60ms liegt. Das kann es allerdings nicht sein, denn dann sähen wir timeout-Errors und nicht Socket-hang-ups. </p>
+<p>Also habe ich mal das Internet danach durchforstet, was diese Socket-hangups bei Node erzeugen könnte. Dabei bin ich auf einen interessanten <a href="http://www.murvinlai.com/remote-http-request.html">Blogpost</a> gestoßen. Dort wird beschrieben, dass solche Fehler zwar auch von der Remote-Seite kommen können, aber eben auch von den Limitierungen des Systems, auf dem der Node-Server läuft. Es gibt ein Limit für die Zahl der gleichzeitig offenen Files, wobei dieses Limit pro Login=User gilt. Der Standardwert ist 1024. Ein Socket ist wie alles auf unixoiden Systemen eine Datei. Ein User (in dem Fall der User, dem der Node-Prozess gehört), kann also maximal 1024 Dateien gleichzeitig öffnen.</p>
+<p>Das wäre auf jeden Fall mal ein Ansatz. Der Verfasser des erwähnten Blogartikels empfiehlt ein Limit von 10240, also das Zehnfache. Außerdem sollte der maxSockets-Wert des http.Agents von Node auf eine Zahl knapp unter dem ulimit gesetzt werden. Nodes Standard für maxSockets ist (mittlerweile) <code>Infinity</code>, aber bei uns ist es derzeit auf 25 gesetzt. Ich muss noch mal nachforschen, was der Grund für dieses Limit war. </p>
+<p>Ohne dass ich weiß, wie unsere Java-Apps funktionieren oder konfiguriert sind, gefällt mir der Gedanke, dass unsere Node.js-App ankommende Anfragen so schnell verarbeitet und dementsprechend oft parallel die Services anspricht, dass es an Systemlimits stößt, die von den Java-Kreuzern nie tangiert werden.</p>
+<p>Schauen wir mal.</p>
+
+	</div>
+</article>
+
+	
+
+</div>
+
+		</main>
+	<footer class="site-footer h-card" aria-describedby="dse">
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net" rel="me" class="u-email">contact@tobias-barth.net</a><br />
+		Telefon: <a href="tel:+4915111215929">+49 151 112 15 929</a></p>
+		<p id="dse" class="in-site-footer">(Bitte beachten Sie vor der Kontaktaufnahme meine Datenschutzerklärung.)</p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril" rel="me"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril" rel="me"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril" rel="me"><span>Github</span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		<a href="http://tobias-barth.net" class="p-name u-url">Tobias&nbsp;Barth</a><br />
+		<span class="p-street-address">Vincenzstr.&nbsp;25</span><br />
+		<span class="p-locality p-postal-code">51065&nbsp;Köln</span></p>
+		<p class="in-site-footer">USt-ID: DE304359556</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
+		<p class="in-site-footer"><a href="dse.html">Datenschutzerklärung</a></p>
+	</footer>
+</body>
+
+</html>

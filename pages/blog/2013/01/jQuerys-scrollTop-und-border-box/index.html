@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>tobias-barth.net | Moderne Webentwicklung aus Köln</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/style.css" />
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="/css/old-ie.css" />
+	<![endif]-->
+
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+
+</head>
+<body>
+	<header class="site-head">
+			<a href="/"><h1 class="in-site-head">tobias-barth.net</h1>
+			<p class="tagline in-site-head">Moderne Webentwicklung aus Köln</p></a>
+		</header>
+
+
+		<main>
+			<nav class="main-navi" id="main-navi">
+				<ul>
+					<li><a href="/portfolio" title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"><span class="fa fa-wrench"></span> Ich mache</a></li>
+				<li><a href="/blog" title="Mein Blog über Webentwicklung und Ähnliches"><span class="fa fa-pencil"></span> Ich schreibe</a></li>
+<!--					<li><a href="" title="Lernen Sie mich besser kennen"><span class="fa fa-user"></span> Ich bin</a></li>-->
+				</ul>
+			</nav>
+		<div class="blog-textcontainer">
+<article id="jQuerys-scrollTop-und-border-box" class="blog-post">
+	<header class="blog-post-header">
+	
+		<h2 class="blog-post-title">jQuerys scrollTop() und border-box</h2>
+	
+	<p class="blog-post-date">Geschrieben am <time datetime="2013-01-28T21:01:00.000Z">28. Januar 2013</time></p>
+	</header>
+	<div class="blog-post-content">
+		<p><strong>Das Folgende betrifft soweit ich sehe nur jQuery &lt; 1.8.</strong></p>
+<p>Letzte Woche habe ich den ersten Kandidaten für den irrsten Bug in diesem Jahr gefunden.</p>
+<p>Der Fehler, den der Kunde berichtete, beruhte darauf, dass das ursprünglich verwendete <code>$(document).scrollTop()</code> nicht im IE8 funktionierte und nachdem er dies durch das funktionierende <code>$(&#39;html&#39;).scrollTop()</code> ersetzt hatte, lief es nicht mehr in Webkit-Browsern.</p>
+<p>Die Lösung dafür war relativ schnell gefunden: Ich ersetzte einfach in dem betreffenden Script den einen <code>scrollTop()</code>-Aufruf durch den Ausdruck <code>($(document).scrollTop() || $(&#39;html&#39;).scrollTop())</code>. Damit war der Drops gelutscht und jeder Browser konnte sich aussuchen, was ihm passte (bzw. was nicht gleich 0 war, da der Code nur beim Scrollen zur Anwendung kam, reichte das aus).</p>
+<p>Aber was war die Ursache? Nach viel Ausprobieren blieb mir nichts übrig als in die jQuery-Source zu schauen und mir anzusehen, wie jQuery.scrollTop() definiert ist. Für das verwendete jQuery 1.6.4 sieht das so aus:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create scrollLeft and scrollTop methods</span></span><br><span class="line">jQuery.each( [<span class="string">"Left"</span>, <span class="string">"Top"</span>], <span class="function"><span class="keyword">function</span>(<span class="params"> i, name </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> method = <span class="string">"scroll"</span> + name;</span><br><span class="line"></span><br><span class="line">  jQuery.fn[ method ] = <span class="function"><span class="keyword">function</span>(<span class="params"> val </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> elem, win;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( val === <span class="literal">undefined</span> ) &#123;</span><br><span class="line">      elem = <span class="keyword">this</span>[ <span class="number">0</span> ];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> ( !elem ) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      win = getWindow( elem );</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Return the scroll offset</span></span><br><span class="line">      <span class="keyword">return</span> win ? (<span class="string">"pageXOffset"</span> <span class="keyword">in</span> win) ? win[ i ? <span class="string">"pageYOffset"</span> : <span class="string">"pageXOffset"</span> ] :</span><br><span class="line">      jQuery.support.boxModel &amp;amp;&amp;amp; win.document.documentElement[ method ] ||</span><br><span class="line">      win.document.body[ method ] :</span><br><span class="line">      elem[ method ];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Set the scroll offset</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Interessiert uns hier nicht</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Der Fall des IE8 sollte mit der Zeile abgedeckt werden, die mit <code>jQuery.support.boxModel</code> beginnt. Diese Eigenschaft dient eigentlich dazu, zu überprüfen, ob das W3C-Box-Modell vom Browser unterstützt wird. Das Problem ist, in diesem Fall gibt sie <code>false</code> zurück, obwohl das Dokument in Ordnung ist und der Browser sich im Standardmodus befindet. Warum? Also nachsehen, wie <code>jQuery.support.boxModel</code> gesetzt wird:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Figure out if the W3C box model works as expected</span></span><br><span class="line">div.style.width = div.style.paddingLeft = <span class="string">"1px"</span>;</span><br><span class="line">support.boxModel = div.offsetWidth === <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>Es wird ein Test-Div erzeugt, dem verschiedene Eigenschaften zugewiesen und das dann an den <code>body</code> angehängt wird. Da das Element hier einen Pixel breit ist und außerdem ein Padding von einem Pixel erhält, sollte <code>offsetWidth</code>, das die Gesamtbreite enthält, 2px zurückgeben.</p>
+<p>Tut es aber nicht.</p>
+<p>Der Grund dafür ist, dass ich im CSS <code>box-sizing: border-box;</code> gesetzt habe. Das ist eigentlich eine prima Sache, denn dadurch sind Elemente, denen man eine bestimmte Breite zuweist, auch wirklich so breit &ndash; egal ob sie Innenabstände oder Rahmen enthalten. Aber in diesem Fall passiert dann folgendes: Wir geben einem Element den linken Innenabstand 1px und sagen dann, dass das gesamte Element, mit Innenabständen und Rahmen, 1px breit sein soll. Das bedeutet, für den eigentlichen Inhalt ist kein Platz mehr, was egal ist, weil das Element sowieso keinen Inhalt hat und nur zum Testen da ist. Aber das bedeutet auch, dass <code>offsetWidth</code> nun auch 1 enthält, das ist schließlich die Gesamtbreite des Elements. Damit schlägt der Test <code>div.offsetWidth === 2</code> natürlich fehl, und <code>scrollTop()</code> gibt nicht mehr <code>window.document.documentElement.scrollTop</code> zurück, sondern 0.</p>
+<p>Darauf muss man erstmal kommen</p>
+<p>Ab jQuery 1.8 besteht das Problem nicht mehr, weil dann nicht mehr auf Box-Model-Support getestet wird bzw. dieser Test nicht mehr in <code>scrollTop()</code> abgerufen wird.</p>
+<p>Warum Webkit übrigens <code>$(&#39;html&#39;).scrollTop()</code> nicht versteht, ist mir noch nicht so ganz klar.</p>
+
+	</div>
+</article>
+
+</div>
+
+		</main>
+	<footer class="site-footer h-card" aria-describedby="dse">
+		<h3 class="in-site-footer cta">Kontaktieren Sie mich</h3>
+		<p class="in-site-footer">Email: <a href="mailto:contact@tobias-barth.net" rel="me" class="u-email">contact@tobias-barth.net</a><br />
+		Telefon: <a href="tel:+4915111215929">+49 151 112 15 929</a></p>
+		<p id="dse" class="in-site-footer">(Bitte beachten Sie vor der Kontaktaufnahme meine Datenschutzerklärung.)</p>
+		<h3 class="in-site-footer cta">Finden Sie mich</h3>
+		<p class="in-site-footer"><img class="sm u-photo" src="/images/Portrait.png" alt="Mein Avatar" /><a class="sm fa fa-adn" href="https://alpha.app.net/4nduril" rel="me"><span>App.net</span></a> <a class="sm fa fa-twitter" href="https://twitter.com/4nduril" rel="me"><span>Twitter</span></a> <a class="sm fa fa-github-square" href="https://github.com/4nduril" rel="me"><span>Github</span></a></p>
+		<h3 class="in-site-footer">Impressum</h3>
+		<p class="in-site-footer">Inhaltlich verantwortlich gemäß § 5 <abbr title="Telemediengesetz">TMG</abbr>:<br />
+		<a href="http://tobias-barth.net" class="p-name u-url">Tobias&nbsp;Barth</a><br />
+		<span class="p-street-address">Vincenzstr.&nbsp;25</span><br />
+		<span class="p-locality p-postal-code">51065&nbsp;Köln</span></p>
+		<p class="in-site-footer">USt-ID: DE304359556</p>
+		<h4 class="in-site-footer">Fotos</h4>
+		<p class="in-site-footer">&copy;&nbsp;<a href="http://annebarth.de">Anne&nbsp;Barth</a></p>
+		<p class="in-site-footer"><a href="dse.html">Datenschutzerklärung</a></p>
+	</footer>
+</body>
+
+</html>

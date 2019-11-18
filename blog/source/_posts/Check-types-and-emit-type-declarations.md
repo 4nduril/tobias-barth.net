@@ -1,14 +1,15 @@
----
 title: Check types and emit type declarations
 tags:
   - typescript
   - library
   - howto
+date: 2019-10-31 19:59:48
 ---
+
 
 ### Preface
 
-This article is part 4 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 5 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 ### Getting the types out of TypeScript
 
@@ -32,7 +33,7 @@ Regardless if we use Babel or TSC for transpiling, for checking types there is j
 
 This is something pretty library-specific. When you build an application in TypeScript, you only care about correct types and an executable output. But when you provide a library, your users (i.e. other programmers) can directly benefit from the fact that you wrote it in TypeScript. When you provide type declaration files (`*.d.ts`) the users will get better auto-completion, type-hints and so on when they use your lib.
 
-Maybe you have heard about [DefinitelyTyped](https://www.definitelytyped.org/). Users can get typings from there for libraries that don't ship with their own types. So, in our case we won't need to do anything with or for DefinitelyTyped. Consumers of our library will have everything they need when we deliver types directly with our code.
+Maybe you have heard about [DefinitelyTyped](https://www.definitelytyped.org/). Users can get types from there for libraries that don't ship with their own types. So, in our case we won't need to do anything with or for DefinitelyTyped. Consumers of our library will have everything they need when we deliver types directly with our code.
 
 Again, because these things are core functionality of TypeScript, we use `tsc`. But this time the calls are slightly different depending on how we transpile – with Babel or TSC.
 
@@ -48,7 +49,7 @@ The `--declaration` flag ensures that TSC generates the type declaration files a
 
 The second flag, `--emitDeclarationOnly`, prevents TSC from outputting transpiled JavaScript files. We use Babel for that.
 
-You may ask yourself why we effectively transpile all of our code twice, once with Babel and once with TSC. It looks like a waste of time if TSC can do both. But [I discussed before](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/) the advantages of Babel before. And having a very fast transpile step separate from a slower declaration generation step can translate to a much better developer experience. The output of declarations can occur only once shortly before publishing – transpiling is something that you do all the time.
+You may ask yourself why we effectively transpile all of our code twice, once with Babel and once with TSC. It looks like a waste of time if TSC can do both. But [I discussed before](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/) the advantages of Babel. And having a very fast transpile step separate from a slower declaration generation step can translate to a much better developer experience. The output of declarations can occur only once shortly before publishing – transpiling is something that you do all the time.
 
 #### With TSC
 
