@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-	<meta charset="utf-8" />
+<head><meta name="generator" content="Hexo 3.9.0">
+	<meta charset="utf-8">
 	<title>tobias-barth.net | Moderne Webentwicklung aus Köln</title>
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/css/style.min.css" />
+	<meta name="description" content>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/style.min.css">
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="/css/old-ie.min.css" />
 	<![endif]-->
 
-	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml">
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 			<p class="tagline in-site-head">Moderne Webentwicklung aus Köln</p></a>
 		</header>
 
-
+</body></html>
 		<main>
 			<nav class="main-navi" id="main-navi">
 				<ul>
@@ -54,12 +54,12 @@
 <p>Maybe you have heard about <a href="https://www.definitelytyped.org/">DefinitelyTyped</a>. Users can get types from there for libraries that don’t ship with their own types. So, in our case we won’t need to do anything with or for DefinitelyTyped. Consumers of our library will have everything they need when we deliver types directly with our code.</p>
 <p>Again, because these things are core functionality of TypeScript, we use <code>tsc</code>. But this time the calls are slightly different depending on how we transpile – with Babel or TSC.</p>
 <h4 id="With-Babel"><a href="#With-Babel" class="headerlink" title="With Babel"></a>With Babel</h4><p>As you probably remember, to create our output files with Babel, we call the Babel command line interface, <code>babel</code>. To also get declaration files we add a call to <code>tsc</code>:</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">tsc</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">declaration</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">emitDeclarationOnly</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">tsc</span> --<span class="comment">declaration</span> --<span class="comment">emitDeclarationOnly</span></span><br></pre></td></tr></table></figure>
 <p>The <code>--declaration</code> flag ensures that TSC generates the type declaration files and since we defined the <code>outputDir</code> in <code>tsconfig.json</code>, they land in the correct folder <code>dist/</code>.</p>
 <p>The second flag, <code>--emitDeclarationOnly</code>, prevents TSC from outputting transpiled JavaScript files. We use Babel for that.</p>
 <p>You may ask yourself why we effectively transpile all of our code twice, once with Babel and once with TSC. It looks like a waste of time if TSC can do both. But <a href="http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/">I discussed before</a> the advantages of Babel. And having a very fast transpile step separate from a slower declaration generation step can translate to a much better developer experience. The output of declarations can occur only once shortly before publishing – transpiling is something that you do all the time.</p>
 <h4 id="With-TSC"><a href="#With-TSC" class="headerlink" title="With TSC"></a>With TSC</h4><p>When we use TSC to generate the published library code, we can use it <em>in the same step</em> to spit out the declarations. Instead of just <code>tsc</code>, we call:</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc <span class="comment">--declaration</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc <span class="comment">--declaration</span></span><br></pre></td></tr></table></figure>
 <p>That is all.</p>
 <h3 id="Alias-All-The-Things"><a href="#Alias-All-The-Things" class="headerlink" title="Alias All The Things"></a>Alias All The Things</h3><p>To make it easier to use and less confusing to find out what our package can do, we will create NPM scripts for all steps that we define. Then we can glue them together so that for example <code>npm run build</code> will always do everything we want from our build.</p>
 <p>In the case of using Babel, in our <code>package.json</code> we make sure that <code>&quot;scripts&quot;</code> contains at least:</p>

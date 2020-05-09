@@ -4,10 +4,10 @@
   "description": "Personal and professional website of myself",
   "main": "",
   "scripts": {
-		"build": "grunt",
-		"build:dist": "grunt dist",
-		"deploy:dev": "rsync -rv ./dev/ /srv/http/tobias-barth.net",
-		"deploy:dist": "rsync -rv ./dist/ tobias-barth.net:/var/www/tobias-barth.net",
+    "build": "grunt",
+    "build:dist": "grunt dist",
+    "deploy:dev": "rsync -rv ./dev/ /srv/http/tobias-barth.net",
+    "deploy:dist": "rsync -rv ./dist/ tobias-barth.net:/var/www/tobias-barth.net",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

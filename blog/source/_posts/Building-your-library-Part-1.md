@@ -12,7 +12,7 @@ date: 2019-07-24 10:39:26
 
 This article is part 4 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
-*Note:* I have promised in [part 2 of this series](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/) that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.
+*Note:* I have promised in [part 3 of this series](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/) that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.
 
 ### Our first build
 

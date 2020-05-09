@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-	<meta charset="utf-8" />
+<head><meta name="generator" content="Hexo 3.9.0">
+	<meta charset="utf-8">
 	<title>tobias-barth.net | Moderne Webentwicklung aus Köln</title>
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/css/style.css" />
+	<meta name="description" content>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/style.css">
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="/css/old-ie.css" />
 	<![endif]-->
 
-	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml" />
+	<link rel="alternate" type="application/rss+xml" href="/blog/feed/rss.xml">
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 			<p class="tagline in-site-head">Moderne Webentwicklung aus Köln</p></a>
 		</header>
 
-
+</body></html>
 		<main>
 			<nav class="main-navi" id="main-navi">
 				<ul>
@@ -38,7 +38,7 @@
 	</header>
 	<div class="blog-post-content">
 		<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>This article is part 4 of the series “Publish a modern JavaScript (or TypeScript) library”. Check out the motivation and links to other parts <a href="http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/">in the introduction</a>.</p>
-<p><em>Note:</em> I have promised in <a href="http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/">part 2 of this series</a> that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.</p>
+<p><em>Note:</em> I have promised in <a href="http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/">part 3 of this series</a> that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.</p>
 <h3 id="Our-first-build"><a href="#Our-first-build" class="headerlink" title="Our first build"></a>Our first build</h3><p>Up until now we have discussed how to set up Babel or the TypeScript Compiler, respectively, for transpiling our thoughtfully crafted library code. But we didn’t actually use them. After all, the goal for our work here should be a fully functioning build chain that does everything we need for publishing our library.</p>
 <p>So let’s start this now. As you can tell from the title of this article, we will refine our build with every item in our tool belt that we installed and configured. While the “normal” posts each focus on one tool for one purpose, these “build” articles will gather all configurations of our various tool combinations that we have at our disposal.</p>
 <p>We will leverage NPM scripts to kick off everything we do. For JavaScript/TypeScript projects it’s the natural thing to do: You <code>npm install</code> and <code>npm test</code> and <code>npm start</code> all the time, so we will <code>npm run build</code> also.</p>
@@ -55,7 +55,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"module"</span>: <span class="string">"dist/index.js"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"tsc"</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>We don’t have to tell TSC where to find and where to put files because it’s all in the tsconfig.json. The only thing our build script has to do is calling <code>tsc</code>.</p>
 <h3 id="Ready-to-run"><a href="#Ready-to-run" class="headerlink" title="Ready to run"></a>Ready to run</h3><p>And that is it. All you have to do now to get production-ready code is typing</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> build</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> build</span></span><br></pre></td></tr></table></figure>
 <p>And you have your transpiled library code inside of the <code>dist</code> directory. It may not seem to be much but I tell you, if you were to <code>npm publish</code> that package or install it in <a href="https://docs.npmjs.com/cli/install.html">one of the other ways aside from the registry</a> it could be used in an application. And it would not be that bad. It may have no exported types, no tests, no contribution helpers, no semantic versioning and no build automation, <strong>BUT</strong> it ships modern code that is tree-shakable – which is more than many others have.</p>
 <p>Be sure to check out the <a href="https://github.com/4nduril/library-starter">example code repository</a> that I set up for this series. There are currently three branches: <code>master</code>, <code>typescript</code> and <code>typescript-tsc</code>. Master reflects my personal choice of tools for JS projects, <code>typescript</code> is my choice in TS projects and the third one is an alternative to the second. The README has a table with branches and their features.</p>
 <p>Next up: Type-Checking and providing type declarations (and this time for real ;) )</p>
