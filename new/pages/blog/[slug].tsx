@@ -1,9 +1,8 @@
 import React from 'react'
 import matter, {GrayMatterFile} from 'gray-matter'
-import ReactMarkdown from 'react-markdown/with-html'
 import ErrorPage from 'next/error'
-import Highlight from '../../src/components/Highlight'
 import SiteHead from '../../src/components/SiteHead'
+import BlogArticle from '../../src/components/BlogArticle'
 
 type BlogFrontmatter = GrayMatterFile<string>['data'] & {
 	title?: string
@@ -13,10 +12,6 @@ interface BlogTemplateProps {
 	error?: string
 	frontmatter?: BlogFrontmatter
 	markdownBody?: GrayMatterFile<string>['content']
-}
-
-const formatDate = (date: Date) => {
-	return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
 }
 
 const BlogTemplate: React.FC<BlogTemplateProps> = ({error, frontmatter, markdownBody}) => {
@@ -29,17 +24,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({error, frontmatter, markdown
 			(
 				<>
 					<SiteHead />
-					<div className="blog-textcontainer">
-						<article>
-							<header>
-								<h2>{frontmatter.title}</h2>
-								{frontmatter.date && (<p className="date">Geschrieben am <time dateTime={new Date(frontmatter.date).toISOString()}>{formatDate(new Date(frontmatter.date))}</time></p>)}
-							</header>
-							<div className="blog-post-content">
-								<ReactMarkdown source={markdownBody} escapeHtml={false} renderers={{code: Highlight}} />
-							</div>
-						</article>
-					</div>
+					<BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
 				</>
 			)
 			: null
