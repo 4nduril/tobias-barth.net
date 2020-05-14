@@ -58,7 +58,6 @@ const App: FC<AppProps> = ({Component, pageProps}) => (
 			@media screen and (min-width: 65em) {
 				body {
 					font-size: ${theme.sizes.mFontsize};
-					line-height: ${theme.sizes.mLineheight};
 				}
 			}
 			p,ul,ol,dl,aside,section,article,h1,h3,h4,h5,h6,address,hr,main,table,iframe,header,pre,figure {
@@ -66,18 +65,75 @@ const App: FC<AppProps> = ({Component, pageProps}) => (
 			}
 			@media screen and (min-width: 65em) {
 				p,ul,ol,dl,aside,section,article,h1,h3,h4,h5,h6,address,hr,main,table,iframe,header,pre,figure {
-					${theme.spacing.vertical('margin-bottom')};
+					${theme.spacing.bigVertical('margin-bottom')};
 				}
+			}
+			h1 {
+				font-size: ${theme.sizes.h1};
+				line-height: ${theme.sizes.h1line};
+			}
+			@media screen and (min-width: 65em) {
+				h1 {
+					font-size: ${theme.sizes.h1Big};
+				}
+			}
+			h2 {
+				font-size: ${theme.sizes.h2};
+				line-height: ${theme.sizes.h2line};
+			}
+			@media screen and (min-width: 65em) {
+				h2 {
+					font-size: ${theme.sizes.h2Big};
+				}
+			}
+			h3 {
+				font-size: ${theme.sizes.h3};
+				line-height: ${theme.sizes.h3line};
+			}
+			@media screen and (min-width: 65em) {
+				h3 {
+					font-size: ${theme.sizes.h3Big};
+				}
+			}
+			h4 {
+				font-size: ${theme.sizes.h4};
+				line-height: ${theme.sizes.h4line};
+			}
+			@media screen and (min-width: 65em) {
+				h4 {
+					font-size: ${theme.sizes.h4Big};
+				}
+			}
+			h5 {
+				font-size: ${theme.sizes.h5};
+				line-height: ${theme.sizes.h5line};
+			}
+			@media screen and (min-width: 65em) {
+				h5 {
+					font-size: ${theme.sizes.h5Big};
+				}
+			}
+			h6 {
+				font-size: ${theme.sizes.h6};
+				line-height: ${theme.sizes.h6line};
+			}
+			@media screen and (min-width: 65em) {
+				h6 {
+					font-size: ${theme.sizes.h6Big};
+				}
+			}
+			h2 {
+				margin-bottom: 1em;
 			}
 			a:focus {
 				outline: thin dotted;
 			}
-			a {
+			main a {
 				color: ${theme.colors.linkcolor};
 				text-decoration: none;
 				transition: all .5s ease-in;
 			}
-			a:hover, a:focus {
+			main a:hover, main a:focus {
 				color: ${theme.colors.bgcolor};
 				background-color: ${theme.colors.linkcolor};
 			}

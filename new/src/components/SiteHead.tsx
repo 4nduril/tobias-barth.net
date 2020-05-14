@@ -5,15 +5,13 @@ import {ThemeContext} from '../utils/theme'
 const SiteHead: FC = () => {
 	const theme = useContext(ThemeContext)
 	return (
-		<>
-			<header>
-				<Link href="/">
-					<a>
-						<h1>tobias-barth.net</h1>
-						<p>Modernes Web aus Köln</p>
-					</a>
-				</Link>
-			</header>
+		<header>
+			<Link href="/">
+				<a>
+					<h1>tobias-barth.net</h1>
+					<p>Modernes Web aus Köln</p>
+				</a>
+			</Link>
 			<style jsx>{`
 				header {
 					background: ${theme.colors.maincolor};
@@ -23,6 +21,7 @@ const SiteHead: FC = () => {
 				}
 				a {
 					color: inherit;
+					text-decoration: none;
 					padding: 0 ${theme.spacing.gutWidth};
 				}
 				h1, p {
@@ -48,7 +47,7 @@ const SiteHead: FC = () => {
 				}
 			`}
 			</style>
-		</>
+		</header>
 	)
 }
 

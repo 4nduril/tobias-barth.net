@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import matter, {GrayMatterFile} from 'gray-matter'
 import ErrorPage from 'next/error'
 import SiteHead from '../../src/components/SiteHead'
 import BlogArticle from '../../src/components/BlogArticle'
+import MainContent from '../../src/components/MainContent'
+import MainNavigation from '../../src/components/MainNavigation'
+import {ThemeContext} from '../../src/utils/theme'
 
 type BlogFrontmatter = GrayMatterFile<string>['data'] & {
 	title?: string
@@ -15,6 +18,7 @@ interface BlogTemplateProps {
 }
 
 const BlogTemplate: React.FC<BlogTemplateProps> = ({error, frontmatter, markdownBody}) => {
+	const theme = useContext(ThemeContext)
 	if (error) {
 		console.log(error)
 		return <ErrorPage statusCode={404} />
@@ -24,7 +28,19 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({error, frontmatter, markdown
 			(
 				<>
 					<SiteHead />
-					<BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
+					<MainNavigation />
+					<MainContent>
+						<div className="blog-textcontainer">
+							<BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
+						</div>
+					</MainContent>
+					<style jsx>{`
+						.blog-textcontainer {
+							margin-left: auto;
+							margin-right: auto;
+							max-width: 33em;
+							padding: 0 ${theme.spacing.gutWidth};
+					`}</style>
 				</>
 			)
 			: null
