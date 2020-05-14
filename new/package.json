@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.2",
-    "next": "9.3.6",
+    "next": "^9.4.0",
     "normalize.css": "^8.0.1",
     "postcss-nested": "^4.2.1",
     "raw-loader": "^4.0.1",
