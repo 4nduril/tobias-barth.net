@@ -28,7 +28,7 @@ Wir initialisieren das Projekt und installieren das erste Paket:
 
 Als erstes erstellen wir die Datei `server/index.js`:
 
-{% code lang:javascript %}
+```javascript
 // index.js
 const express = require('express');
 const app = express();
@@ -44,13 +44,13 @@ app.listen(3000, (err) => {
   if (err) throw err;
   console.log('Listening on port 3000');
 });
-{% endcode %}
+```
 
 Sehr schön. Um uns das Entwicklerleben leichter zu machen, installieren wir uns `nodemon` und starten dann per npm-Script den Server:
 
 	$ yarn add -D nodemon
 
-{% code lang:json %}
+```json
 // package.json
 {
   "name": "upload-app",
@@ -60,7 +60,7 @@ Sehr schön. Um uns das Entwicklerleben leichter zu machen, installieren wir uns
   },
   …
 }
-{% endcode %}
+```
 
 	$ npm start
 	Listening on port 3000
@@ -69,7 +69,7 @@ Sehr schön. Um uns das Entwicklerleben leichter zu machen, installieren wir uns
 
 Bisher antwortet unser Server nur mit dem String `'Hello'`. Wir ändern das mit einem schicken Low-Budget-Template. Wir erstellen die Datei `server/templates.js` mit folgendem Inhalt:
 
-{% code lang:javascript %}
+```javascript
 // server/templates.js 
 const pageHeader = `<!DOCTYPE html>
 <html>
@@ -101,24 +101,24 @@ ${pageFooter}
 module.exports = {
   homepage,
 };
-{% endcode %}
+```
 
 Wir exportieren also eine Funktion, die ein Template-Literal zurückgibt. Wir hätten Header und Footer auch direkt integrieren können, aber wir brauchen sie später noch für eine zweite Seite.
 
 In `server/index.js` nutzen wir jetzt die `homepage`-Funktion:
 
-{% code lang:javascript %}
+```javascript
 // server/index.js
 const { homepage } = require('./templates.js');
 
 app.get('/', (req, res) => {
   res.send(homepage());
 });
-{% endcode %}
+```
 
 Wir haben jetzt ein Formular mit einem File-Upload-Input auf unserer Website. Es sieht noch ein bisschen unspektakulär aus. Werfen wir etwas CSS dagegen! Wir erstellen die Datei `server/static/style.css`:
 
-{% code lang:css %}
+```css
 /* server/static/style.css */ 
 * {
   font-family: sans-serif;
@@ -155,7 +155,7 @@ img {
   background-color: deepskyblue;
   font-weight: bold;
 }
-{% endcode %}
+```
 
 Besser. *Anmerkung:* Ich blende hier das eigentliche Input-Element aus und nutze die Tatsache, dass man auch auf dass zugehörige Label-Element klicken kann, um den Datei-Auswahl-Dialog zu öffnen. Diese Idee habe ich mir aus dem MDN abgeguckt: [Using a label element to trigger a hidden file input element](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications#Using_a_label_element_to_trigger_a_hidden_file_input_element). Das hat den Vorteil, dass man das hässliche Browser-gestylte File-Input los ist und in Ruhe einfach das Label stylen kann.
 
@@ -169,16 +169,16 @@ Wir benutzen dafür `multiparty`:
 
 und passen zuerst unseren Server an:
 
-{% code lang:javascript %}
+```javascript
 // in server/index.js
 const handleUpload = require('./handleUpload.js');
 
 app.post('/upload', handleUpload);
-{% endcode %}
+```
 
 Die Datei `server/handleUpload.js` müssen wir natürlich auch schreiben:
 
-{% code lang:javascript %}
+```javascript
 // server/handleUpload.js
 const Form = require('multiparty').Form;
 const { uploadOptions } = require('./config.js');
@@ -194,7 +194,7 @@ module.exports = function handleUpload(req, res) {
   form.on('close', () => res.send(successPage(req.filename)));
   form.parse(req);
 };
-{% endcode %}
+```
 
 Die Instanzen von `multiparty.Form` sind Event-Emitter. `.parse` verabeitet die Anfrage vom Browser, in der die hochgeladene Datei enthalten ist. Das `file`-Event wird emittiert, wenn eine Datei aus dem Request fertig verarbeitet ist. Hier nutzen wir die Gelegenheit um den Original-Dateinamen im Request-Objekt zwischen zu speichern.
 
@@ -202,7 +202,7 @@ Die Dokumentation von multiparty rät dringend, einen Error-Listener zu registri
 
 Schließlich senden wir eine Erfolgsmeldung an den Browser zurück, wenn der Request fertig verarbeitet ist. Diese `successPage` ist wieder eine Template-Funktion, die wir genau wie die Homepage in `server/templates.js` definieren:
 
-{% code lang:javascript %}
+```javascript
 // in server/templates.js
 
 const successPage = filename => `${pageHeader}
@@ -214,7 +214,7 @@ module.exports = {
   homepage,
   successPage,
 };
-{% endcode %}
+```
 
 Hier nutzen wir den im Request-Objekt gespeicherten Dateinamen, um der Nutzerin im Browser nochmal anzuzeigen, was sie hochgeladen hat.
 
@@ -222,7 +222,7 @@ Haben alle bemerkt, dass es noch ein Detail in `handleUpload.js` zu besprechen g
 
 Der Bequemlichkeit halber legen wir die Datei `server/config.js` an, und exportieren von dort ein paar Dinge:
 
-{% code lang:javascript %}
+```javascript
 // server/config.js
 const path = require('path');
 
@@ -235,11 +235,11 @@ module.exports = {
     uploadDir,
   },
 };
-{% endcode %}
+```
 
 Bisher geben wir `multiparty` nur eine Option mit, aber eventuell ändert sich das auch einmal und dann haben wir schon ein ganzes Config-Objekt dafür. Außerdem wollen wir in der Lage sein, im Produktions-Modus den allgemein gültigen HTTP-Port zu nutzen anstatt 3000. Das `uploadDir` exportieren wir gleich mit, um es bei App-Start anzulegen und zusammen mit der "Listening …"-Meldung anzuzeigen. So weiß derjenige, der den Server startet, auch direkt, wo er nach den hochgeladenen Dateien schauen muss. Wir haben es hier so eingerichtet, dass dieses Verzeichnis innerhalb des Ordners erzeugt wird, aus dem die App gestartet wird. Das ganze wird von unserem Server so genutzt:
 
-{% code lang:javascript %}
+```javascript
 // in server/index.js
 const fs = require('fs');
 const { port, uploadDir } = require('./config.js');
@@ -258,8 +258,7 @@ Listening on port ${port}
 Using directory "${uploadDir}" for uploads
   `);
 });
-
-{% endcode %}
+```
 
 Damit sind wir eigentlich fertig. Wir haben eine Website, man kann dort eine Bild-Datei hochladen, sie landet in unserem Upload-Ordner und man bekommt eine Bestätigung nach dem Hochladen.
 
@@ -271,7 +270,7 @@ Per default lauscht Express auf allen zugewiesenen IP-Adressen. Wenn wir wüsste
 
 Ok, los gehts. Wir brauchen eine IP-Adresse, die nicht intern ist (intern wäre z.B. 127.0.0.1, die zeigt immer auf den Rechner, auf dem sie angefragt wird). Dann stellen wir sicher, dass der Server auf dieser Adresse lauscht und zeigen sie im Terminal an:
 
-{% code lang:javascript %}
+```javascript
 // in server/config.js
 const os = require('os');
 
@@ -295,13 +294,13 @@ module.exports = {
   },
   serverIp: getMachineIp(),
 };
-{% endcode %}
+```
 
 Ich empfehle jedem mal auf dem eigenen Rechner die Node.js REPL zu starten und dort `os.networkInterfaces()` aufzurufen, um einen Eindruck zu bekommen, mit was für Daten wir hier arbeiten.
 
 Als nächstes bauen wir das in den Server ein:
 
-{% code lang:javascript %}
+```javascript
 // in server/index.js
 const { port, serverIp, uploadDir } = require('./config.js');
 
@@ -322,13 +321,13 @@ if (serverIp) {
 } else {
   throw Error('No public v4 IP found!');
 }
-{% endcode %}
+```
 
 Wir können jetzt zwar unsere Website nicht mehr mit `localhost:3000` aufrufen, aber das wäre ja eh nur auf dem Computer gegangen, auf dem der Server läuft. Viel wichtiger ist, dass die Kinder sie von außen erreichen.
 
 Jetzt könnte die Kursleiterin also die richtige IP-Adresse sehen und sie z.B. an die Tafel schreiben. Oder in ein Dokument tippen und das mit dem Beamer an die Wand werfen. Moment. Ein Beamer? Ein Dokument? Wir können die IP auch gleich zusätzlich auf der Upload-Webseite anzeigen. Dazu müssen wir sie bloß unserer Template-Funktion übergeben:
 
-{% code lang:javascript %}
+```javascript
 // in server/templates.js
 const homepage = ({ address, listenPort }) => `${pageHeader}
       <form action="/upload" method="post" enctype="multipart/form-data">
@@ -340,9 +339,9 @@ const homepage = ({ address, listenPort }) => `${pageHeader}
       </form>
 ${pageFooter}
 `;
-{% endcode %}
+```
 
-{% code lang:javascript %}
+```javascript
 // in server/index.js
 
 const homepageOpts = {
@@ -353,7 +352,7 @@ const homepageOpts = {
 app.get('/', (req, res) => {
   res.send(homepage(homepageOpts));
 });
-{% endcode %}
+```
 
 ### Schritt 5: Und noch besser
 
@@ -363,7 +362,7 @@ IP-Adressen sind trotzdem ganz schön nervig einzutippen, erst recht auf einem S
 
 Wir erzeugen jetzt beim App-Start einmalig aus der IP-Adresse und dem Port einen URL, den wir als QR-Code in Form eines Image-Data-URI encodieren. Das spart uns das abspeichern, auslesen und aufräumen einer richtigen Bild-Datei. Der Data-URI wird bei App-Start erzeugt und im RAM gehalten bis der Prozess beendet wird. Und wir können ihn einfach bei jedem Request an die Template-Funktion weiterreichen, von der er direkt in das HTML injiziert wird. Sollte aus irgendeinem Grund das Erzeugen fehlschlagen, ist uns das egal, denn die IP wird als Fallback auch noch angezeigt.
 
-{% code lang:javascript %}
+```javascript
 // in server/index.js
 const qrcode = require('qrcode');
 
@@ -393,9 +392,9 @@ if (serverIp) {
 } else {
   throw Error('No public v4 IP found!');
 }
-{% endcode %}
+```
 
-{% code lang:javascript %}
+```javascript
   // in server/templates.js
   const homepage = ({ address, listenPort, qr }) => `${pageHeader}
         <form action="/upload" method="post" enctype="multipart/form-data">
@@ -408,7 +407,7 @@ if (serverIp) {
         </form>
   ${pageFooter}
   `;
-{% endcode %}
+```
 
 So, jetzt sind wir aber wirklich fertig. Übrigens ganz ohne Client-Side-Javascript. Wir brauchten gerade mal zwei Dependencies: `express` und `multiparty`. Eine dritte, `qrcode`, um den Bequemlichkeitsfaktor noch zu erhöhen. Das ganze läuft unter Node.js 6.9.5, ohne Babel, ohne Webpack, ohne React, sogar ganz ohne externe Templating-Engine.
 
