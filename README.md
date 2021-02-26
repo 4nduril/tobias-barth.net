@@ -1,25 +1,30 @@
-English version below.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
-# Meine Website: das Innerste nach außen gekehrt
+## Getting Started
 
-Zum Relaunch meiner Website im September 2014 habe ich mich entschlossen, meine Arbeit daran inklusive ihrer stetigen Weiterentwicklung hier zu veröffentlichen. Es ist ein work-in-progress, nach guter alter „publish-early – publish often“-Tradition. Ich lade jeden ein, das Entstehen und Entwickeln meiner Site zu verfolgen, mir Anregungen zu geben und mich auf Fehler oder Bugs hinzuweisen.
+First, run the development server:
 
-## Issues, Milestones und Tags
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-Neben der Idee, dass es eventuell für andere Entwickler interessant sein kann, wie jemand Schritt für Schritt eine Website aufbaut, verspreche ich mir Vorteile von Githubs Issue-Tracking-System. Ich möchte es nutzen, um meine Arbeit zu planen und zu strukturieren. Vor allem, um nicht den Überblick zu verlieren. Außerdem kann es auch jeder andere nutzen, um mich auf Dinge zu stoßen, um die ich mich noch kümmern muss.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Sprache
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-Hätte ich von Anfang diesen Schritt geplant, wäre auch alle bisherigen Commit-Messages auf Englisch anstatt auf Deutsch verfasst. So müssen alle, die des Deutschen nicht mächtig sind, auf die bisherigen Kommentare verzichten. Zukünftig wird alles zweisprachig verfasst.
+## Learn More
 
-# My website: turned inside out
+To learn more about Next.js, take a look at the following resources:
 
-To the occasion of my website’s recent relaunch in September 2014, I decided to publish my constant and ongoing work on it here on Github. It’s a work-in-progress following the fine tradition of “publish early — publish often”. I invite everyone to follow the creation and development of my site. Tell me your ideas and please point on errors and bugs.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Issues, milestones and tags
+You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
 
-So I had the idea it could be interesting for fellow devs how somebody creates a website step by step. Besides, I am looking forward to make use of Github’s issue tracking system to plan and to structure my work. Additionally, of course anyone can use it to point to things I have to take care of.
+## Deploy on Vercel
 
-## Language
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-If I had planned this move from the beginning, my commit messages to this point would be in English instead of German only. But, as it is now, unfortunately everyone who is not able to read German will have to accept my apologies and start reading from this point in time. Future commit messages will be in German and English.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
