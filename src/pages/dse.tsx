@@ -215,8 +215,8 @@ const DSE: FunctionComponent = () => (
     </Paragraph>
 
     <Paragraph>Tobias Barth</Paragraph>
-    <Paragraph>Vincenzstr. 25</Paragraph>
-    <Paragraph>51065 Köln</Paragraph>
+    <Paragraph>Türrschmidtstr. 35</Paragraph>
+    <Paragraph>10317 Köln</Paragraph>
     <Paragraph>Deutschland</Paragraph>
     <Paragraph>Tel.: +4915111215929</Paragraph>
     <Paragraph>E-Mail: contact@tobias-barth.net</Paragraph>
