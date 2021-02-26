@@ -11,6 +11,10 @@ const Home: FunctionComponent = () => {
     <>
       <Head>
         <title>tobias-barth.net – Modern Web Freelancer aus Berlin</title>
+        <meta
+          name="description"
+          content="Web Development aus Berlin. Freelancer Tobias Barth bringt viel Erfahrung mit HTML, CSS und JavaScript in Ihr Projekt. Accessibility und Responsive Design, Single-Page-Applications mit ReactJS oder Vue."
+        />
       </Head>
       <SiteHead />
       <main className="bg-primary text-gray-200">
