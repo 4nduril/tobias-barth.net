@@ -6,6 +6,7 @@ tags:
   - library
   - babel
   - howto
+description: Part 2 of the series "Publish a modern JavaScript (or TypeScript) library". Babel can transpile JavaScript as well as TypeScript. I would argue that it's even better to use Babel instead of the TypeScript compiler for compiling the code (down) to compatible JavaScript because it is faster.
 date: '2019-07-05 16:05:11'
 ---
 

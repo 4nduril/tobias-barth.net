@@ -7,6 +7,7 @@ tags:
   - ipv6
 categories:
   - Server-Administration
+description: Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine public v4 IP-Adresse und ein /124 v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.
 date: '2017-07-01 11:39:12'
 ---
 

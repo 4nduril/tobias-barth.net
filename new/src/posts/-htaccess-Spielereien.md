@@ -5,6 +5,7 @@ tags:
   - server-config
 categories:
   - Web-Stuff
+description: Mit .htaccess-Dateien kann man den Zugang zu den einzelnen Dateien oder Dokumenten auf seinem (Apache-)Webserver sehr bequem regeln. Es lassen sich zum Beispiel einzelne Verzeichnisse nur für Nutzer mit einer bestimmten IP freigeben. Oder man kann Passwörter für den Zugang vergeben. Vor ein paar Tagen habe ich herausgefunden, dass man mit ihnen auch wunderbar beliebige andere Servervariablen abfragen kann.
 date: '2011-12-04 13:47:00'
 ---
 

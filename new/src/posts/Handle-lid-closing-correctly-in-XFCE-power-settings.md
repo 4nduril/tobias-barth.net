@@ -5,6 +5,7 @@ tags:
   - power-management
   - xfce
   - suspend-hibernate
+description: I always had problems with the power management settings on my laptop. It's running Manjaro Linux (Arch derivate). Regardless of what I set in the XFCE power settings, the actions that should happen on lid closing didn't work as expected.
 date: '2019-05-21 15:55:25'
 ---
 

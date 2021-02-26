@@ -5,6 +5,8 @@ import matter, { GrayMatterFile } from "gray-matter";
 import Link from "next/link";
 import { Layout } from "../../components/Layout";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { RssIcon } from "../../components/RssIcon";
 
 type BlogProps = {
   posts: {
@@ -13,6 +15,7 @@ type BlogProps = {
 };
 
 const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
+  const router = useRouter();
   return (
     <Layout>
       <Head>
@@ -20,16 +23,6 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
         <meta
           name="description"
           content="Articles about web development and design, HTML, CSS and JavaScript, Single-Page-Applications with ReactJS and without, performance and best practices."
-        />
-        <meta
-          name="keywords"
-          content={[
-            ...new Set(
-              posts
-                .flatMap(({ frontmatter }) => frontmatter.tags)
-                .filter(Boolean)
-            ),
-          ].join(", ")}
         />
         <link
           rel="alternate"
@@ -40,8 +33,16 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
       <h2 className="text-3xl font-bold mb-7">
         Blog-Articles by Tobias Barth, Freelance Web Person
       </h2>
-      <p>
-        <a href="/blog/feed/rss.xml">Abonnieren</a>
+      <p className="mb-7 text-center">
+        <button
+          className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center"
+          onClick={() => router.push("/blog/feed/rss.xml")}
+        >
+          Abonnieren{" "}
+          <span className="inline-block w-6 h-6 ml-4">
+            <RssIcon />
+          </span>
+        </button>
       </p>
       <ul>
         {posts.map(({ frontmatter }) => (

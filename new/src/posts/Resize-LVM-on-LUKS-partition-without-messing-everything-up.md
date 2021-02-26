@@ -4,6 +4,7 @@ tags:
   - Linux
   - LVM
   - Encryption
+description: I needed to shrink /dev/sda3, move it to the end of the SSD and grow /dev/sda2 as necessary. But I did not know if this was even possible with my setup.
 date: '2019-06-10 13:49:27'
 ---
 

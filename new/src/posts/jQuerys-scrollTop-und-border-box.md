@@ -5,6 +5,7 @@ tags:
   - scrollTop
 categories:
   - Web-Stuff
+description: Der Fehler, den der Kunde berichtete, beruhte darauf, dass das ursprünglich verwendete `$(document).scrollTop()` nicht im IE8 funktionierte und nachdem er dies durch das funktionierende `$('html').scrollTop()` ersetzt hatte, lief es nicht mehr in Webkit-Browsern.
 date: '2013-01-28 22:01:00'
 ---
 

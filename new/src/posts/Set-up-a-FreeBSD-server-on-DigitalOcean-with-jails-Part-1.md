@@ -4,6 +4,7 @@ tags:
   - FreeBSD
   - Server
   - Tutorial
+description: I have a few Droplets running on DigitalOcean (DO) for small puposes like Dropbox-replacement, private Git repositories and so on. Now I want to move my website and so, my webserver from another hoster to DO.
 date: '2018-06-13 16:01:56'
 ---
 

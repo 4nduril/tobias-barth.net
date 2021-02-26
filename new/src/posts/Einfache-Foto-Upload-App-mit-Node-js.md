@@ -6,6 +6,7 @@ tags:
   - apps
 categories:
   - Web-Stuff
+description: Wir stellen einen WLAN-Router auf, mit dem sich alle verbinden. Er braucht keinen Internet-Uplink. Die Projektleiterin startet einen Node.js-Webserver auf ihrem Macbook, der eine Seite mit einem Webformular ausliefert, das nichts anderes tut, als einen Datei-Upload zu ermöglichen. Der Server speichert die hochgeladenen Files auf dem Laptop und das wars.
 date: '2017-05-30 19:08:00'
 ---
 Meine Frau brauchte für ein Projekt mit Kindern eine einfache Möglichkeit, Fotos von Smartphones auf ihren Laptop zu laden. Es gibt viele Methoden das zu machen: Bluetooth, USB, SD-Karten-Austausch, und natürlich die üblichen Internet-Lösungen wie Dropbox.

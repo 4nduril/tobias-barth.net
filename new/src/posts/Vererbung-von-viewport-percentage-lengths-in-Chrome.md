@@ -7,6 +7,8 @@ tags:
   - viewport-relative-lengths
 categories:
   - Web-Stuff
+description: Ich stolperte neulich über ein Problem mit viewport-relativen Längen in CSS.
+
 date: '2013-06-05 16:59:00'
 ---
 

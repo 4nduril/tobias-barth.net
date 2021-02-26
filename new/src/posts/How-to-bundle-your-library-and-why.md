@@ -5,6 +5,7 @@ tags:
   - webpack
   - rollup
   - parcel
+description: Part 6 of the series "Publish a modern JavaScript (or TypeScript) library". At this point in our setup we deliver our library as separate modules. ES Modules to be exact. Let's discuss what we achieve with that and what could be missing.
 date: '2019-11-18 21:58:14'
 ---
 

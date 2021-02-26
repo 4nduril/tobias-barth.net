@@ -4,11 +4,12 @@ tags:
   - freebsd
   - nas
   - network
+description: I just fixed an issue with my FreeBSD home server. It is set up as a file server for Mac (AFP) and Linux Clients (NFS). My local network is Gigabit-based so the limitating factor on read/write speeds should be the hard disk drives in the server. But lately, it dropped amazingly to ~1MB/sec.
 date: '2019-05-03 11:36:54'
 ---
 
 
-I just fixed an issue with my FreeBSD home server. It is set up as a file server for Mac (AFP) and Linux Clients (NFS). My local network is Gigabit-based sothe limitating factor on read/write speeds should be the hard disk drives in the server.
+I just fixed an issue with my FreeBSD home server. It is set up as a file server for Mac (AFP) and Linux Clients (NFS). My local network is Gigabit-based so the limitating factor on read/write speeds should be the hard disk drives in the server.
 
 The server has a Core i3-6100T CPU @ 3.20GHz, 8GB RAM, a ZFS setup with two mirror vdevs each consisting of two disks connected to the board via SATA3. And of course the onboard Gbit NIC (Realtek).
 

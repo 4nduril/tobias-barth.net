@@ -5,6 +5,7 @@ tags:
   - recursion
   - promises
   - async-await
+description: I had a list of input data and wanted to execute a function for every item in that list. What I need is a way to traverse the array, execute the function for the current element, wait until the Promise resolves and only then go to the next element and call the function with it. 
 date: '2019-04-18 14:47:53'
 ---
 

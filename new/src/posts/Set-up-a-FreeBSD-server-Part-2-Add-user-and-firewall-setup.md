@@ -4,7 +4,7 @@ tags:
   - FreeBSD
   - Server
   - Tutorial
-  - Firewall
+description: Some initial setup work like adding a user, properly configuring SSH access and adding a firewall.
 date: '2018-06-21 18:14:14'
 ---
 

@@ -5,6 +5,7 @@ tags:
   - typescript
   - library
   - howto
+description: Part 4 of the series "Publish a modern JavaScript (or TypeScript) library". The goal for our work here should be a fully functioning build chain that does everything we need for publishing our library.
 date: '2019-07-24 10:39:26'
 ---
 

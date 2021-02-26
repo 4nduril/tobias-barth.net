@@ -5,7 +5,7 @@ tags:
   - webpack
   - typescript
   - umd
-description: In the last post we have established in which cases we may need to bundle our library – instead of just delivering transpiled files /modules. There are a few tools which help us to do so and we will look at the most important of them one after another.
+description: Part 7 of the series "Publish a modern JavaScript (or TypeScript) library". In the last post we have established in which cases we may need to bundle our library – instead of just delivering transpiled files /modules. There are a few tools which help us to do so and we will look at the most important of them one after another.
 date: '2020-05-08 17:59:34'
 ---
 

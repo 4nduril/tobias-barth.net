@@ -4,6 +4,7 @@ tags:
   - typescript
   - library
   - howto
+description: Part 3 of the series "Publish a modern JavaScript (or TypeScript) library". Instead of Babel like in the last post we can use the TypeScript compiler `tsc` to transpile our code.
 date: '2019-07-18 13:24:59'
 ---
 

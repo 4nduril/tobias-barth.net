@@ -5,6 +5,7 @@ tags:
   - typescript
   - library
   - howto
+description: Did you ever write some library code together and then wanted to publish it as an NPM package but realized you have no idea what is the technique du jour to do so? Which transpiler, which bundler, which other tools and why? You have found the right place.
 date: '2019-07-05 16:02:26'
 ---
 

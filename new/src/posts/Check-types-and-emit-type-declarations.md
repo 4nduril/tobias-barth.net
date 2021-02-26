@@ -4,6 +4,7 @@ tags:
   - typescript
   - library
   - howto
+description: Part 5 of the series "Publish a modern JavaScript (or TypeScript) library". We want to know that there are no type errors in our code and we want to export type declarations.
 date: '2019-10-31 19:59:48'
 ---
 
