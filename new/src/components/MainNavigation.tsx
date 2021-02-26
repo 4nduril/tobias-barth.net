@@ -1,70 +1,31 @@
-import React, { FC, useContext } from "react";
 import Link from "next/link";
-import { ThemeContext } from "../utils/theme";
+import { FunctionComponent } from "react";
 
-const MainNavigation: FC = () => {
-  const theme = useContext(ThemeContext);
+const MainNavigation: FunctionComponent = () => {
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav className="mb-7 pb-1 font-bold bg-primary">
+      <ul className="flex justify-around list-none">
+        {/* <li className="flex-grow mx-8 text-center">
           <Link href="/portfolio">
-            <a title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte">
+            <a
+              className="inline-block text-gray-200 no-underline px-4 py-2 hover:bg-link-color transition-colors"
+              title="Meine Fähigkeiten, Arbeitsfelder und Beispielprojekte"
+            >
               Ich mache
             </a>
           </Link>
-        </li>
-        <li>
+		</li> */}
+        <li className="flex-grow mx-8 text-center">
           <Link href="/blog">
-            <a title="Mein Blog über Webentwicklung und Ähnliches">
-              Ich schreibe
+            <a
+              className="inline-block text-gray-200 no-underline px-4 py-2 hover:bg-link-color transition-colors"
+              title="Mein Blog über Webentwicklung und Ähnliches"
+            >
+              Blog
             </a>
           </Link>
         </li>
       </ul>
-      <style jsx>{`
-        nav {
-          ${theme.spacing.vertical("margin-top", -1)}
-          ${theme.spacing.vertical("margin-bottom")}
-			font-weight: bold;
-          background-color: ${theme.colors.maincolor};
-          overflow: hidden;
-        }
-        @media screen and (min-width: 65em) {
-          nav {
-            ${theme.spacing.bigVertical("margin-top", -1)}
-            ${theme.spacing.bigVertical("margin-bottom")}
-          }
-        }
-        ul {
-          display: flex;
-          justify-content: space-around;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-        li {
-          flex: 1;
-          margin: 0 ${theme.spacing.gutWidth};
-          text-align: center;
-        }
-        a {
-          text-decoration: none;
-          color: ${theme.colors.lighttextcolor};
-          display: inline-block;
-          padding: 0.5em 0.2em;
-          width: auto;
-          height: 100%;
-          transition: all 0.5s ease-in;
-        }
-        a:hover,
-        a:focus,
-        a:active {
-          outline: none;
-          color: ${theme.colors.bgcolor};
-          background-color: ${theme.colors.linkcolor};
-        }
-      `}</style>
     </nav>
   );
 };

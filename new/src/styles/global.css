@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  main a {
+    @apply cursor-pointer text-link-color no-underline transition-all;
+  }
+  main a:hover,
+  main a:focus {
+    @apply text-white bg-link-color;
+  }
+  q {
+    quotes: "„" "“" "‚" "‘";
+  }
+
+  blockquote {
+    font-style: italic;
+    padding: 0 1em;
+    border-left: 3px solid #ddd;
+  }
+  abbr,
+  acronym {
+    cursor: help;
+  }
+  figure {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+  }
+  ol,
+  ul {
+    @apply list-inside;
+  }
+}
+
+@layer utilities {
+  .logo-shadow {
+    text-shadow: 0 1px 2px rgba(34, 34, 34, 0.9);
+  }
+}

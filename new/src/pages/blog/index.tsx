@@ -1,13 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent } from "react";
 import matter, { GrayMatterFile } from "gray-matter";
-import SiteHead from "../../components/SiteHead";
-import MainContent from "../../components/MainContent";
-import MainNavigation from "../../components/MainNavigation";
-import { ThemeContext } from "../../utils/theme";
-import SiteFooter from "../../components/SiteFooter";
 import Link from "next/link";
+import { Layout } from "../../components/Layout";
+import Head from "next/head";
 
 type BlogProps = {
   posts: {
@@ -16,39 +13,51 @@ type BlogProps = {
 };
 
 const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
-  const theme = useContext(ThemeContext);
   return (
-    <>
-      <SiteHead />
-      <MainNavigation />
-      <MainContent>
-        <div className="blog-textcontainer">
-          <h2>Blog-Articles by Tobias Barth, Freelance Web Person</h2>
-          <ul>
-            {posts.map(({ frontmatter }) => (
-              <li>
-                <Link href={frontmatter.href}>
-                  <>
-                    <a>{frontmatter.title}</a>
-                    {frontmatter.description && (
-                      <p>{frontmatter.description}</p>
-                    )}
-                  </>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </MainContent>
-      <SiteFooter />
-      <style jsx>{`
-		.blog-textcontainer {
-			margin-left: auto;
-			margin-right: auto;
-			max-width: 33em;
-			padding: 0 ${theme.spacing.gutWidth};
-		`}</style>
-    </>
+    <Layout>
+      <Head>
+        <title>Blog-Articles by Tobias Barth, Freelance Web Person</title>
+        <meta
+          name="description"
+          content="Articles about web development and design, HTML, CSS and JavaScript, Single-Page-Applications with ReactJS and without, performance and best practices."
+        />
+        <meta
+          name="keywords"
+          content={[
+            ...new Set(
+              posts
+                .flatMap(({ frontmatter }) => frontmatter.tags)
+                .filter(Boolean)
+            ),
+          ].join(", ")}
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href="/blog/feed/rss.xml"
+        />
+      </Head>
+      <h2 className="text-3xl font-bold mb-7">
+        Blog-Articles by Tobias Barth, Freelance Web Person
+      </h2>
+      <p>
+        <a href="/blog/feed/rss.xml">Abonnieren</a>
+      </p>
+      <ul>
+        {posts.map(({ frontmatter }) => (
+          <li key={frontmatter.href}>
+            <Link href={frontmatter.href}>
+              <div className="mb-7">
+                <h3 className="text-2xl font-bold mb-4">
+                  <a>{frontmatter.title}</a>
+                </h3>
+                {frontmatter.description && <p>{frontmatter.description}</p>}
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Layout>
   );
 };
 
@@ -59,20 +68,27 @@ export const getStaticProps = async () => {
     .readdir(path.resolve(process.cwd(), "src/posts"))
     .then((paths) =>
       Promise.all(
-        paths.map(async (filePath) => {
-          const parsed = await fs
-            .readFile(
-              path.resolve(process.cwd(), "src/posts/", filePath),
-              "utf8"
-            )
-            .then(matter)
-            .then(extractGrayMatter);
-          parsed.frontmatter.href = `/blog/${path.basename(filePath, ".md")}`;
-          return parsed;
-        })
+        paths
+          .filter((filename) => filename.endsWith(".md"))
+          .map(async (filePath) => {
+            const parsed = await fs
+              .readFile(
+                path.resolve(process.cwd(), "src/posts/", filePath),
+                "utf8"
+              )
+              .then(matter)
+              .then(extractGrayMatter);
+            parsed.frontmatter.href = `/blog/${path.basename(filePath, ".md")}`;
+            return parsed;
+          })
       )
     );
-  console.log(posts);
+  posts.sort((a, b) =>
+    new Date(a.frontmatter.date).getTime() <
+    new Date(b.frontmatter.date).getTime()
+      ? 1
+      : -1
+  );
   return {
     props: {
       posts,

@@ -1,9 +1,7 @@
-import React, {FC} from 'react'
+import { FC } from "react";
 
-const MainContent: FC = ({children}) => (
-	<main>
-		{children}
-	</main>
-)
+const MainContent: FC = ({ children }) => (
+  <main className="mx-auto max-w-prose">{children}</main>
+);
 
-export default MainContent
+export default MainContent;

@@ -6,20 +6,10 @@ interface HighlightProps {
   value: string;
 }
 const Highlight: FC<HighlightProps> = ({ value, language }) => (
-  <div className="pre-wrapper">
+  <div className="mb-7">
     <SyntaxHighlighter language={language} customStyle={{ margin: "0" }}>
       {value}
     </SyntaxHighlighter>
-    <style jsx>{`
-      .pre-wrapper {
-        margin-bottom: ${1.125 * 1.4444}rem;
-      }
-      @media screen and (min-width: 65em) {
-        .pre-wrapper {
-          margin-bottom: ${1.111 * 1.125 * 1.4444}rem;
-        }
-      }
-    `}</style>
   </div>
 );
 

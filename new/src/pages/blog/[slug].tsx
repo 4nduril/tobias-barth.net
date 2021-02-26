@@ -1,14 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
-import React, { useContext } from "react";
 import matter, { GrayMatterFile } from "gray-matter";
 import ErrorPage from "next/error";
-import SiteHead from "../../components/SiteHead";
+import Head from "next/head";
 import BlogArticle from "../../components/BlogArticle";
-import MainContent from "../../components/MainContent";
-import MainNavigation from "../../components/MainNavigation";
-import { ThemeContext } from "../../utils/theme";
-import SiteFooter from "../../components/SiteFooter";
+import { Layout } from "../../components/Layout";
 
 type BlogFrontmatter = GrayMatterFile<string>["data"] & {
   title?: string;
@@ -25,29 +21,26 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
   frontmatter,
   markdownBody,
 }) => {
-  const theme = useContext(ThemeContext);
   if (error) {
     console.log(error);
     return <ErrorPage statusCode={404} />;
   }
   return frontmatter && markdownBody ? (
-    <>
-      <SiteHead />
-      <MainNavigation />
-      <MainContent>
-        <div className="blog-textcontainer">
-          <BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
-        </div>
-      </MainContent>
-      <SiteFooter />
-      <style jsx>{`
-		.blog-textcontainer {
-			margin-left: auto;
-			margin-right: auto;
-			max-width: 33em;
-			padding: 0 ${theme.spacing.gutWidth};
-		`}</style>
-    </>
+    <Layout>
+      <Head>
+        <title>
+          {frontmatter.title} – Blog-Articles by Tobias Barth, Freelance Web
+          Person
+        </title>
+        <meta name="keywords" content={frontmatter.tags.join(", ")} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href="/blog/feed/rss.xml"
+        />
+      </Head>
+      <BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
+    </Layout>
   ) : null;
 };
 

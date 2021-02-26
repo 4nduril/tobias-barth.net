@@ -1,8 +1,8 @@
-import React, { FC, useContext } from "react";
 import { GrayMatterFile } from "gray-matter";
 import ReactMarkdown from "react-markdown/with-html";
 import Highlight from "../../src/components/Highlight";
-import { ThemeContext } from "../utils/theme";
+import { FC } from "react";
+import styles from "./BlogArticle.module.css";
 
 type BlogFrontmatter = GrayMatterFile<string>["data"] & {
   title?: string;
@@ -18,13 +18,12 @@ const formatDate = (date: Date) => {
 };
 
 const BlogArticle: FC<BlogArticleProps> = ({ frontmatter, markdownBody }) => {
-  const theme = useContext(ThemeContext);
   return !frontmatter || !markdownBody ? null : (
-    <article>
+    <article className="overflow-hidden">
       <header>
-        <h2>{frontmatter.title}</h2>
+        <h2 className="text-3xl font-bold mt-4 mb-7">{frontmatter.title}</h2>
         {frontmatter.date && (
-          <p className="date">
+          <p className="text-base text-center">
             Geschrieben am{" "}
             <time dateTime={new Date(frontmatter.date).toISOString()}>
               {formatDate(new Date(frontmatter.date))}
@@ -32,29 +31,13 @@ const BlogArticle: FC<BlogArticleProps> = ({ frontmatter, markdownBody }) => {
           </p>
         )}
       </header>
-      <div className="blog-post-content">
+      <div className={styles["blog-post-content"]}>
         <ReactMarkdown
           source={markdownBody}
           escapeHtml={false}
           renderers={{ code: Highlight }}
         />
       </div>
-      <style jsx>{`
-        article {
-          overflow: hidden;
-        }
-        header {
-          margin-top: 1em;
-        }
-        h2 {
-          padding: 0 0.2em;
-        }
-        .date {
-          font-size: ${theme.sizes.milli};
-          line-height: ${theme.sizes.milliline};
-          text-align: center;
-        }
-      `}</style>
     </article>
   );
 };
