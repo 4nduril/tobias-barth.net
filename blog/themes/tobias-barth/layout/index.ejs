@@ -1,9 +1,0 @@
-<div class="blog-textcontainer">
-<% if (page.posts && page.posts.length) { %>
-	<% page.posts.each(function(post) { %>
-		<%- partial('partials/article', {post: post, index: true}) %>
-	<% }) %>
-<% } else { %>
-	<p>Daddeldidu</p>
-<% } %>
-</div>
