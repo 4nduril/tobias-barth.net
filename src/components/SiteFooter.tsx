@@ -8,11 +8,21 @@ const SiteFooter: FC = () => (
     </h3>
     <p className="mb-7">
       Email:{" "}
-      <a href="mailto:contact@tobias-barth.net" rel="me" className="u-mail">
+      <a
+        href="mailto:contact@tobias-barth.net"
+        rel="me"
+        className="u-mail text-link-color focus:outline-black"
+      >
         contact@tobias-barth.net
       </a>
       <br />
-      Telefon: <a href="tel:+4915111215929">+49 151 112 15 929</a>
+      Telefon:{" "}
+      <a
+        href="tel:+4915111215929"
+        className="text-link-color focus:outline-black"
+      >
+        +49 151 112 15 929
+      </a>
     </p>
     <p id="dse" className="mb-7">
       Bitte beachten Sie vor der Kontaktaufnahme meine Datenschutzerklärung.
