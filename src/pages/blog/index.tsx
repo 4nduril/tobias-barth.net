@@ -17,7 +17,9 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
   return (
     <Layout lang="en">
       <Head>
-        <title lang="en">Articles by Tobias Barth, Freelance Web Person</title>
+        <title lang="en">
+          Articles by Tobias Barth, Web Freelancer from Berlin
+        </title>
         <meta
           lang="en"
           name="description"
@@ -30,7 +32,7 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
         />
       </Head>
       <h2 className="text-3xl font-bold mb-7">
-        Articles by Tobias Barth, Freelance Web Person
+        Articles by Tobias Barth, Web Freelancer from Berlin
       </h2>
       <p className="mb-7 text-center">
         <a

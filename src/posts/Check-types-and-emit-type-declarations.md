@@ -11,7 +11,7 @@ date: '2019-10-31 19:59:48'
 
 ### Preface
 
-This article is part 5 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 5 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 ### Getting the types out of TypeScript
 
@@ -51,7 +51,7 @@ The `--declaration` flag ensures that TSC generates the type declaration files a
 
 The second flag, `--emitDeclarationOnly`, prevents TSC from outputting transpiled JavaScript files. We use Babel for that.
 
-You may ask yourself why we effectively transpile all of our code twice, once with Babel and once with TSC. It looks like a waste of time if TSC can do both. But [I discussed before](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/) the advantages of Babel. And having a very fast transpile step separate from a slower declaration generation step can translate to a much better developer experience. The output of declarations can occur only once shortly before publishing – transpiling is something that you do all the time.
+You may ask yourself why we effectively transpile all of our code twice, once with Babel and once with TSC. It looks like a waste of time if TSC can do both. But [I discussed before](http://tobias-barth.net/blog/Compiling-modern-language-features-with-the-TypeScript-compiler/) the advantages of Babel. And having a very fast transpile step separate from a slower declaration generation step can translate to a much better developer experience. The output of declarations can occur only once shortly before publishing – transpiling is something that you do all the time.
 
 #### With TSC
 

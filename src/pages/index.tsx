@@ -9,7 +9,7 @@ const Home: FunctionComponent = () => {
   return (
     <>
       <Head>
-        <title>tobias-barth.net – Modern Web Freelancer aus Berlin</title>
+        <title>Tobias Barth – Web Freelancer aus Berlin</title>
         <meta
           name="description"
           content="Web Development aus Berlin. Als Freelancer bringe ich viel Erfahrung mit – aus Projekten in eCommerce, Banking oder Travel. Spezialist in Single-Page-Applications mit React."

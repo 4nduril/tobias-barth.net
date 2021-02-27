@@ -54,9 +54,12 @@ The chapters of this series will not only show configurations I think you should
 
 We will start with the first points on our list above. As new articles arrive, I will add them here as links and I will also try to keep the finished articles updated when the tools they use get new features or change APIs. If you find something that's not true anymore, please give me a hint.
 
-1. [Transpile modern language features – With Babel](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/).
-1. [Compiling modern language features with the TypeScript compiler](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/).
-1. [Building your library: Part 1](http://tobias-barth.net/blog/2019/07/Building-your-library-Part-1/)
+1. [Transpile modern language features – With Babel](https://tobias-barth.net/blog/Transpile-modern-language-features-with-Babel/).
+1. [Compiling modern language features with the TypeScript compiler](https://tobias-barth.net/blog/Compiling-modern-language-features-with-the-TypeScript-compiler/).
+1. [Building your library: Part 1](https://tobias-barth.net/blog/Building-your-library-Part-1/)
+1. [Check types and emit type declarations](https://tobias-barth.net/blog/Check-types-and-emit-type-declarations)
+1. [How to bundle your library and why](https://tobias-barth.net/blog/How-to-bundle-your-library-and-why)
+1. [Bundling your library with Webpack](https://tobias-barth.net/blog/Bundling-your-library-with-Webpack)
 
 Oh and one last thing™: I'll be using `npm` throughout the series because I like it. If you like `yarn` better, just exchange the commands.
 

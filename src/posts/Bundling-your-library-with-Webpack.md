@@ -12,7 +12,7 @@ date: '2020-05-08 17:59:34'
 
 ### Preface
 
-This article is part 7 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 7 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 **If you are not interested in the background and reasoning behind the setup, [jump directly to the conclusion](#bylww-conclusion).**
 
@@ -145,7 +145,7 @@ module.exports = {
 
 ### Problem 2: Babels runtime helpers
 
-In case we are using Babel for transpiling, Webpack now runs into the next error. It tries to resolve the helper and polyfill imports that Babel created for us but as [we only declared them](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/) as a `peerDependency` we haven't installed them yet and so Webpack can't put them into the bundle.
+In case we are using Babel for transpiling, Webpack now runs into the next error. It tries to resolve the helper and polyfill imports that Babel created for us but as [we only declared them](http://tobias-barth.net/blog/Transpile-modern-language-features-with-Babel/) as a `peerDependency` we haven't installed them yet and so Webpack can't put them into the bundle.
 
 #### Bundling helpers?
 
@@ -185,7 +185,7 @@ Because some libraries expose themselves differently depending on the module sys
 
 ### Problem 4: File extensions
 
-This is of course only an issue if you are writing TypeScript or if you name files containing JSX `*.jsx` instead of `*js` (which we don't in the example library). Do you remember when we had to tell the Babel CLI which file extensions it should accept? If not, read again [about building our library](http://tobias-barth.net/blog/2019/07/Building-your-library-Part-1/). Now, Webpack has to find all the files we are trying to import in our code. And like Babel by default it looks for files with a `.js` extension. If we want Webpack to find other files as well we have to give it a list of valid extensions:
+This is of course only an issue if you are writing TypeScript or if you name files containing JSX `*.jsx` instead of `*js` (which we don't in the example library). Do you remember when we had to tell the Babel CLI which file extensions it should accept? If not, read again [about building our library](http://tobias-barth.net/blog/Building-your-library-Part-1/). Now, Webpack has to find all the files we are trying to import in our code. And like Babel by default it looks for files with a `.js` extension. If we want Webpack to find other files as well we have to give it a list of valid extensions:
 
 ```jsx
 // webpack.config.js
@@ -289,7 +289,7 @@ There are more nuanced ways to set `libraryTarget` than explained here. If you a
 
 We are done with the configuration part. (Unbelievable, right?!) The only thing that's left is changing the `package.json` so that the bundle can be imported from outside as an addition to our ES modules and that users can get it automatically from [unpkg.com](https://unpkg.com/) as well.
 
-Right now both, the `main` and the `module` key are pointing to `dist/index.js`. While only the latter is correct. As [I mentioned before](http://tobias-barth.net/blog/2019/07/Building-your-library-Part-1/) `main` should point to a ES5-compatible file and not to an ES module. Now we can safely change it to our new bundle file.
+Right now both, the `main` and the `module` key are pointing to `dist/index.js`. While only the latter is correct. As [I mentioned before](http://tobias-barth.net/blog/Building-your-library-Part-1/) `main` should point to a ES5-compatible file and not to an ES module. Now we can safely change it to our new bundle file.
 
 Of course we also have to actually build the bundle. For this we add an npm script named "bundle" to our script section and add it to the "build" script.
 

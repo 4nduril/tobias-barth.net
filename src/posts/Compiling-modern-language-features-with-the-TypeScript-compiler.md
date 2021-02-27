@@ -11,7 +11,7 @@ date: '2019-07-18 13:24:59'
 
 ### Preface
 
-This article is part 3 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 3 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
 ### How to use the TypeScript compiler `tsc` to transpile your code
 
@@ -44,7 +44,7 @@ Note that these options allow us to just run `tsc` on the command line without a
 
 ### Target environment
 
-Remember when we discussed `browserslist` in the "Babel" article? (If not, [check it out here](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/).) We used an array of queries to tell Babel exactly which environments our code should be able to run in. Not so with `tsc`.
+Remember when we discussed `browserslist` in the "Babel" article? (If not, [check it out here](http://tobias-barth.net/blog/Transpile-modern-language-features-with-Babel/).) We used an array of queries to tell Babel exactly which environments our code should be able to run in. Not so with `tsc`.
 
 If you are interested, read this intriguing [issue](https://github.com/Microsoft/TypeScript/issues/19183) in the TypeScript GitHub repository. Maybe some day in the future we will have such a feature in `tsc` but for now, we have to use "JavaScript versions" as targets.
 

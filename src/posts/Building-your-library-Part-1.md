@@ -12,9 +12,9 @@ date: '2019-07-24 10:39:26'
 
 ### Preface
 
-This article is part 4 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/2019/07/Publish-a-modern-JavaScript-or-TypeScript-library/).
+This article is part 4 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
-*Note:* I have promised in [part 3 of this series](http://tobias-barth.net/blog/2019/07/Compiling-modern-language-features-with-the-TypeScript-compiler/) that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.
+*Note:* I have promised in [part 3 of this series](http://tobias-barth.net/blog/Compiling-modern-language-features-with-the-TypeScript-compiler/) that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.
 
 ### Our first build
 
@@ -43,7 +43,7 @@ You define a `build` script as you may now in the `package.json` file inside of 
 
 #### Using `module`
 
-The standard key to point to the entry file of a package is `main`. But we are using `module` here. This goes back to a [proposal by the bundler Rollup](https://github.com/rollup/rollup/wiki/pkg.module). The idea here is that the entry point under a `main` key is valid ES5 only. Especially regarding module syntax. The code there should use things like CommonJS, AMD or UMD but not ESModules. While bundlers like Webpack and Rollup can deal with legacy modules they can't tree-shake them. (Read [the article on Babel](http://tobias-barth.net/blog/2019/07/Transpile-modern-language-features-with-Babel/) again if you forgot why that is.)
+The standard key to point to the entry file of a package is `main`. But we are using `module` here. This goes back to a [proposal by the bundler Rollup](https://github.com/rollup/rollup/wiki/pkg.module). The idea here is that the entry point under a `main` key is valid ES5 only. Especially regarding module syntax. The code there should use things like CommonJS, AMD or UMD but not ESModules. While bundlers like Webpack and Rollup can deal with legacy modules they can't tree-shake them. (Read [the article on Babel](http://tobias-barth.net/blog/Transpile-modern-language-features-with-Babel/) again if you forgot why that is.)
 
 Therefore the proposal states that you can provide an entry point under `module` to indicate that the code there is using modern ESModules. The bundlers will always look first if there is a `module` key in your package.json and in that case just use it. Only when they don't find it they will fall back to `main`.
 

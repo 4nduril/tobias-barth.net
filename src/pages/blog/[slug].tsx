@@ -29,8 +29,8 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
     <Layout>
       <Head>
         <title>
-          {frontmatter.title} – Blog-Articles by Tobias Barth, Freelance Web
-          Person
+          {frontmatter.title} – Blog-Articles by Tobias Barth, Web Freelancer
+          from Berlin
         </title>
         <meta
           name="description"
