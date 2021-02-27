@@ -32,7 +32,10 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
           {frontmatter.title} – Blog-Articles by Tobias Barth, Freelance Web
           Person
         </title>
-        <meta name="keywords" content={frontmatter.tags.join(", ")} />
+        <meta
+          name="description"
+          content={frontmatter.description || frontmatter.title}
+        />
         <link
           rel="alternate"
           type="application/rss+xml"

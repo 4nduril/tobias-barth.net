@@ -1,11 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { FunctionComponent } from "react";
-import matter, { GrayMatterFile } from "gray-matter";
-import Link from "next/link";
-import { Layout } from "../../components/Layout";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Link from "next/link";
+import matter, { GrayMatterFile } from "gray-matter";
+import { Layout } from "../../components/Layout";
 import { RssIcon } from "../../components/RssIcon";
 
 type BlogProps = {
@@ -15,12 +14,12 @@ type BlogProps = {
 };
 
 const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
-  const router = useRouter();
   return (
-    <Layout>
+    <Layout lang="en">
       <Head>
-        <title>Blog-Articles by Tobias Barth, Freelance Web Person</title>
+        <title lang="en">Articles by Tobias Barth, Freelance Web Person</title>
         <meta
+          lang="en"
           name="description"
           content="Articles about web development and design, HTML, CSS and JavaScript, Single-Page-Applications with ReactJS and without, performance and best practices."
         />
@@ -31,30 +30,30 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
         />
       </Head>
       <h2 className="text-3xl font-bold mb-7">
-        Blog-Articles by Tobias Barth, Freelance Web Person
+        Articles by Tobias Barth, Freelance Web Person
       </h2>
       <p className="mb-7 text-center">
-        <button
+        <a
+          href="/blog/feed/rss.xml"
           className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center"
-          onClick={() => router.push("/blog/feed/rss.xml")}
         >
           Abonnieren{" "}
           <span className="inline-block w-6 h-6 ml-4">
             <RssIcon />
           </span>
-        </button>
+        </a>
       </p>
       <ul>
         {posts.map(({ frontmatter }) => (
-          <li key={frontmatter.href}>
-            <Link href={frontmatter.href}>
-              <div className="mb-7">
-                <h3 className="text-2xl font-bold mb-4">
+          <li key={frontmatter.href} {...{ lang: frontmatter.lang }}>
+            <div className="mb-7">
+              <h3 className="text-2xl font-bold mb-4">
+                <Link href={frontmatter.href}>
                   <a>{frontmatter.title}</a>
-                </h3>
-                {frontmatter.description && <p>{frontmatter.description}</p>}
-              </div>
-            </Link>
+                </Link>
+              </h3>
+              {frontmatter.description && <p>{frontmatter.description}</p>}
+            </div>
           </li>
         ))}
       </ul>

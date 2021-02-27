@@ -13,8 +13,27 @@ interface BlogArticleProps {
   markdownBody?: GrayMatterFile<string>["content"];
 }
 
-const formatDate = (date: Date) => {
-  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+const formatDate = (date: Date, lang?: string) => {
+  const englishMonths = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ] as const;
+
+  return lang === "de"
+    ? `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+    : `${
+        englishMonths[date.getMonth()]
+      }, ${date.getDate()}th ${date.getFullYear()}`;
 };
 
 const BlogArticle: FC<BlogArticleProps> = ({ frontmatter, markdownBody }) => {
@@ -23,11 +42,22 @@ const BlogArticle: FC<BlogArticleProps> = ({ frontmatter, markdownBody }) => {
       <header>
         <h2 className="text-3xl font-bold mt-4 mb-7">{frontmatter.title}</h2>
         {frontmatter.date && (
-          <p className="text-base text-center">
-            Geschrieben am{" "}
-            <time dateTime={new Date(frontmatter.date).toISOString()}>
-              {formatDate(new Date(frontmatter.date))}
-            </time>
+          <p className="text-base text-center mb-7">
+            {frontmatter.lang === "de" ? (
+              <>
+                Geschrieben am{" "}
+                <time dateTime={new Date(frontmatter.date).toISOString()}>
+                  {formatDate(new Date(frontmatter.date), frontmatter.lang)}
+                </time>
+              </>
+            ) : (
+              <>
+                Written on{" "}
+                <time dateTime={new Date(frontmatter.date).toISOString()}>
+                  {formatDate(new Date(frontmatter.date), frontmatter.lang)}
+                </time>
+              </>
+            )}
           </p>
         )}
       </header>

@@ -2,7 +2,6 @@ import Head from "next/head";
 import { FunctionComponent } from "react";
 import SiteHead from "../components/SiteHead";
 import MainNavigation from "../components/MainNavigation";
-import MainContent from "../components/MainContent";
 import SiteFooter from "../components/SiteFooter";
 import { Portrait } from "../components/Portrait";
 
@@ -13,7 +12,7 @@ const Home: FunctionComponent = () => {
         <title>tobias-barth.net – Modern Web Freelancer aus Berlin</title>
         <meta
           name="description"
-          content="Web Development aus Berlin. Freelancer Tobias Barth bringt viel Erfahrung mit HTML, CSS und JavaScript in Ihr Projekt. Accessibility und Responsive Design, Single-Page-Applications mit ReactJS oder Vue."
+          content="Web Development aus Berlin. Als Freelancer bringe ich viel Erfahrung mit – aus Projekten in eCommerce, Banking oder Travel. Spezialist in Single-Page-Applications mit React."
         />
       </Head>
       <SiteHead />

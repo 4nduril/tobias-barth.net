@@ -13,9 +13,9 @@ date: '2018-06-21 18:14:14'
 
 I added my SSH public key to the droplet when I created it, so I can now login by typing:
 
-{% code %}
+```
 ~ $ ssh -l root <droplet-ip>
-{% endcode %}
+```
 
 and then providing my passphrase.
 
@@ -23,7 +23,7 @@ and then providing my passphrase.
 
 First, I will update existing packages. (Sidenote: Since the DO-droplets are not the most heavy-lifting machines, at least in my version, I will install everything as precompiled packages instead of using ports.)
 
-{% code %}
+```
 root@pioneer-3:~ # pkg upgrade
 Updating FreeBSD repository catalogue...
 Fetching meta.txz: 100%    944 B   0.9kB/s    00:01
@@ -118,11 +118,12 @@ Proceed with this action? [y/N]:y
 .
 .
 root@pioneer-3:~ #
-{% endcode %}
+
+```
 
 Now I can add my non-privileged user (aptly named "tobi"):
 
-{% code %}
+```
 root@pioneer-3:~ # adduser
 Username: tobi
 Full name: Tobias Barth
@@ -153,55 +154,55 @@ OK? (yes/no): yes
 adduser: INFO: Successfully added (tobi) to the user database.
 Add another user? (yes/no): no
 Goodbye!
-{% endcode %}
+```
 
 Notably, I added my new user to the group "wheel" to enable the use of "sudo" for this user. To make that work, I have to edit the file `/usr/local/etc/sudoers`. This is not done directly, but with help from the command `visudo`:
 
-{% code %}
+```
 root@pioneer-3:~ # visudo
-{% endcode %}
+```
 
 Now, uncomment the line
 
-{% code %}
+```
 %wheel ALL=(ALL) ALL
-{% endcode %}
+```
 
 ### SSH-Configuration
 
 At this point, I can login per SSH as the user "tobi" with my password. That is a step in the right direction (I want to disable root logins), but not ideal. Authentication with public/private key pairs is more secure than using a password. So I will configure that. My public key is already on the server, but within the home directory of root. I can just copy it over to my home folder:
 
-{% code %}
+```
 root@pioneer-3:~ # su tobi
 [tobi@pioneer-3 ~]$ cd
 [tobi@pioneer-3 ~]$ mkdir .ssh
 [tobi@pioneer-3 ~]$ chmod 700 .ssh
 [tobi@pioneer-3 ~]$ sudo cp /root/authorized_keys .ssh
 [tobi@pioneer-3 ~]$ sudo chown tobi:tobi .ssh/authorized_keys
-{% endcode %}
+```
 
 I can now login with my SSH-Key and a passphrase as the unprivileged user "tobi". Next, I edit the SSH config in `/etc/ssh/sshd_config`
 
 I change it so that it contains the following lines and values:
 
-{% code %}
+```
 PasswordAuthentication no
 ChallengeResponseAuthentication no
 PubkeyAuthentication yes
 PermitRootLogin no
-{% endcode %}
+```
 
 With this root is excluded from remote and users can only authenticate with a key.
 
 I have sneaked in a different shell prompt and not only that – it's an entire different shell: ZSH. I installed it with `pkg install zsh` and then made it the default shell for both, the root user and the user "tobi". Changing the shell is as easy as:
 
-{% code %}
+```
 chsh -s zsh
-{% endcode %}
+```
 
 while "being" the user I want to change. Alternatively, I can append the username to the command. Additionally I provided an absolute basic `.zshrc` configuration file for both users:
 
-{% code %}
+```
 # Lines configured by zsh-newuser-install
 setopt appendhistory autocd extendedglob nomatch notify
 unsetopt beep
@@ -212,7 +213,7 @@ promptinit
 prompt redhat
 
 alias l="ls -al"
-{% endcode %}
+```
 
 ### Conclusion
 

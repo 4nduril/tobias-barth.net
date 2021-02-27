@@ -6,6 +6,7 @@ tags:
 categories:
   - Meta
 description: Endlich habe ich es doch geschafft. Mein Blog ist funktionsfähig und online.
+lang: de
 date: '2015-07-25 02:24:16'
 ---
 

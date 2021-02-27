@@ -6,6 +6,7 @@ tags:
 categories:
   - Web-Stuff
 description: Der Fehler, den der Kunde berichtete, beruhte darauf, dass das ursprünglich verwendete `$(document).scrollTop()` nicht im IE8 funktionierte und nachdem er dies durch das funktionierende `$('html').scrollTop()` ersetzt hatte, lief es nicht mehr in Webkit-Browsern.
+lang: de
 date: '2013-01-28 22:01:00'
 ---
 
@@ -19,7 +20,7 @@ Die Lösung dafür war relativ schnell gefunden: Ich ersetzte einfach in dem bet
 
 Aber was war die Ursache? Nach viel Ausprobieren blieb mir nichts übrig als in die jQuery-Source zu schauen und mir anzusehen, wie jQuery.scrollTop() definiert ist. Für das verwendete jQuery 1.6.4 sieht das so aus:
 
-{% code lang:javascript %}
+```javascript
 // Create scrollLeft and scrollTop methods
 jQuery.each( ["Left", "Top"], function( i, name ) {
   var method = "scroll" + name;
@@ -48,15 +49,15 @@ jQuery.each( ["Left", "Top"], function( i, name ) {
     // Interessiert uns hier nicht
   };
 });
-{% endcode %}
+```
 
 Der Fall des IE8 sollte mit der Zeile abgedeckt werden, die mit `jQuery.support.boxModel` beginnt. Diese Eigenschaft dient eigentlich dazu, zu überprüfen, ob das W3C-Box-Modell vom Browser unterstützt wird. Das Problem ist, in diesem Fall gibt sie `false` zurück, obwohl das Dokument in Ordnung ist und der Browser sich im Standardmodus befindet. Warum? Also nachsehen, wie `jQuery.support.boxModel` gesetzt wird:
 
-{% code lang:javascript %}
+```javascript
 // Figure out if the W3C box model works as expected
 div.style.width = div.style.paddingLeft = "1px";
 support.boxModel = div.offsetWidth === 2;
-{% endcode %}
+```
 
 Es wird ein Test-Div erzeugt, dem verschiedene Eigenschaften zugewiesen und das dann an den `body` angehängt wird. Da das Element hier einen Pixel breit ist und außerdem ein Padding von einem Pixel erhält, sollte `offsetWidth`, das die Gesamtbreite enthält, 2px zurückgeben.
 

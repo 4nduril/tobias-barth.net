@@ -6,6 +6,7 @@ tags:
   - linux
   - performance
 description: Ungewöhnlich viele "socket hang up"-Meldungen. Nicht so viele, dass wir ernsthafte Schwierigkeiten hätten, die auch sichtbar wären, aber, und das ist besonders interessant, es sind wesentlich mehr als bei anderen Webapps, die Java-basiert sind und dieselben Services bei jedem Request anfragen.
+lang: de
 date: '2016-04-09 18:45:00'
 ---
 

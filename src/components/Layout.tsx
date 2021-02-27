@@ -4,11 +4,15 @@ import MainNavigation from "./MainNavigation";
 import MainContent from "./MainContent";
 import SiteFooter from "./SiteFooter";
 
-export const Layout: FunctionComponent = ({ children }) => (
+type LayoutProps = {
+  lang?: string;
+};
+
+export const Layout: FunctionComponent<LayoutProps> = ({ children, lang }) => (
   <>
     <SiteHead />
     <MainNavigation />
-    <MainContent>{children}</MainContent>
+    <MainContent lang={lang}>{children}</MainContent>
     <SiteFooter />
   </>
 );

@@ -8,6 +8,7 @@ tags:
 categories:
   - Server-Administration
 description: Ich habe vor Kurzem begonnen Jails in FreeBSD zu nutzen und auszuprobieren. Mein Digitalocean-Droplet läuft unter FreeBSD 11 und DO gibt mir eine public v4 IP-Adresse und ein /124 v6 Präfix. Für meinen privaten Kram interessiert mich IPv4 nicht, daher habe ich 16 öffentliche IPs, mit denen ich spielen kann.
+lang: de
 date: '2017-07-01 11:39:12'
 ---
 
@@ -17,12 +18,12 @@ Das heißt, ich brauche kein NAT sondern kann den Jails direkt public IPs zuweis
 
 Bisher habe ich mit `ezjail` zwei Jails eingrichtet: `git` und `backup`. DO weißt dem Interface automatisch die v6-IP mit der Endziffer `1` zu. In meiner `rc.conf` steht entsprechend für die beiden Jail-IPs:
 
-{% code %}
+```
 ifconfig_vtnet0_alias1="inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2 prefixlen 64"
 ifconfig_vtnet0_alias2="inet6 xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3 prefixlen 64"
 cloned_interfaces="lo1"
 ezjail_enable="YES"
-{% endcode %}
+```
 
 Heute musste ich das Droplet powercyclen und beim Boot kam nur der `git`-Jail hoch. Ich probierte, den zweiten selbst zu starten:
 
