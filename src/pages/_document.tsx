@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
             async
             defer
             data-domain="tobias-barth.net"
-            src="https://plausible.io/js/plausible.js"
+            src="https://plausible.tobias-barth.net/js/index.js"
           ></script>
         </Head>
         <body className="text-lg lg:text-xl leading-snug font-body">
