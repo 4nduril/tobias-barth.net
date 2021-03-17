@@ -56,19 +56,32 @@ const extractGrayMatter = (data: GrayMatterFile<string>) => {
 
 const wrapInProps = (data: any) => ({ props: data });
 
-export const getStaticProps = ({ params: { slug } }) =>
-  import(`../../posts/${slug}.md`)
+export const getStaticProps = async ({ params: { slug }, preview }) => {
+  const postData = await import(`../../posts/${slug}.md`)
     .then(({ default: content }) => content)
-    .then(matter)
-    .then(extractGrayMatter)
-    .then(wrapInProps)
-    .catch((reason) => {
-      return {
-        props: {
-          error: "Post does not exist: " + JSON.stringify(reason),
-        },
-      };
-    });
+    .catch(() => false);
+  if (postData) {
+    return wrapInProps(extractGrayMatter(matter(postData)));
+  }
+  if (!preview) {
+    return {
+      props: {
+        error: "Post does not exist.",
+      },
+    };
+  }
+  const draftData = await import(`../../drafts/${slug}.md`)
+    .then(({ default: content }) => content)
+    .catch(() => false);
+  if (draftData) {
+    return wrapInProps(extractGrayMatter(matter(draftData)));
+  }
+  return {
+    props: {
+      error: "Post does not exist.",
+    },
+  };
+};
 
 export const getStaticPaths = async () => {
   const paths = await fs
