@@ -27,15 +27,20 @@ Ich hatte eine ungeordnete Liste, deren Elemente je ein `<div>` enthielten, in d
 Zuerst ein Beispiel, wie es funktionieren sollte. Die `<li>`-Elemente sollen eine definierte Höhe haben und die `<div>`s sollten genauso hoch sein. Das CSS dazu:
 
 ```css
-* { margin:0; padding:0; }
-ul { list-style-type:none; }
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style-type: none;
+}
 li {
-  background:blue;
-  height:10em; 
+  background: blue;
+  height: 10em;
 }
 div {
-  background:red;
-  height:100%; /* Genau so hoch wie sein Container */
+  background: red;
+  height: 100%; /* Genau so hoch wie sein Container */
 }
 ```
 
@@ -45,7 +50,7 @@ Jetzt geben wir dem `<li>`-Element aber eine vom Viewport abhängige Größe:
 
 ```css
 li {
-  height:30vw; /* Die Höhe soll 30 Prozent der Breite des Viewports betragen */
+  height: 30vw; /* Die Höhe soll 30 Prozent der Breite des Viewports betragen */
 }
 ```
 

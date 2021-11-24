@@ -10,7 +10,6 @@ description: Part 2 of the series "Publish a modern JavaScript (or TypeScript) l
 date: '2019-07-05 16:05:11'
 ---
 
-
 ### Preface
 
 This article is part 2 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
@@ -32,23 +31,18 @@ module.exports = {
       '@babel/env',
       {
         modules: false,
-      }
+      },
     ],
     '@babel/preset-typescript',
-    '@babel/preset-react'
+    '@babel/preset-react',
   ],
-  plugins: [
-    [
-      '@babel/plugin-transform-runtime',
-      { corejs: 3 }
-    ]
-],
+  plugins: [['@babel/plugin-transform-runtime', { corejs: 3 }]],
   env: {
     test: {
-      presets: ['@babel/env']
-    }
-  }
-};
+      presets: ['@babel/env'],
+    },
+  },
+}
 ```
 
 Let's go through it because there are a few assumptions used in this config which we will need for other features in our list.
@@ -61,9 +55,10 @@ The file is treated as a CommonJS module and is expected to return a configurati
 
 Presets are (sometimes configurable) sets of Babel plugins so that you don't have to manage yourself which plugins you need. The one you should definitely use is `@babel/preset-env`. You have already installed it. Under the `presets` key in the config you list every preset your library is going to use along with any preset configuration options.
 
-In the example config above there are three presets: 
-1. `env` is the mentioned standard one. 
-1. `typescript` is obviously only needed to compile files that contain TypeScript syntax. As already mentioned it works by **throwing away** anything that isn't JavaScript. It does not interpret or even check TypeScript. *And that's a Good Thing.* We will talk about that point later. If your library is not written in TypeScript, you don't need this preset. But if you need it, you have to install it of course: `npm install -D @babel/preset-typescript`.
+In the example config above there are three presets:
+
+1. `env` is the mentioned standard one.
+1. `typescript` is obviously only needed to compile files that contain TypeScript syntax. As already mentioned it works by **throwing away** anything that isn't JavaScript. It does not interpret or even check TypeScript. _And that's a Good Thing._ We will talk about that point later. If your library is not written in TypeScript, you don't need this preset. But if you need it, you have to install it of course: `npm install -D @babel/preset-typescript`.
 1. `react` is clearly only needed in React projects. It brings plugins for JSX syntax and transforming. If you need it, install it with: `npm i -D @babel/preset-react`. Note: With the config option `pragma` (and probably `pragmaFrag`) you can transpile JSX to other functions than `React.createElement`. See [documentation](https://babeljs.io/docs/en/babel-preset-react#pragma).
 
 Let us look at the `env` preset again. Notable is the `modules: false` option for `preset-env`. The effect is this: As per default Babel transpiles ESModules (`import` / `export`) to CommonJS modules (`require()` / `module.export(s)`). With `modules` set to `false` Babel will output the transpiled files with their ESModule syntax untouched. The rest of the code will be transformed, just the module related statements stay the same. This has (at least) two benefits:
@@ -112,7 +107,7 @@ It took me a few hours reading and understanding the problem, the current soluti
 
 But because I already did you don't have to if you don't want to. Ok, let's start with the fact that there two standard ways to get polyfills into your code. Wait, one step back: Why polyfills?
 
-If you already know, skip to [Import core-js](#tmplfwb-import-core-js). When Babel transpiles your code according to the target environment that you specified, it just changes syntax. Code that the target (the browser) does not understand is changed to (probably longer and more complicated) code that does the same and is understood. But there are things beyond syntax that are possibly not supported: features. Like for example Promises. Or certain features of other builtin types like `Object.is` or `Array.from` or whole new types like `Map` or `Set`. Therefore we need polyfills that recreate those features for targets that do not support them natively. 
+If you already know, skip to [Import core-js](#tmplfwb-import-core-js). When Babel transpiles your code according to the target environment that you specified, it just changes syntax. Code that the target (the browser) does not understand is changed to (probably longer and more complicated) code that does the same and is understood. But there are things beyond syntax that are possibly not supported: features. Like for example Promises. Or certain features of other builtin types like `Object.is` or `Array.from` or whole new types like `Map` or `Set`. Therefore we need polyfills that recreate those features for targets that do not support them natively.
 
 Also note that we are talking here only about polyfills for ES-features or some closely related Web Platform features (see the [full list here](https://github.com/zloirock/core-js/blob/master/README.md#features)). There are browser features like for instance the global `fetch` function that need separate polyfills.
 
@@ -137,7 +132,7 @@ This will transform our code so that the import of the whole `core-js` gets remo
 
 Two additional notes here: (1) <a name="tmplfwb-corejs-3"></a>You have to explicitly set `corejs` to `3`. If the key is absent, Babel will use version 2 of `corejs` and you don't want that. Much has changed for the better in version 3, especially feature-wise. But also bugs have been fixed and the package size is dramatically smaller. If you want, read it all up [here (overview)](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#what-changed-in-core-js3) and [here (changelog for version 3.0.0)](https://github.com/zloirock/core-js/blob/master/CHANGELOG.md#300---20190319).
 
-And (2), there is another possible value for `useBuiltIns` and that is `entry`. This variant will not figure out which features your code actually needs. Instead, it will just add *all* polyfills that exist for the given target environment. It works by looking for `corejs` imports in your source (like `import corejs/stable`) which should only appear once in your codebase, probably in your entry module. Then, it replaces this "meta" import with all of the specific imports of polyfills that match your targets. This approach will likely result in a much, much larger package with much of unneeded code. So we just use `usage`. (With `corejs@2` there were a few problems with `usage` that could lead to wrong assumptions about which polyfills you need. So in some cases `entry` was the more safe option. But these problems are appearently fixed with version 3.)
+And (2), there is another possible value for `useBuiltIns` and that is `entry`. This variant will not figure out which features your code actually needs. Instead, it will just add _all_ polyfills that exist for the given target environment. It works by looking for `corejs` imports in your source (like `import corejs/stable`) which should only appear once in your codebase, probably in your entry module. Then, it replaces this "meta" import with all of the specific imports of polyfills that match your targets. This approach will likely result in a much, much larger package with much of unneeded code. So we just use `usage`. (With `corejs@2` there were a few problems with `usage` that could lead to wrong assumptions about which polyfills you need. So in some cases `entry` was the more safe option. But these problems are appearently fixed with version 3.)
 
 ### Tell transform-runtime to import core-js
 
@@ -166,7 +161,7 @@ On the other hand, using the transform plugin does not account for the environme
 
 So it looks like you have to choose between a package that adds as few code as possible and one that plays nicely with unknown applications around it. I have played around with the different options a bit and bundled the resulting files with webpack and this is my result:
 
-You get the smallest bundle with the `core-js` globals from `preset-env`. But it's too dangerous for a library to mess with the global namespace of its users. Besides that, in the (hopefully very near) future the transform-runtime plugin will also use the browserslist target environments. So the size issue is going to go away. 
+You get the smallest bundle with the `core-js` globals from `preset-env`. But it's too dangerous for a library to mess with the global namespace of its users. Besides that, in the (hopefully very near) future the transform-runtime plugin will also use the browserslist target environments. So the size issue is going to go away.
 
 ### The `env` key
 
@@ -201,22 +196,22 @@ module.exports = {
       '@babel/env', // transpile for targets
       {
         modules: false, // don't transpile module syntax
-      }
+      },
     ],
   ],
   plugins: [
     [
       '@babel/plugin-transform-runtime', // replace helper code with runtime imports (deduplication)
-      { corejs: 3 } // import corejs polyfills exactly where they are needed
-    ]
+      { corejs: 3 }, // import corejs polyfills exactly where they are needed
+    ],
   ],
   env: {
-    test: { // extra configuration for process.env.NODE_ENV === 'test'
-      presets: ['@babel/env'] // overwrite env-config from above with transpiled module syntax
-    }
-  }
-};
-
+    test: {
+      // extra configuration for process.env.NODE_ENV === 'test'
+      presets: ['@babel/env'], // overwrite env-config from above with transpiled module syntax
+    },
+  },
+}
 ```
 
 If you write TypeScript, run `npm i -D @babel/preset-typescript` and add `'@babel/preset-typescript'` to the `presets`.
@@ -241,7 +236,7 @@ Add a `browserslist` section in your package.json:
 
 In case of using another browserslist query that includes targets that do not have support for generator functions and/or async/await, there is something you have to tell your users:
 
-Babel's transform-runtime plugin will import `regenerator-runtime`. This library depends on a globally available Promise constructor. **But** Babel will not include a promise polyfill for regenerator-runtime. Probably because it adds polyfills only for things genuinely belonging to *your* code, not external library code. That means, if your usecase meets these conditions, you should mention it in your README or installation instructions that the users of your lib have to make sure there is a Promise available in their application.
+Babel's transform-runtime plugin will import `regenerator-runtime`. This library depends on a globally available Promise constructor. **But** Babel will not include a promise polyfill for regenerator-runtime. Probably because it adds polyfills only for things genuinely belonging to _your_ code, not external library code. That means, if your usecase meets these conditions, you should mention it in your README or installation instructions that the users of your lib have to make sure there is a Promise available in their application.
 
 And that is it for the Babel setup.
 

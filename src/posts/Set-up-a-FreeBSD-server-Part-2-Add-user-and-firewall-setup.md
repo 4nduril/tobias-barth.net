@@ -8,7 +8,6 @@ description: Some initial setup work like adding a user, properly configuring SS
 date: '2018-06-21 18:14:14'
 ---
 
-
 [Last time](/blog/2018/06/Set-up-a-FreeBSD-server-on-DigitalOcean-with-jails-Part-1/) I stopped when my new droplet was initialized. Next, I will do some initial setup work like adding a user, properly configuring SSH access and adding a firewall.
 
 I added my SSH public key to the droplet when I created it, so I can now login by typing:

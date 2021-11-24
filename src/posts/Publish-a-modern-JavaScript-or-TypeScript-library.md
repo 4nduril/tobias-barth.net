@@ -9,7 +9,6 @@ description: Did you ever write some library code together and then wanted to pu
 date: '2019-07-05 16:02:26'
 ---
 
-
 Did you ever write some library code together and then wanted to publish it as an NPM package but realized you have no idea what is the technique du jour to do so?
 
 Did you ever wonder "Should I use Webpack or Rollup?", "What about ES modules?", "What about any other package format, actually?", "How to publish Types along with the compiled code?" and so on?
@@ -20,15 +19,15 @@ Perfect! You have found the right place. In this series of articles I will try t
 
 This is the set of tools and their respective version range for which this tutorial is tested:
 
-- ES2018 
+- ES2018
 - Webpack >= 4
 - Babel >= 7.4
 - TypeScript >= 3
 - Rollup >= 1
 - React >= 16.8
-( code aimed at other libraries like Vue or Angular should work the same )
+  ( code aimed at other libraries like Vue or Angular should work the same )
 
-Some or even most of that what follows could be applied to older versions of these tools, too. But I will not guarantee or test it. 
+Some or even most of that what follows could be applied to older versions of these tools, too. But I will not guarantee or test it.
 
 ### Creation
 
@@ -62,4 +61,3 @@ We will start with the first points on our list above. As new articles arrive, I
 1. [Bundling your library with Webpack](https://tobias-barth.net/blog/Bundling-your-library-with-Webpack)
 
 Oh and one last thing™: I'll be using `npm` throughout the series because I like it. If you like `yarn` better, just exchange the commands.
-

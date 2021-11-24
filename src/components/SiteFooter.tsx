@@ -1,5 +1,5 @@
-import { FC } from "react";
-import Link from "next/link";
+import { FC } from 'react'
+import Link from 'next/link'
 
 const SiteFooter: FC = () => (
   <footer className="text-center pb-7" aria-describedby="dse">
@@ -7,7 +7,7 @@ const SiteFooter: FC = () => (
       Kontaktieren Sie mich
     </h3>
     <p className="mb-7">
-      Email:{" "}
+      Email:{' '}
       <a
         href="mailto:contact@tobias-barth.net"
         rel="me"
@@ -16,7 +16,7 @@ const SiteFooter: FC = () => (
         contact@tobias-barth.net
       </a>
       <br />
-      Telefon:{" "}
+      Telefon:{' '}
       <a
         href="tel:+4915111215929"
         className="text-link-color focus:outline-black"
@@ -47,6 +47,6 @@ const SiteFooter: FC = () => (
       </a>
     </p>
   </footer>
-);
+)
 
-export default SiteFooter;
+export default SiteFooter

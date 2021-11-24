@@ -8,7 +8,6 @@ description: Part 5 of the series "Publish a modern JavaScript (or TypeScript) l
 date: '2019-10-31 19:59:48'
 ---
 
-
 ### Preface
 
 This article is part 5 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
@@ -55,14 +54,13 @@ You may ask yourself why we effectively transpile all of our code twice, once wi
 
 #### With TSC
 
-When we use TSC to generate the published library code, we can use it *in the same step* to spit out the declarations. Instead of just `tsc`, we call:
+When we use TSC to generate the published library code, we can use it _in the same step_ to spit out the declarations. Instead of just `tsc`, we call:
 
 ```
 tsc --declaration
 ```
 
 That is all.
-
 
 ### Alias All The Things
 
@@ -96,7 +94,7 @@ And if you are just using TSC, it looks like this:
 }
 ```
 
-Note that we don't add `check-types` to `build`. First of all building and testing are two very different things. We don't want to mix them explicitly. And second, in both cases we *do* check the types on build. Because as I said: that happens every time you call `tsc`. So even if you are slightly pedantic about type-checking on build, you don't have to call `check-types` within the build script.
+Note that we don't add `check-types` to `build`. First of all building and testing are two very different things. We don't want to mix them explicitly. And second, in both cases we _do_ check the types on build. Because as I said: that happens every time you call `tsc`. So even if you are slightly pedantic about type-checking on build, you don't have to call `check-types` within the build script.
 
 One great advantage of aliasing every action to a NPM script is that everyone working on your library (including you) can just run `npm run` and will get a nice overview of what scripts are available and what they do.
 

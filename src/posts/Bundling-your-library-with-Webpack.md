@@ -9,7 +9,6 @@ description: Part 7 of the series "Publish a modern JavaScript (or TypeScript) l
 date: '2020-05-08 17:59:34'
 ---
 
-
 ### Preface
 
 This article is part 7 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
@@ -22,11 +21,11 @@ In the last post we have established in which cases we may need to bundle our li
 
 As promised I will make the start with Webpack. Probably most of you have already had contact with Webpack. Probably in the context of website/application bundling. Anyway, a short intro to what it is and does. It is a very versatile tool that was originally build around the concept of code-splitting. Of course it can do (and does) many more things than that but that was the initial, essential idea: make it possible and make it easy to split all of your application code into chunks of code that belong together. So that the browser (the user) does not have to first download, parse and execute **all** of the app code before anything works. But instead to load only the right amount of code needed at the moment. Webpack is awesome at that.
 
-The thing is, we don't want to do that. We do not have an application, we have a library. There is either no need for splitting because our code really does only one thing (even if it is a complex thing). Or, we provide rather independent code blocks but then it's the *application's* job to put the right things in the right chunks. We can not assume anything about the library-user's needs so they get to decide about splitting.
+The thing is, we don't want to do that. We do not have an application, we have a library. There is either no need for splitting because our code really does only one thing (even if it is a complex thing). Or, we provide rather independent code blocks but then it's the _application's_ job to put the right things in the right chunks. We can not assume anything about the library-user's needs so they get to decide about splitting.
 
 Then, what can Webpack do for us? It can take all of our carefully crafted modules, walk through their dependency structure like a tree and put them all together in one module – a bundle. Plus, it adds a tiny bit of runtime code to make sure everything is consumable as we expect it to.
 
-Webpack, like all bundlers I can think of right now, can work directly with the source code. It's not like you have to, say, transpile it first and then Webpack starts its thing. But for Webpack to be able to understand your code and also to apply any transformation you may want, you need to use so-called *loaders*. There is a `babel-loader` that we can use for transpiling, TypeScript-loaders, even things like SVG- or CSS-loaders which allow us to import things in our JS/TS files that aren't even related to JavaScript.
+Webpack, like all bundlers I can think of right now, can work directly with the source code. It's not like you have to, say, transpile it first and then Webpack starts its thing. But for Webpack to be able to understand your code and also to apply any transformation you may want, you need to use so-called _loaders_. There is a `babel-loader` that we can use for transpiling, TypeScript-loaders, even things like SVG- or CSS-loaders which allow us to import things in our JS/TS files that aren't even related to JavaScript.
 
 This article does not want and is not able to cover all the possibilities of what you can achieve with Webpack. If you want to learn more, consult the official [documentation](https://webpack.js.org/). It's really good these days. (Back in my time … but anyway.)
 
@@ -62,8 +61,8 @@ module.exports = {
   entry: './src/index.js', // or './src/index.ts' if TypeScript
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'library-starter.js'
-  }
+    filename: 'library-starter.js',
+  },
 }
 ```
 
@@ -151,7 +150,7 @@ In case we are using Babel for transpiling, Webpack now runs into the next error
 
 As you remember, we deliberately did define `@babel/runtime-corejs3` as a peer dependency to make sure our delivered library is as small as possible and also to allow the user to have at best only one version of it installed, keeping their application bundle smaller. Now, if we install it by ourselves and bundle it with Webpack, then all the benefit is gone. Yes, that's right. We can of course tell Webpack that certain imports should be treated as "external" and we will in fact do that later on for the "react" dependency that our specific library has. But not for the runtime helpers.
 
-Because remember why we are bundling: One of the reasons was to make it possible for a user to drop the bundle in a `script` tag into their page. To be able to do that with deps declared as external, also *those* have to be available as separate UMD package. This is the case for many things like React or Lodash but not for this runtime package. That means we have to bundle it together with our code. We could make a very sophisticated setup with several Webpack configs, one resulting in a bigger bundle for that specific use case and one for usual importing in an application. But *we already reached* the second goal: with our non-bundled build.
+Because remember why we are bundling: One of the reasons was to make it possible for a user to drop the bundle in a `script` tag into their page. To be able to do that with deps declared as external, also _those_ have to be available as separate UMD package. This is the case for many things like React or Lodash but not for this runtime package. That means we have to bundle it together with our code. We could make a very sophisticated setup with several Webpack configs, one resulting in a bigger bundle for that specific use case and one for usual importing in an application. But _we already reached_ the second goal: with our non-bundled build.
 
 If your library uses non-JS/TS imports like CSS or SVGs, then of course you can think about how much it will save the users of your library if you go that extra mile. I am not going to cover that in this article. Maybe at a later point when we have all of our foundations in place.
 
@@ -181,7 +180,7 @@ module.exports = {
 }
 ```
 
-Because some libraries expose themselves differently depending on the module system that is being used, we can (and must) declare the name under which the external can be found for each of these systems. `root` denotes the name of a global accessible variable. Deeper explanation can be found in the [Webpack docs](https://webpack.js.org/configuration/externals/#object). 
+Because some libraries expose themselves differently depending on the module system that is being used, we can (and must) declare the name under which the external can be found for each of these systems. `root` denotes the name of a global accessible variable. Deeper explanation can be found in the [Webpack docs](https://webpack.js.org/configuration/externals/#object).
 
 ### Problem 4: File extensions
 
@@ -195,7 +194,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.jsx', 'js']
   },
   ...
-} 
+}
 ```
 
 If you are not writing TypeScript the list of extensions can be as short as `['.jsx', '.js']`. We didn't need to specify the `*.jsx` extension for the normal Babel call because Babel recognizes it already (as opposed to `*.tsx` for example).
@@ -249,9 +248,9 @@ But this is still not enough because we now get an executable script that create
 ```html
 <script src="/library-starter.js"></script>
 <script>
-...
-libraryStarter.usePropsThatChanged...
-...
+  ...
+  libraryStarter.usePropsThatChanged...
+  ...
 </script>
 ```
 
@@ -316,7 +315,7 @@ Install webpack:
 npm install -D webpack webpack-cli
 ```
 
- Install babel-loader or ts-loader:
+Install babel-loader or ts-loader:
 
 ```bash
 npm install -D babel-loader # or ts-loader

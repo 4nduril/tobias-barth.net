@@ -27,15 +27,15 @@ ezjail_enable="YES"
 
 Heute musste ich das Droplet powercyclen und beim Boot kam nur der `git`-Jail hoch. Ich probierte, den zweiten selbst zu starten:
 
-	# ezjail-admin start backup
+    # ezjail-admin start backup
 
 Das gab diesen Fehler aus:
 
-	ifconfig: ioctl (SIOCAIFADDR): Invalid argument)
+    ifconfig: ioctl (SIOCAIFADDR): Invalid argument)
 
 Erst wusste ich damit nichts anzufangen. Dann fiel mir auf, dass in der Zeile davor der Befehl stand, der versucht wurde auszuführen:
 
-	/usr/sbin/ifconfig vtnet0 inet6 <adresse>/128 alias
+    /usr/sbin/ifconfig vtnet0 inet6 <adresse>/128 alias
 
 Hoppala. `ezjail` versuchte selbst einen Alias anzulegen, obwohl schon einer existiert. Tatsächlich habe ich dann nochmal selbst den `ifconfig` Befehl getestet, geht tatsächlich nicht.
 
@@ -43,15 +43,14 @@ Ist auch klar: Mit dieser IP war bereits ein Alias definiert _mit der Präfixlä
 
 Ein Blick in die `ezjail`-Config-files für die beiden Jails zeigt, dass ich bei dem `git`-Jail die IP so konfiguriert habe:
 
-	export jail_git_ip="xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2"
+    export jail_git_ip="xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx2"
 
 Bei dem `backup`-Jail brauchte ich aber wegen eines Dienstes darin ein Loopback-Interface, das ich in der `rc.conf` oben als `lo1` angelegt habe. Also muss ich dem Jail zwei Interfaces mit IPs übergeben und das mache ich so:
 
-	export jail_git_ip="lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3"
+    export jail_git_ip="lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3"
 
-Offenbar führt die fehlende Präfixlängenangabe hier dazu, dass `ezjail` (oder `ifconfig`) sie auf 128 setzt. Also änderte ich die Zeile zu: 
+Offenbar führt die fehlende Präfixlängenangabe hier dazu, dass `ezjail` (oder `ifconfig`) sie auf 128 setzt. Also änderte ich die Zeile zu:
 
-	export jail_git_ip="lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3/64"
+    export jail_git_ip="lo1|127.0.0.3,vtnet0|xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxx3/64"
 
 Und schon läuft es.
-

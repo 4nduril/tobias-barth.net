@@ -1,6 +1,6 @@
 ---
 title: Build a looping video player with React
-tags: 
+tags:
   - video
   - react
 description: Rendering an HTML video tag with a source element is as easy as it gets. But when you are combining multiple video snippets which should follow each other seamlessly and loop the whole set – it gets tricky.
@@ -20,7 +20,6 @@ I built the whole page with [NextJS](https://nextjs.org/). The media content is 
 So let's start the player component:
 
 ```typescript
-
 type VideoPlayerProps = {
   videoFiles: { file: string; caption: string; type: string }[]
   audioFiles: string[]

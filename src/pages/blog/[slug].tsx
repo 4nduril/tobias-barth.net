@@ -1,19 +1,19 @@
-import { promises as fs } from "fs";
-import path from "path";
-import matter, { GrayMatterFile } from "gray-matter";
-import ErrorPage from "next/error";
-import Head from "next/head";
-import BlogArticle from "../../components/BlogArticle";
-import { Layout } from "../../components/Layout";
+import { promises as fs } from 'fs'
+import path from 'path'
+import matter, { GrayMatterFile } from 'gray-matter'
+import ErrorPage from 'next/error'
+import Head from 'next/head'
+import BlogArticle from '../../components/BlogArticle'
+import { Layout } from '../../components/Layout'
 
-type BlogFrontmatter = GrayMatterFile<string>["data"] & {
-  title?: string;
-};
+type BlogFrontmatter = GrayMatterFile<string>['data'] & {
+  title?: string
+}
 
 interface BlogTemplateProps {
-  error?: string;
-  frontmatter?: BlogFrontmatter;
-  markdownBody?: GrayMatterFile<string>["content"];
+  error?: string
+  frontmatter?: BlogFrontmatter
+  markdownBody?: GrayMatterFile<string>['content']
 }
 
 const BlogTemplate: React.FC<BlogTemplateProps> = ({
@@ -22,8 +22,8 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
   markdownBody,
 }) => {
   if (error) {
-    console.log(error);
-    return <ErrorPage statusCode={404} />;
+    console.log(error)
+    return <ErrorPage statusCode={404} />
   }
   return frontmatter && markdownBody ? (
     <Layout>
@@ -44,59 +44,59 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({
       </Head>
       <BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
     </Layout>
-  ) : null;
-};
+  ) : null
+}
 
 const extractGrayMatter = (data: GrayMatterFile<string>) => {
   return {
     frontmatter: data.data as BlogFrontmatter,
     markdownBody: data.content,
-  };
-};
+  }
+}
 
-const wrapInProps = (data: any) => ({ props: data });
+const wrapInProps = (data: any) => ({ props: data })
 
 export const getStaticProps = async ({ params: { slug }, preview }) => {
   const postData = await import(`../../posts/${slug}.md`)
     .then(({ default: content }) => content)
-    .catch(() => false);
+    .catch(() => false)
   if (postData) {
-    return wrapInProps(extractGrayMatter(matter(postData)));
+    return wrapInProps(extractGrayMatter(matter(postData)))
   }
   if (!preview) {
     return {
       props: {
-        error: "Post does not exist.",
+        error: 'Post does not exist.',
       },
-    };
+    }
   }
   const draftData = await import(`../../drafts/${slug}.md`)
     .then(({ default: content }) => content)
-    .catch(() => false);
+    .catch(() => false)
   if (draftData) {
-    return wrapInProps(extractGrayMatter(matter(draftData)));
+    return wrapInProps(extractGrayMatter(matter(draftData)))
   }
   return {
     props: {
-      error: "Post does not exist.",
+      error: 'Post does not exist.',
     },
-  };
-};
+  }
+}
 
 export const getStaticPaths = async () => {
   const paths = await fs
-    .readdir(path.resolve(process.cwd(), "src/posts"))
-    .then((paths) =>
+    .readdir(path.resolve(process.cwd(), 'src/posts'))
+    .then(paths =>
       paths
-        .filter((filename) => filename.endsWith(".md"))
-        .map((filename) => ({
-          params: { slug: path.basename(filename, ".md") },
+        .filter(filename => filename.endsWith('.md'))
+        .map(filename => ({
+          params: { slug: path.basename(filename, '.md') },
         }))
-    );
+    )
   return {
     paths: paths,
     fallback: false,
-  };
-};
+  }
+}
 
-export default BlogTemplate;
+export default BlogTemplate
