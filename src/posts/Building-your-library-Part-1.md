@@ -9,12 +9,11 @@ description: Part 4 of the series "Publish a modern JavaScript (or TypeScript) l
 date: '2019-07-24 10:39:26'
 ---
 
-
 ### Preface
 
 This article is part 4 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
 
-*Note:* I have promised in [part 3 of this series](http://tobias-barth.net/blog/Compiling-modern-language-features-with-the-TypeScript-compiler/) that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.
+_Note:_ I have promised in [part 3 of this series](http://tobias-barth.net/blog/Compiling-modern-language-features-with-the-TypeScript-compiler/) that the next post would be about exporting types. But bear with me. First we will use what we have. Types are coming up next.
 
 ### Our first build
 
@@ -71,7 +70,6 @@ As I mentioned above, Babel wouldn't know that it should transpile the `.ts` and
 ### Build TypeScript with TSC
 
 For using the TypeScript Compiler we configure our build in the `package.json` like this:
-
 
 ```javascript
 {

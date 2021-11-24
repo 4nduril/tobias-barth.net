@@ -5,14 +5,13 @@ tags:
   - recursion
   - promises
   - async-await
-description: I had a list of input data and wanted to execute a function for every item in that list. What I need is a way to traverse the array, execute the function for the current element, wait until the Promise resolves and only then go to the next element and call the function with it. 
+description: I had a list of input data and wanted to execute a function for every item in that list. What I need is a way to traverse the array, execute the function for the current element, wait until the Promise resolves and only then go to the next element and call the function with it.
 date: '2019-04-18 14:47:53'
 ---
 
-
 ### The problem
 
-I recently faced a problem: I had a list (an array) of input data and wanted to execute a function for every item in that list. 
+I recently faced a problem: I had a list (an array) of input data and wanted to execute a function for every item in that list.
 
 No problem, you say, take `Array.prototype.map`, that's what it's for. **BUT** the function in question returns a Promise and I want to be able to only continue in the program flow when all of these Promises are resolved.
 
@@ -25,7 +24,6 @@ And that's because effectively, all the heavy child processes get started in nea
 So what I need is a way to traverse the array, execute the function for the current element, _wait_ until the Promise resolves and _only then_ go to the next element and call the function with it. That means `map` will not work because I have no control over the execution flow. So I will have to build my own `map`. And while I am on it, I will implement it a bit nicer as stand-alone function that takes the mapper function first and then the data array:
 
 ```javascript
-
 const sequentialMap = fn =>
   function innerSequentialMap([head, ...tail]) {
     if (!head) {
@@ -89,21 +87,19 @@ outer(666) // logs 731
 And Promise-flattening means essentially that if you have a Promise of a Promise of a value that is the same as if you just had a Promise of the value.
 
 ```javascript
-
 const p2 = Promise.resolve(Promise.resolve(1))
 const p1 = Promise.resolve(1)
 
 p2.then(console.log) // logs 1
 p1.then(console.log) // logs 1
-
 ```
 
 To recall, here is what the code we are talking about looks like:
 
 ```javascript
-  return fn(head).then(headResult =>
-    sequentialMapInternal(tail).then(tailResult => [headResult, ...tailResult])
-  )
+return fn(head).then(headResult =>
+  sequentialMapInternal(tail).then(tailResult => [headResult, ...tailResult])
+)
 ```
 
 We keep the `headResult` in scope and then we generate the next Promise by calling the inner function recursively again but with a shorter list without the first element. We wait again with `.then` for the final result and only then we build our result array.
@@ -135,14 +131,13 @@ Yes, that is much better. Now the exection is paused until `headResult` is there
 Wait. Did I just say I can pause execution with `await`? Wouldn't this work also within a loop?
 
 ```javascript
-const loopVersion = fn =>
-  async list => {
-    const result = []
-    for (const elem of list) {
-      result.push(await fn(elem))
-    }
-    return result
+const loopVersion = fn => async list => {
+  const result = []
+  for (const elem of list) {
+    result.push(await fn(elem))
   }
+  return result
+}
 ```
 
 See, this is what happens to people like me that are too deep into functional programming paradigms. Yes, you should generally avoid loops because they are not declarative and you end up telling the machine (and your coworker) not _what_ you want to happen but _how_ you want it to happen. That is, again, generally, no good practice. But in this case that is exactly what we wanted: To give a step-by-step schema on how to execute our code. To optimize for resource usage.

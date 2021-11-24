@@ -19,6 +19,7 @@ Das erste habe ich schon gefixt, nämlich das hexo-generator-feed-Plugin. Das er
 Ich habe zwar schon länger ein privates Blog gehabt, in dem auch hin und wieder Web-Kram landete, aber ich wollte jetzt gern im richtigen Rahmen und öfter Sachen aus dem Frontend-Alltag (oder Säuremiene, wie manche sagen) posten. Zwei, drei alte Posts vom anderen Blog habe ich hier der Vollständigkeit halber importiert, aber die sind wirklich schon betagt.
 
 Achso, zwei Dinge noch:
+
 1. Das hier ist nur die minimalist working version. Es gibt z.B. noch keine vernünftige Integration von Kategorien und Tags (sie werden zumindest noch nicht dargestellt). Das wird sich über die Zeit aber immer weiter verbessern. Die Grundfunktion eines Blogs sind Einträge und der Feed. Beides geht.
 2. Es gibt keine Kommentarsektion. Das ist auch Absicht und wird erstmal so bleiben. Ob ich meine Meinung ändere, weiß ich noch nicht, derzeit steht sie aber fest. Kommentare und Anmerkungen erhalte ich aber trotzdem sehr gern per Twitter oder Email.
 

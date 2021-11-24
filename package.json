@@ -6,29 +6,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run lint && npm run typecheck"
   },
   "dependencies": {
     "gray-matter": "^4.0.2",
     "marked": "^2.0.0",
-    "next": "^10.0.7",
+    "next": "^12.0.4",
     "normalize.css": "^8.0.1",
     "postcss-nested": "^4.2.1",
     "raw-loader": "^4.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-markdown": "^4.3.1",
     "react-syntax-highlighter": "^12.2.1",
     "styled-jsx-plugin-postcss": "^2.0.1"
   },
   "devDependencies": {
     "@types/marked": "^1.2.2",
-    "@types/node": "^13.13.5",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.7",
+    "@types/node": "^14.17.34",
+    "@types/react": "^17.0.36",
+    "@types/react-dom": "^17.0.11",
     "autoprefixer": "^10.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "12.0.4",
+    "eslint-config-prettier": "^8.3.0",
     "postcss": "^8.2.6",
+    "prettier": "2.4.1",
     "tailwindcss": "^2.0.3",
-    "typescript": "^3.8.3"
+    "typescript": "^4.5.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

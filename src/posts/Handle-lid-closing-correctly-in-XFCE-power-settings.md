@@ -9,8 +9,7 @@ description: I always had problems with the power management settings on my lapt
 date: '2019-05-21 15:55:25'
 ---
 
-
-This is mainly just a note for my future self. I always had problems with the power management settings on my laptop. It's running Manjaro Linux (Arch derivate). Regardless of what I set in the XFCE power settings, the actions that should happen on lid closing didn't work as expected. I wanted that the machine does a suspend-to-RAM when I close the lid and the power cable is plugged in. And when it is not plugged in I wanted the machine to suspend-to-disk (hibernate). 
+This is mainly just a note for my future self. I always had problems with the power management settings on my laptop. It's running Manjaro Linux (Arch derivate). Regardless of what I set in the XFCE power settings, the actions that should happen on lid closing didn't work as expected. I wanted that the machine does a suspend-to-RAM when I close the lid and the power cable is plugged in. And when it is not plugged in I wanted the machine to suspend-to-disk (hibernate).
 
 On some point I just disabled everything in `/etc/systemd/logind.conf` (set it to ignore lid actions) and lived with the fact.
 

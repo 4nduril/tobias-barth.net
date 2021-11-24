@@ -8,7 +8,6 @@ description: I just fixed an issue with my FreeBSD home server. It is set up as 
 date: '2019-05-03 11:36:54'
 ---
 
-
 I just fixed an issue with my FreeBSD home server. It is set up as a file server for Mac (AFP) and Linux Clients (NFS). My local network is Gigabit-based so the limitating factor on read/write speeds should be the hard disk drives in the server.
 
 The server has a Core i3-6100T CPU @ 3.20GHz, 8GB RAM, a ZFS setup with two mirror vdevs each consisting of two disks connected to the board via SATA3. And of course the onboard Gbit NIC (Realtek).
@@ -30,7 +29,7 @@ re0: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> metric 0 mtu 1500
         status: active
 ```
 
-Do you spot it? 
+Do you spot it?
 
 ```
         media: Ethernet autoselect (10baseT/UTP <full-duplex>)

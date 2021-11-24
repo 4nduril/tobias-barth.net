@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { FunctionComponent } from "react";
+import Link from 'next/link'
+import { FunctionComponent } from 'react'
 
 const MainNavigation: FunctionComponent = () => {
   return (
@@ -27,7 +27,7 @@ const MainNavigation: FunctionComponent = () => {
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default MainNavigation;
+export default MainNavigation

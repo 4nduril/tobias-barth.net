@@ -55,8 +55,8 @@ Der Fall des IE8 sollte mit der Zeile abgedeckt werden, die mit `jQuery.support.
 
 ```javascript
 // Figure out if the W3C box model works as expected
-div.style.width = div.style.paddingLeft = "1px";
-support.boxModel = div.offsetWidth === 2;
+div.style.width = div.style.paddingLeft = '1px'
+support.boxModel = div.offsetWidth === 2
 ```
 
 Es wird ein Test-Div erzeugt, dem verschiedene Eigenschaften zugewiesen und das dann an den `body` angehängt wird. Da das Element hier einen Pixel breit ist und außerdem ein Padding von einem Pixel erhält, sollte `offsetWidth`, das die Gesamtbreite enthält, 2px zurückgeben.

@@ -1,9 +1,9 @@
-import { FunctionComponent } from "react";
-import { Layout } from "../components/Layout";
+import { FunctionComponent } from 'react'
+import { Layout } from '../components/Layout'
 
 const Paragraph: FunctionComponent = ({ children }) => (
   <p className="mb-7">{children}</p>
-);
+)
 
 const DSE: FunctionComponent = () => (
   <Layout>
@@ -729,18 +729,18 @@ const DSE: FunctionComponent = () => (
     <Paragraph>
       Diese Datenschutzerklärung wurde durch den Datenschutzerklärungs-Generator
       von den <a href="https://dg-datenschutz.de/">externer DSB Bonn</a> in
-      Kooperation mit der RC GmbH, die{" "}
-      <a href="http://remarketing.company/">gebrauchte Notebooks</a>{" "}
-      wiederverwertet und den{" "}
+      Kooperation mit der RC GmbH, die{' '}
+      <a href="http://remarketing.company/">gebrauchte Notebooks</a>{' '}
+      wiederverwertet und den{' '}
       <a href="https://www.wbs-law.de/abmahnung-filesharing/">
         Filesharing Rechtsanwälten
-      </a>{" "}
+      </a>{' '}
       von WBS-LAW erstellt. Ich Nachhinein wurden einzelne Formulierungen
-      ("unsere Firma" o.ä.) von mir so angepasst, dass sie auf mich als
-      freiberuflichen Einzelunternehmer besser passen. Die fettgesetzte
+      (&bdquo;unsere Firma&ldquo; o.ä.) von mir so angepasst, dass sie auf mich
+      als freiberuflichen Einzelunternehmer besser passen. Die fettgesetzte
       Kurzfassung am Beginn ist ebenfalls von mir selbst.
     </Paragraph>
   </Layout>
-);
+)
 
-export default DSE;
+export default DSE

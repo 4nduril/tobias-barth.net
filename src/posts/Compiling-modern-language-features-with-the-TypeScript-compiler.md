@@ -8,7 +8,6 @@ description: Part 3 of the series "Publish a modern JavaScript (or TypeScript) l
 date: '2019-07-18 13:24:59'
 ---
 
-
 ### Preface
 
 This article is part 3 of the series "Publish a modern JavaScript (or TypeScript) library". Check out the motivation and links to other parts [in the introduction](http://tobias-barth.net/blog/Publish-a-modern-JavaScript-or-TypeScript-library/).
@@ -38,7 +37,7 @@ You already know, the configuration is done via a `tsconfig.json` in the root of
 
 ### `include` and `outDir`
 
-These options tell `tsc` where to find the files to compile and where to put the result. When we discuss how to emit type declaration files along with your code, `outDir` will be used also for their destination. 
+These options tell `tsc` where to find the files to compile and where to put the result. When we discuss how to emit type declaration files along with your code, `outDir` will be used also for their destination.
 
 Note that these options allow us to just run `tsc` on the command line without anything else and it will find our files and put the output where it belongs.
 

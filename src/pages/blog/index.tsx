@@ -1,17 +1,17 @@
-import { promises as fs } from "fs";
-import path from "path";
-import { FunctionComponent } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import matter, { GrayMatterFile } from "gray-matter";
-import { Layout } from "../../components/Layout";
-import { RssIcon } from "../../components/RssIcon";
+import { promises as fs } from 'fs'
+import path from 'path'
+import { FunctionComponent } from 'react'
+import Head from 'next/head'
+import Link from 'next/link'
+import matter, { GrayMatterFile } from 'gray-matter'
+import { Layout } from '../../components/Layout'
+import { RssIcon } from '../../components/RssIcon'
 
 type BlogProps = {
   posts: {
-    frontmatter: GrayMatterFile<string>["data"];
-  }[];
-};
+    frontmatter: GrayMatterFile<string>['data']
+  }[]
+}
 
 const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
   return (
@@ -35,15 +35,14 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
         Articles by Tobias Barth, Web Freelancer from Berlin
       </h2>
       <p className="mb-7 text-center">
-        <a
-          href="/blog/feed/rss.xml"
-          className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center"
-        >
-          Abonnieren{" "}
-          <span className="inline-block w-6 h-6 ml-4">
-            <RssIcon />
-          </span>
-        </a>
+        <Link href="/blog/feed/rss.xml">
+          <a className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center">
+            Abonnieren{' '}
+            <span className="inline-block w-6 h-6 ml-4">
+              <RssIcon />
+            </span>
+          </a>
+        </Link>
       </p>
       <ul>
         {posts.map(({ frontmatter }) => (
@@ -60,48 +59,48 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
         ))}
       </ul>
     </Layout>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog
 
 export const getStaticProps = async () => {
   const posts = await fs
-    .readdir(path.resolve(process.cwd(), "src/posts"))
-    .then((paths) =>
+    .readdir(path.resolve(process.cwd(), 'src/posts'))
+    .then(paths =>
       Promise.all(
         paths
-          .filter((filename) => filename.endsWith(".md"))
-          .map(async (filePath) => {
+          .filter(filename => filename.endsWith('.md'))
+          .map(async filePath => {
             const parsed = await fs
               .readFile(
-                path.resolve(process.cwd(), "src/posts/", filePath),
-                "utf8"
+                path.resolve(process.cwd(), 'src/posts/', filePath),
+                'utf8'
               )
               .then(matter)
-              .then(extractGrayMatter);
-            parsed.frontmatter.href = `/blog/${path.basename(filePath, ".md")}`;
-            return parsed;
+              .then(extractGrayMatter)
+            parsed.frontmatter.href = `/blog/${path.basename(filePath, '.md')}`
+            return parsed
           })
       )
-    );
+    )
   posts.sort((a, b) =>
     new Date(a.frontmatter.date).getTime() <
     new Date(b.frontmatter.date).getTime()
       ? 1
       : -1
-  );
+  )
   return {
     props: {
       posts,
     },
-  };
-};
+  }
+}
 const extractGrayMatter = (data: GrayMatterFile<string>) => {
   return {
     frontmatter: data.data as BlogFrontmatter,
-  };
-};
-type BlogFrontmatter = GrayMatterFile<string>["data"] & {
-  title?: string;
-};
+  }
+}
+type BlogFrontmatter = GrayMatterFile<string>['data'] & {
+  title?: string
+}

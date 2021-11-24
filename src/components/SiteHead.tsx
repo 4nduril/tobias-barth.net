@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { FunctionComponent } from "react";
+import Link from 'next/link'
+import { FunctionComponent } from 'react'
 
 const SiteHead: FunctionComponent = () => {
   return (
@@ -17,7 +17,7 @@ const SiteHead: FunctionComponent = () => {
         </Link>
       </header>
     </div>
-  );
-};
+  )
+}
 
-export default SiteHead;
+export default SiteHead

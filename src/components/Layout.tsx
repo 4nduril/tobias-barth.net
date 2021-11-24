@@ -1,12 +1,12 @@
-import { FunctionComponent } from "react";
-import SiteHead from "./SiteHead";
-import MainNavigation from "./MainNavigation";
-import MainContent from "./MainContent";
-import SiteFooter from "./SiteFooter";
+import { FunctionComponent } from 'react'
+import SiteHead from './SiteHead'
+import MainNavigation from './MainNavigation'
+import MainContent from './MainContent'
+import SiteFooter from './SiteFooter'
 
 type LayoutProps = {
-  lang?: string;
-};
+  lang?: string
+}
 
 export const Layout: FunctionComponent<LayoutProps> = ({ children, lang }) => (
   <>
@@ -15,4 +15,4 @@ export const Layout: FunctionComponent<LayoutProps> = ({ children, lang }) => (
     <MainContent lang={lang}>{children}</MainContent>
     <SiteFooter />
   </>
-);
+)
