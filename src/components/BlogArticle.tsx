@@ -1,6 +1,7 @@
 import { GrayMatterFile } from 'gray-matter'
-import ReactMarkdown from 'react-markdown/with-html'
-import Highlight from '../../src/components/Highlight'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import rehypePrism from '@mapbox/rehype-prism'
 import { FC } from 'react'
 import styles from './BlogArticle.module.css'
 
@@ -62,11 +63,9 @@ const BlogArticle: FC<BlogArticleProps> = ({ frontmatter, markdownBody }) => {
         )}
       </header>
       <div className={styles['blog-post-content']}>
-        <ReactMarkdown
-          source={markdownBody}
-          escapeHtml={false}
-          renderers={{ code: Highlight }}
-        />
+        <ReactMarkdown rehypePlugins={[rehypeRaw, rehypePrism]}>
+          {markdownBody}
+        </ReactMarkdown>
       </div>
     </article>
   )
