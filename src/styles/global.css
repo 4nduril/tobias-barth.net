@@ -31,6 +31,9 @@
   ul {
     @apply list-inside;
   }
+}
+
+@layer components {
   /* PrismJS 1.25.0
 https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+docker+graphql+jsx+tsx+typescript+yaml */
   code[class*='language-'],
