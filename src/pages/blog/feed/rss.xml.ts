@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import matter, { GrayMatterFile } from 'gray-matter'
 import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
-import marked from 'marked'
+import { marked } from 'marked'
 
 const getOrigin = (req: NextApiRequest) => {
   if (!req.headers.host) {
