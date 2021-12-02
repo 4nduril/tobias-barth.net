@@ -1,15 +1,39 @@
+const unifiedModule = import('unified')
+const remarkParseModule = import('remark-parse')
+const remarkRehypeModule = import('remark-rehype')
+const rehypePrismModule = import('@mapbox/rehype-prism')
+
 module.exports = {
-  purge: ["./src/**/*.{js,ts,jsx,tsx}"],
+  purge: {
+    content: ['./src/**/*.{js,ts,jsx,tsx,md}'],
+    transform: {
+      md: content => {
+        return Promise.all([
+          unifiedModule,
+          remarkParseModule,
+          remarkRehypeModule,
+          rehypePrismModule,
+        ]).then(([{ unified }, remarkParse, remarkRehype, rehypePrism]) =>
+          unified()
+            .use(remarkParse)
+            .use(remarkRehype)
+            .use(rehypePrism)
+            .process(content)
+            .then(x => console.log(x) || x)
+        )
+      },
+    },
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      display: ["Dosis", "sans-serif"],
-      body: ['"PT Sans"', "sans-serif"],
+      display: ['Dosis', 'sans-serif'],
+      body: ['"PT Sans"', 'sans-serif'],
     },
     extend: {
       colors: {
-        primary: "#0B65AA",
-        "link-color": "#074574",
+        primary: '#0B65AA',
+        'link-color': '#074574',
       },
     },
   },
@@ -17,4 +41,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+}
