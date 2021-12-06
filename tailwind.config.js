@@ -1,28 +1,32 @@
-const unifiedModule = import('unified')
-const remarkParseModule = import('remark-parse')
-const remarkRehypeModule = import('remark-rehype')
-const rehypePrismModule = import('@mapbox/rehype-prism')
+/*
+ * const unifiedModule = import('unified')
+ * const remarkParseModule = import('remark-parse')
+ * const remarkRehypeModule = import('remark-rehype')
+ * const rehypePrismModule = import('@mapbox/rehype-prism')
+ */
 
 module.exports = {
   purge: {
     content: ['./src/**/*.{js,ts,jsx,tsx,md}'],
-    transform: {
-      md: content => {
-        return Promise.all([
-          unifiedModule,
-          remarkParseModule,
-          remarkRehypeModule,
-          rehypePrismModule,
-        ]).then(([{ unified }, remarkParse, remarkRehype, rehypePrism]) =>
-          unified()
-            .use(remarkParse)
-            .use(remarkRehype)
-            .use(rehypePrism)
-            .process(content)
-            .then(x => console.log(x) || x)
-        )
-      },
-    },
+    /*
+     * transform: {
+     *   md: content => {
+     *     return Promise.all([
+     *       unifiedModule,
+     *       remarkParseModule,
+     *       remarkRehypeModule,
+     *       rehypePrismModule,
+     *     ]).then(([{ unified }, remarkParse, remarkRehype, rehypePrism]) =>
+     *       unified()
+     *         .use(remarkParse)
+     *         .use(remarkRehype)
+     *         .use(rehypePrism)
+     *         .process(content)
+     *         .then(x => console.log(x) || x)
+     *     )
+     *   },
+     * },
+     */
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
