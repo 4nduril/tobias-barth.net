@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-  purge: {
-    content: ['./src/**/*.{js,ts,jsx,tsx,md}'],
+  content: {
+    files: ['./src/**/*.{js,ts,jsx,tsx,md}'],
     /*
      * transform: {
      *   md: content => {
@@ -28,7 +28,6 @@ module.exports = {
      * },
      */
   },
-  darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
       display: ['Dosis', 'sans-serif'],
