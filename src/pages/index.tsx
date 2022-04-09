@@ -22,15 +22,16 @@ const Home: FunctionComponent = () => {
             <p className="mb-7">
               Hallo, mein Name ist Tobias Barth. Ich bin{' '}
               <strong>freiberuflicher Frontend-Entwickler</strong>. Ich arbeite
-              seit 2011 in der Web-Entwicklung und im Web-Design mit dem Fokus
-              auf <em>Barrierefreiheit bzw. Accessibility</em> und
-              gerätunabhängiger Bedienbarkeit (<em>responsive Design</em>). Für
-              die meisten meiner Kunden verstärke ich projektbezogen ihr Team.
-              Egal ob Startup, etablierter Player oder großes Ecommerce-Umfeld,
-              ich bereichere mit Erfahrung, erprobten Best-Practices und
-              kreativen Ideen jedes Projekt. Ich komme aus Köln, lebe in Berlin
-              und arbeite für Sie, wo Sie mich brauchen, natürlich auch
-              problemlos remote.
+              seit 2011 in der Web-Entwicklung und im Web-Design.{' '}
+              <em>Barrierefreiheit bzw. Accessibility</em> und gerätunabhängige
+              Bedienbarkeit (<em>responsive Design</em>) gehören
+              selbstverständlich zu meiner täglichen Arbeit. Für die meisten
+              meiner Kunden verstärke ich projektbezogen ihr Team. Egal ob
+              Startup, etablierter Player oder großes Ecommerce-Umfeld, ich
+              bereichere mit Erfahrung, erprobten Best-Practices und kreativen
+              Ideen jedes Projekt. Ich komme aus Köln, lebe in Berlin und
+              arbeite für Sie, wo Sie mich brauchen, natürlich auch problemlos
+              remote.
             </p>
             <p className="mb-7">
               Ich komme ursprünglich aus dem klassischen HTML/CSS-Bereich. Seit
@@ -45,6 +46,17 @@ const Home: FunctionComponent = () => {
                 NextJS
               </a>{' '}
               und dem gängigen Ökosystem um diese Bibliotheken herum.
+            </p>
+            <p className="mb-7">
+              Ich bin zusammen mit meiner Frau Gründer der{' '}
+              <a className="text-current" href="https://smash-housing.com">
+                Wohnungstauschbörse SMASH
+              </a>
+              , deren gesamte Implementierung von mir ist. Außerdem habe ich{' '}
+              <a className="text-current" href="https://as-time-goes-by.dev">
+                As Time Goes By
+              </a>{' '}
+              als Spaß-Projekt geschrieben.
             </p>
           </div>
           <Portrait />
