@@ -31,6 +31,9 @@
   ul {
     @apply list-inside;
   }
+  pre {
+    overflow-x: auto;
+  }
 }
 
 @layer components {
