@@ -1,7 +1,8 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 type MainContentProps = {
   lang?: string
+  children?: ReactNode
 }
 
 const MainContent: FC<MainContentProps> = ({ children, lang }) => (

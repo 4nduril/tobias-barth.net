@@ -1,7 +1,11 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, ReactNode } from 'react'
 import { Layout } from '../components/Layout'
 
-const Paragraph: FunctionComponent = ({ children }) => (
+type ParagraphProps = {
+  children?: ReactNode
+}
+
+const Paragraph: FunctionComponent<ParagraphProps> = ({ children }) => (
   <p className="mb-7">{children}</p>
 )
 
