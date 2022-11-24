@@ -1,11 +1,52 @@
 import Head from 'next/head'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useRef } from 'react'
 import SiteHead from '../components/SiteHead'
 import MainNavigation from '../components/MainNavigation'
 import SiteFooter from '../components/SiteFooter'
 import { Portrait } from '../components/Portrait'
 
+export const useRenderMeasure = (name: string, skip = false): void => {
+  skip = Boolean(
+    skip ||
+      typeof window === 'undefined' ||
+      !window.performance ||
+      !window?.performance?.mark
+  )
+  const didMountRef = useRef(false)
+
+  if (!skip && didMountRef.current) {
+    window.performance.mark(`${name}UpdateStart`)
+  } else if (!skip) {
+    window.performance.mark(`${name}MountStart`)
+  }
+
+  useEffect(() => {
+    if (skip) return
+    if (didMountRef.current) {
+      window.performance.mark(`${name}UpdateEnd`)
+      if (window.performance.getEntriesByName(`${name}UpdateStart`).length) {
+        window.performance.measure(
+          `${name}Update`,
+          `${name}UpdateStart`,
+          `${name}UpdateEnd`
+        )
+      }
+    } else {
+      didMountRef.current = true
+      window.performance.mark(`${name}MountEnd`)
+      if (window.performance.getEntriesByName(`${name}MountStart`).length) {
+        window.performance.measure(
+          `${name}Mount`,
+          `${name}MountStart`,
+          `${name}MountEnd`
+        )
+      }
+    }
+  }, [skip, name])
+}
+
 const Home: FunctionComponent = () => {
+  useRenderMeasure('index page')
   return (
     <>
       <Head>
