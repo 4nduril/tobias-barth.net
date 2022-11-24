@@ -28,10 +28,11 @@ const SiteFooter: FC = () => (
       Bitte beachten Sie vor der Kontaktaufnahme meine Datenschutzerklärung.
     </p>
     <p className="mb-7">
-      <Link href="/dse">
-        <a className="inline-block px-4 py-2 text-link-color hover:bg-link-color hover:text-gray-200 transition-colors">
-          Datenschutzerklärung
-        </a>
+      <Link
+        href="/dse"
+        className="inline-block px-4 py-2 text-link-color hover:bg-link-color hover:text-gray-200 transition-colors"
+      >
+        Datenschutzerklärung
       </Link>
     </p>
     <p className="mb-7">

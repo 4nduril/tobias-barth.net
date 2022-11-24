@@ -35,13 +35,14 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
         Articles by Tobias Barth, Web Freelancer from Berlin
       </h2>
       <p className="mb-7 text-center">
-        <Link href="/blog/feed/rss.xml">
-          <a className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center">
-            Abonnieren{' '}
-            <span className="inline-block w-6 h-6 ml-4">
-              <RssIcon />
-            </span>
-          </a>
+        <Link
+          href="/blog/feed/rss.xml"
+          className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center"
+        >
+          Abonnieren{' '}
+          <span className="inline-block w-6 h-6 ml-4">
+            <RssIcon />
+          </span>
         </Link>
       </p>
       <ul>
@@ -49,9 +50,7 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
           <li key={frontmatter.href} {...{ lang: frontmatter.lang }}>
             <div className="mb-7">
               <h3 className="text-2xl font-bold mb-4">
-                <Link href={frontmatter.href}>
-                  <a>{frontmatter.title}</a>
-                </Link>
+                <Link href={frontmatter.href}>{frontmatter.title}</Link>
               </h3>
               {frontmatter.description && <p>{frontmatter.description}</p>}
             </div>
