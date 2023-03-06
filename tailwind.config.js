@@ -30,8 +30,8 @@ module.exports = {
   },
   theme: {
     fontFamily: {
-      display: ['Dosis', 'sans-serif'],
-      body: ['"PT Sans"', 'sans-serif'],
+      display: ['var(--font-dosis)', 'sans-serif'],
+      body: ['var(--font-ptsans)', 'sans-serif'],
     },
     extend: {
       colors: {
