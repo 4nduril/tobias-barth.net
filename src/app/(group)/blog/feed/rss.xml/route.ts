@@ -1,29 +1,11 @@
+import { NextResponse } from 'next/server'
+import { headers } from 'next/headers'
 import { promises as fs } from 'fs'
-import matter, { GrayMatterFile } from 'gray-matter'
-import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
+import matter, { GrayMatterFile } from 'gray-matter'
 import { marked } from 'marked'
 
-const getOrigin = (req: NextApiRequest) => {
-  if (!req.headers.host) {
-    return 'http://localhost:3000'
-  }
-  return req.headers.host.startsWith('localhost')
-    ? `http://${req.headers.host}`
-    : `https://${req.headers.host}`
-}
-
-export default function Feed() {
-  return null
-}
-
-export const getServerSideProps = async ({
-  req,
-  res,
-}: {
-  req: NextApiRequest
-  res: NextApiResponse
-}) => {
+export async function GET() {
   const { latestPostDate, rssItemsXml } = await fs
     .readdir(path.resolve(process.cwd(), 'src/posts'))
     .then(paths => paths.filter(filename => filename.endsWith('.md')))
@@ -37,7 +19,7 @@ export const getServerSideProps = async ({
             )
             .then(matter)
             .then(extractGrayMatter)
-          parsed.frontmatter.href = `${getOrigin(req)}/blog/${path.basename(
+          parsed.frontmatter.href = `${getOrigin()}/blog/${path.basename(
             filePath,
             '.md'
           )}`
@@ -46,16 +28,28 @@ export const getServerSideProps = async ({
       )
     )
     .then(getPostsXml)
+
   const body = getFeedXml({
     itemsXml: rssItemsXml,
     latestPostDate,
-    blogUrl: `${getOrigin(req)}/blog`,
+    blogUrl: `${getOrigin()}/blog`,
   })
-  res.setHeader('Content-Type', 'text/xml')
-  res.write(body)
-  res.end()
-  return { props: {} }
+
+  return new NextResponse(body, {
+    headers: {
+      'Content-Type': 'text/xml',
+    },
+  })
 }
+
+const getOrigin = () => {
+  const host = headers().get('host')
+  if (!host) {
+    return 'http://localhost:3000'
+  }
+  return host.startsWith('localhost') ? `http://${host}` : `https://${host}`
+}
+
 const getFeedXml = ({
   itemsXml,
   latestPostDate,
@@ -78,7 +72,7 @@ const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
   let latestPostDate: string = ''
   let rssItemsXml: string = ''
   posts.forEach(post => {
-    let postDate: Date
+    let postDate: Date | undefined = undefined
     if (post.frontmatter.date) {
       postDate = new Date(post.frontmatter.date)
       if (
@@ -92,7 +86,8 @@ const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
       <item>
         <title>${post.frontmatter.title}</title>
         <link>${post.frontmatter.href}</link>
-        <pubDate>${postDate.toUTCString()}</pubDate>
+        ${postDate ? `<pubDate>${postDate.toUTCString()}</pubDate>` : ''}
+        
         ${
           post.frontmatter.description
             ? `<description>${post.frontmatter.description}</description>`
