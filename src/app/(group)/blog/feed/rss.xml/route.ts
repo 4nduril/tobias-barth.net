@@ -19,6 +19,7 @@ export async function GET() {
             )
             .then(matter)
             .then(extractGrayMatter)
+
           parsed.frontmatter.href = `${getOrigin()}/blog/${path.basename(
             filePath,
             '.md'
@@ -42,12 +43,71 @@ export async function GET() {
   })
 }
 
+type BlogFrontmatter = GrayMatterFile<string>['data'] & {
+  title?: string
+  date?: string
+  href: string
+}
+
+const extractGrayMatter = (data: GrayMatterFile<string>) => {
+  return {
+    frontmatter: data.data as BlogFrontmatter,
+    markdownBody: data.content,
+  }
+}
+
 const getOrigin = () => {
   const host = headers().get('host')
   if (!host) {
     return 'http://localhost:3000'
   }
   return host.startsWith('localhost') ? `http://${host}` : `https://${host}`
+}
+
+const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
+  const { rssItemsXml, latestPostDate } = posts.reduce(
+    (acc, post) => {
+      // Get post's date from frontmatter.
+      const postDate =
+        (post.frontmatter.date && new Date(post.frontmatter.date)) ?? ''
+
+      // If post's date greater than any previous post's date, use current post's.
+      const latestPostDate =
+        postDate &&
+        (!acc.latestPostDate ||
+          postDate.getTime() > new Date(acc.latestPostDate).getTime())
+          ? postDate.toUTCString()
+          : acc.latestPostDate
+
+      // Concatenate XML for current post to RSS string.
+      const rssItemsXml = `${acc.rssItemsXml}
+      <item>
+        <title>${post.frontmatter.title ?? ''}</title>
+        <link>${post.frontmatter.href}</link>
+        ${postDate ? `<pubDate>${postDate.toUTCString()}</pubDate>` : ''}
+        
+        ${
+          post.frontmatter.description
+            ? `<description>${post.frontmatter.description}</description>`
+            : ''
+        }
+        <content:encoded><![CDATA[${marked(
+          post.markdownBody
+        )}]]></content:encoded>
+      </item>`
+
+      return {
+        rssItemsXml,
+        latestPostDate,
+      }
+    },
+    { rssItemsXml: '', latestPostDate: '' }
+  )
+
+  return {
+    rssItemsXml,
+    latestPostDate,
+  }
 }
 
 const getFeedXml = ({
@@ -67,49 +127,3 @@ const getFeedXml = ({
     </channel>
   </rss>
 `
-
-const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
-  let latestPostDate: string = ''
-  let rssItemsXml: string = ''
-  posts.forEach(post => {
-    let postDate: Date | undefined = undefined
-    if (post.frontmatter.date) {
-      postDate = new Date(post.frontmatter.date)
-      if (
-        !latestPostDate ||
-        postDate.getTime() > new Date(latestPostDate).getTime()
-      ) {
-        latestPostDate = postDate.toUTCString()
-      }
-    }
-    rssItemsXml += `
-      <item>
-        <title>${post.frontmatter.title}</title>
-        <link>${post.frontmatter.href}</link>
-        ${postDate ? `<pubDate>${postDate.toUTCString()}</pubDate>` : ''}
-        
-        ${
-          post.frontmatter.description
-            ? `<description>${post.frontmatter.description}</description>`
-            : ''
-        }
-        <content:encoded><![CDATA[${marked(
-          post.markdownBody
-        )}]]></content:encoded>
-      </item>`
-  })
-  return {
-    rssItemsXml,
-    latestPostDate,
-  }
-}
-
-const extractGrayMatter = (data: GrayMatterFile<string>) => {
-  return {
-    frontmatter: data.data as BlogFrontmatter,
-    markdownBody: data.content,
-  }
-}
-type BlogFrontmatter = GrayMatterFile<string>['data'] & {
-  title?: string
-}
