@@ -1,36 +1,25 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import { FunctionComponent } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
 import matter, { GrayMatterFile } from 'gray-matter'
-import { Layout } from '../../components/Layout'
-import { RssIcon } from '../../components/RssIcon'
+import { RssIcon } from './RssIcon'
+import Link from 'next/link'
+import MainContent from '../../../components/MainContent'
 
-type BlogProps = {
-  posts: {
-    frontmatter: GrayMatterFile<string>['data']
-  }[]
+export const metadata = {
+  title: 'Articles by Tobias Barth, Web Freelancer from Berlin',
+  description:
+    'Articles about web development and design, HTML, CSS and JavaScript, Single-Page-Applications with ReactJS and without, performance and best practices.',
+  alternates: {
+    types: {
+      'application/rss+xml': '/blog/feed/rss.xml',
+    },
+  },
 }
 
-const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
+export default async function BlogIndex() {
+  const posts = await getPosts()
   return (
-    <Layout lang="en">
-      <Head>
-        <title lang="en">
-          Articles by Tobias Barth, Web Freelancer from Berlin
-        </title>
-        <meta
-          lang="en"
-          name="description"
-          content="Articles about web development and design, HTML, CSS and JavaScript, Single-Page-Applications with ReactJS and without, performance and best practices."
-        />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          href="/blog/feed/rss.xml"
-        />
-      </Head>
+    <MainContent lang="en">
       <h2 className="text-3xl font-bold mb-7">
         Articles by Tobias Barth, Web Freelancer from Berlin
       </h2>
@@ -57,13 +46,11 @@ const Blog: FunctionComponent<BlogProps> = ({ posts }) => {
           </li>
         ))}
       </ul>
-    </Layout>
+    </MainContent>
   )
 }
 
-export default Blog
-
-export const getStaticProps = async () => {
+const getPosts = async () => {
   const posts = await fs
     .readdir(path.resolve(process.cwd(), 'src/posts'))
     .then(paths =>
@@ -89,12 +76,9 @@ export const getStaticProps = async () => {
       ? 1
       : -1
   )
-  return {
-    props: {
-      posts,
-    },
-  }
+  return posts
 }
+
 const extractGrayMatter = (data: GrayMatterFile<string>) => {
   return {
     frontmatter: data.data as BlogFrontmatter,

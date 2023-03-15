@@ -1,8 +1,6 @@
-import { FunctionComponent, useEffect, useRef } from 'react'
-import SiteHead from '../components/SiteHead'
+import { FunctionComponent } from 'react'
 import MainNavigation from '../components/MainNavigation'
-import SiteFooter from '../components/SiteFooter'
-import { Portrait } from '../components/Portrait'
+import { Portrait } from './Portrait'
 
 export const metadata = {
   title: 'Tobias Barth – Web Freelancer aus Berlin',
