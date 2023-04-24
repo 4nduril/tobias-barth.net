@@ -32,7 +32,7 @@
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.8.0",
     "postcss": "^8.4.21",
-    "prettier": "2.8.4",
+    "prettier": "2.8.8",
     "raw-loader": "^4.0.2",
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
