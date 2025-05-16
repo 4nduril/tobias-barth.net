@@ -7,24 +7,28 @@ import MainContent from '../../../../components/MainContent'
 // Show 404s when a non-prerendered page is requested.
 export const dynamicParams = false
 
-type Params = {
+type Params = Promise<{
   slug: string
-}
+}>
+
+type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T
 
 // Find all posts and generate the slugs.
-export const generateStaticParams = async (): Promise<Array<Params>> => {
+export const generateStaticParams = async (): Promise<
+  Array<Awaited<Params>>
+> => {
   return fs.readdir(path.resolve(process.cwd(), 'src/posts')).then(paths =>
     paths
       .filter(filename => filename.endsWith('.md'))
       .map(filename => ({
         slug: path.basename(filename, '.md'),
-      }))
+      })),
   )
 }
 
 // Use async post data to generate the head data.
-export const generateMetadata = ({ params }: { params: Params }) =>
-  getPostData(params).then(data => ({
+export const generateMetadata = async ({ params }: { params: Params }) =>
+  getPostData(await params).then(data => ({
     title: (data && data.frontmatter.title) || '',
     description: (data && data.frontmatter.description) || '',
     alternates: {
@@ -34,7 +38,7 @@ export const generateMetadata = ({ params }: { params: Params }) =>
     },
   }))
 
-const getPostData = ({ slug }: Params) =>
+const getPostData = ({ slug }: Awaited<Params>) =>
   import(`../../../../posts/${slug}.md`)
     .then(({ default: content }) => content)
     .then(matter)
@@ -53,12 +57,12 @@ const extractGrayMatter = (data: GrayMatterFile<string>) => {
 }
 
 interface BlogTemplateProps {
-  params?: { slug: string }
+  params?: Promise<{ slug: string }>
 }
 
 export default async function BlogTemplate({ params }: BlogTemplateProps) {
   if (!params) return null
-  const { frontmatter, markdownBody } = await getPostData(params)
+  const { frontmatter, markdownBody } = await getPostData(await params)
   return frontmatter && markdownBody ? (
     <MainContent lang="en">
       <BlogArticle frontmatter={frontmatter} markdownBody={markdownBody} />
