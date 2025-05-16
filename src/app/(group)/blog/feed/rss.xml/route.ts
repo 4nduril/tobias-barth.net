@@ -15,18 +15,20 @@ export async function GET() {
           const parsed = await fs
             .readFile(
               path.resolve(process.cwd(), 'src/posts/', filePath),
-              'utf8'
+              'utf8',
             )
             .then(matter)
             .then(extractGrayMatter)
 
-          parsed.frontmatter.href = `${getOrigin()}/blog/${path.basename(
+          const origin = await getOrigin()
+
+          parsed.frontmatter.href = `${origin}/blog/${path.basename(
             filePath,
-            '.md'
+            '.md',
           )}`
           return parsed
-        })
-      )
+        }),
+      ),
     )
     .then(getPostsXml)
 
@@ -56,13 +58,14 @@ const extractGrayMatter = (data: GrayMatterFile<string>) => {
   }
 }
 
-const getOrigin = () => {
-  const host = headers().get('host')
-  if (!host) {
-    return 'http://localhost:3000'
-  }
-  return host.startsWith('localhost') ? `http://${host}` : `https://${host}`
-}
+const getOrigin = () =>
+  headers().then(headersList => {
+    const host = headersList.get('host')
+    if (!host) {
+      return 'http://localhost:3000'
+    }
+    return host.startsWith('localhost') ? `http://${host}` : `https://${host}`
+  })
 
 const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
   const { rssItemsXml, latestPostDate } = posts.reduce(
@@ -92,7 +95,7 @@ const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
             : ''
         }
         <content:encoded><![CDATA[${marked(
-          post.markdownBody
+          post.markdownBody,
         )}]]></content:encoded>
       </item>`
 
@@ -101,7 +104,7 @@ const getPostsXml = (posts: ReturnType<typeof extractGrayMatter>[]) => {
         latestPostDate,
       }
     },
-    { rssItemsXml: '', latestPostDate: '' }
+    { rssItemsXml: '', latestPostDate: '' },
   )
 
   return {
