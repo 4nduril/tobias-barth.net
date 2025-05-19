@@ -26,7 +26,7 @@ export default async function BlogIndex() {
       <p className="mb-7 text-center">
         <Link
           href="/blog/feed/rss.xml"
-          className="rounded py-2 px-4 shadow bg-primary text-gray-200 font-bold inline-flex items-center"
+          className="rounded py-2 px-4 shadow-sm bg-primary text-gray-200 font-bold inline-flex items-center"
         >
           Abonnieren{' '}
           <span className="inline-block w-6 h-6 ml-4">
