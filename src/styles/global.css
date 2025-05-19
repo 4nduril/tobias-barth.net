@@ -1,6 +1,369 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility token {
+  &.cdata {
+    color: #708090;
+  }
+  &.comment {
+    color: #708090;
+  }
+  &.doctype {
+    color: #708090;
+  }
+  &.prolog {
+    color: #708090;
+  }
+  &.punctuation {
+    color: #999;
+  }
+  &.namespace {
+    opacity: 0.7;
+  }
+  &.boolean {
+    color: #905;
+  }
+  &.constant {
+    color: #905;
+  }
+  &.deleted {
+    color: #905;
+  }
+  &.number {
+    color: #905;
+  }
+  &.property {
+    color: #905;
+  }
+  &.symbol {
+    color: #905;
+  }
+  &.tag {
+    color: #905;
+  }
+  &.attr-name {
+    color: #690;
+  }
+  &.builtin {
+    color: #690;
+  }
+  &.char {
+    color: #690;
+  }
+  &.inserted {
+    color: #690;
+  }
+  &.selector {
+    color: #690;
+  }
+  &.string {
+    color: #690;
+  }
+  .language-css &.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+
+  .style &.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+  &.entity {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+  &.operator {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+  &.url {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+  &.atrule {
+    color: #07a;
+  }
+  &.attr-value {
+    color: #07a;
+  }
+  &.keyword {
+    color: #07a;
+  }
+  &.class-name {
+    color: #dd4a68;
+  }
+  &.function {
+    color: #dd4a68;
+  }
+  &.important {
+    color: #e90;
+  }
+  &.regex {
+    color: #e90;
+  }
+  &.variable {
+    color: #e90;
+  }
+  &.bold {
+    font-weight: 700;
+  }
+  &.important {
+    font-weight: 700;
+  }
+  &.italic {
+    font-style: italic;
+  }
+  &.entity {
+    cursor: help;
+  }
+}
+
+@utility cdata {
+  &.token {
+    color: #708090;
+  }
+}
+
+@utility comment {
+  & .token {
+    color: #708090;
+  }
+}
+
+@utility doctype {
+  & .token {
+    color: #708090;
+  }
+}
+
+@utility prolog {
+  & .token {
+    color: #708090;
+  }
+}
+
+@utility punctuation {
+  &.token {
+    color: #999;
+  }
+}
+
+@utility namespace {
+  &.token {
+    opacity: 0.7;
+  }
+}
+
+@utility boolean {
+  &.token {
+    color: #905;
+  }
+}
+
+@utility constant {
+  & .token {
+    color: #905;
+  }
+}
+
+@utility deleted {
+  & .token {
+    color: #905;
+  }
+}
+
+@utility number {
+  & .token {
+    color: #905;
+  }
+}
+
+@utility property {
+  & .token {
+    color: #905;
+  }
+}
+
+@utility symbol {
+  & .token {
+    color: #905;
+  }
+}
+
+@utility tag {
+  & .token {
+    color: #905;
+  }
+}
+
+@utility attr-name {
+  &.token {
+    color: #690;
+  }
+}
+
+@utility builtin {
+  & .token {
+    color: #690;
+  }
+}
+
+@utility char {
+  & .token {
+    color: #690;
+  }
+}
+
+@utility inserted {
+  & .token {
+    color: #690;
+  }
+}
+
+@utility selector {
+  & .token {
+    color: #690;
+  }
+}
+
+@utility string {
+  & .token {
+    color: #690;
+  }
+  .language-css &.token {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+
+  .style &.token {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+}
+
+@utility language-css {
+  & .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+}
+
+@utility style {
+  & .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+}
+
+@utility entity {
+  & .token {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+  &.token {
+    cursor: help;
+  }
+}
+
+@utility operator {
+  & .token {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+}
+
+@utility url {
+  & .token {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, 0.5);
+  }
+}
+
+@utility atrule {
+  &.token {
+    color: #07a;
+  }
+}
+
+@utility attr-value {
+  & .token {
+    color: #07a;
+  }
+}
+
+@utility keyword {
+  & .token {
+    color: #07a;
+  }
+}
+
+@utility class-name {
+  &.token {
+    color: #dd4a68;
+  }
+}
+
+@utility function {
+  & .token {
+    color: #dd4a68;
+  }
+}
+
+@utility important {
+  &.token {
+    color: #e90;
+  }
+  & .token {
+    font-weight: 700;
+  }
+}
+
+@utility regex {
+  & .token {
+    color: #e90;
+  }
+}
+
+@utility variable {
+  & .token {
+    color: #e90;
+  }
+}
+
+@utility bold {
+  &.token {
+    font-weight: 700;
+  }
+}
+
+@utility italic {
+  &.token {
+    font-style: italic;
+  }
+}
+
+@utility logo-shadow {
+  text-shadow: 0 1px 2px rgba(34, 34, 34, 0.9);
+}
 
 @layer base {
   main a {
@@ -93,72 +456,5 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
     padding: 0.1em;
     border-radius: 0.3em;
     white-space: normal;
-  }
-  .token.cdata,
-  .token.comment,
-  .token.doctype,
-  .token.prolog {
-    color: #708090;
-  }
-  .token.punctuation {
-    color: #999;
-  }
-  .token.namespace {
-    opacity: 0.7;
-  }
-  .token.boolean,
-  .token.constant,
-  .token.deleted,
-  .token.number,
-  .token.property,
-  .token.symbol,
-  .token.tag {
-    color: #905;
-  }
-  .token.attr-name,
-  .token.builtin,
-  .token.char,
-  .token.inserted,
-  .token.selector,
-  .token.string {
-    color: #690;
-  }
-  .language-css .token.string,
-  .style .token.string,
-  .token.entity,
-  .token.operator,
-  .token.url {
-    color: #9a6e3a;
-    background: hsla(0, 0%, 100%, 0.5);
-  }
-  .token.atrule,
-  .token.attr-value,
-  .token.keyword {
-    color: #07a;
-  }
-  .token.class-name,
-  .token.function {
-    color: #dd4a68;
-  }
-  .token.important,
-  .token.regex,
-  .token.variable {
-    color: #e90;
-  }
-  .token.bold,
-  .token.important {
-    font-weight: 700;
-  }
-  .token.italic {
-    font-style: italic;
-  }
-  .token.entity {
-    cursor: help;
-  }
-}
-
-@layer utilities {
-  .logo-shadow {
-    text-shadow: 0 1px 2px rgba(34, 34, 34, 0.9);
   }
 }
