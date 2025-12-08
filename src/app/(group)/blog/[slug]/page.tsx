@@ -3,6 +3,7 @@ import path from 'path'
 import matter, { GrayMatterFile } from 'gray-matter'
 import BlogArticle from '../BlogArticle'
 import MainContent from '../../../../components/MainContent'
+import { Metadata } from 'next'
 
 // Show 404s when a non-prerendered page is requested.
 export const dynamicParams = false
@@ -27,7 +28,11 @@ export const generateStaticParams = async (): Promise<
 }
 
 // Use async post data to generate the head data.
-export const generateMetadata = async ({ params }: { params: Params }) =>
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Params
+}): Promise<Metadata> =>
   getPostData(await params).then(data => ({
     title: (data && data.frontmatter.title) || '',
     description: (data && data.frontmatter.description) || '',

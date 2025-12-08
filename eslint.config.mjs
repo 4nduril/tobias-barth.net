@@ -16,7 +16,6 @@ const compat = new FlatCompat({
 })
 
 export default defineConfig([
-  compat.extends('next/core-web-vitals'),
+  ...compat.extends('next/core-web-vitals'),
   eslintConfigPrettier,
 ])
-
