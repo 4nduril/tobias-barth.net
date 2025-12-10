@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 
 const MainNavigation: FunctionComponent = () => {
   return (
-    <nav className="mb-7 pb-1 font-bold bg-primary">
+    <nav className="mb-7 pb-1 font-bold bg-primary print:hidden">
       <ul className="flex justify-around list-none">
         {/* <li className="grow mx-8 text-center">
           <Link href="/portfolio">

@@ -41,7 +41,7 @@ const BlogArticle: FC<BlogArticleProps> = ({ frontmatter, markdownBody }) => {
   return !frontmatter || !markdownBody ? null : (
     <article className="overflow-hidden">
       <header>
-        <h2 className="text-3xl font-bold mt-4 mb-7">{frontmatter.title}</h2>
+        <h1 className="text-3xl font-bold mt-4 mb-7">{frontmatter.title}</h1>
         {frontmatter.date && (
           <p className="text-base text-center mb-7">
             {frontmatter.lang === 'de' ? (
