@@ -11,7 +11,7 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({ children }) => (
 
 const DSE: FunctionComponent = () => (
   <MainContent>
-    <h2 className="text-3xl font-bold mb-7">Datenschutzerklärung</h2>
+    <h1 className="text-3xl font-bold mb-7">Datenschutzerklärung</h1>
 
     <Paragraph>
       Ich freue mich sehr über Ihr Interesse an mir. Datenschutz hat einen

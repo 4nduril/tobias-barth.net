@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 
 const SiteFooter: FC = () => (
-  <footer className="text-center pb-7" aria-describedby="dse">
+  <footer className="text-center pb-7 print:hidden" aria-describedby="dse">
     <h3 className="text-center text-xl font-bold mb-7">
       Kontaktieren Sie mich
     </h3>

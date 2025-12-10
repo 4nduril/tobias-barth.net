@@ -1,5 +1,5 @@
 import PlausibleProvider from 'next-plausible'
-import { PT_Sans } from 'next/font/google'
+import { PT_Sans, Dosis } from 'next/font/google'
 import '../styles/global.css'
 import SiteHead from '../components/SiteHead'
 import SiteFooter from '../components/SiteFooter'
@@ -11,10 +11,20 @@ const ptSans = PT_Sans({
   subsets: ['latin-ext'],
 })
 
+const dosis = Dosis({
+  variable: '--font-dosis',
+  display: 'swap',
+  weight: ['300', '400', '600', '700'],
+  subsets: ['latin-ext'],
+  preload: true,
+})
+
 export default function RootLayout({ children }) {
   return (
     <html lang="de">
-      <body className={`text-lg lg:text-xl leading-snug ${ptSans.variable}`}>
+      <body
+        className={`text-lg lg:text-xl leading-snug ${ptSans.className} ${ptSans.variable} ${dosis.variable}`}
+      >
         <PlausibleProvider domain="tobias-barth.net">
           <SiteHead />
           {children}

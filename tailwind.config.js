@@ -28,18 +28,6 @@ module.exports = {
      * },
      */
   },
-  theme: {
-    fontFamily: {
-      display: ['var(--font-dosis)', 'sans-serif'],
-      body: ['var(--font-ptsans)', 'sans-serif'],
-    },
-    extend: {
-      colors: {
-        primary: '#0B65AA',
-        'link-color': '#074574',
-      },
-    },
-  },
   variants: {
     extend: {},
   },

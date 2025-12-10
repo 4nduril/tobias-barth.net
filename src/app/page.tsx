@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react'
 import MainNavigation from '../components/MainNavigation'
 import { Portrait } from './Portrait'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Tobias Barth – Web Freelancer aus Berlin',
   description:
     'Web Development aus Berlin. Als Freelancer bringe ich viel Erfahrung mit – aus Projekten in eCommerce, Banking oder Travel. Spezialist in Single-Page-Applications mit React.',

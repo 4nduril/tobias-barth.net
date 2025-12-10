@@ -36,11 +36,6 @@ export const generateMetadata = async ({
   getPostData(await params).then(data => ({
     title: (data && data.frontmatter.title) || '',
     description: (data && data.frontmatter.description) || '',
-    alternates: {
-      types: {
-        'application/rss+xml': '/blog/feed/rss.xml',
-      },
-    },
   }))
 
 const getPostData = ({ slug }: Awaited<Params>) =>
